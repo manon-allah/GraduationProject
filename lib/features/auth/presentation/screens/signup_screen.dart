@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/features/auth/presentation/widgets/custom_signup_body.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -10,7 +11,8 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
+      body: CustomSignupBody(),
     );
   }
 }

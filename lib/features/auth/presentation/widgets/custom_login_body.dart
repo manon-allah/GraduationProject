@@ -3,8 +3,8 @@ import 'package:instagram/features/auth/presentation/widgets/custom_button_login
 import 'package:instagram/features/auth/presentation/widgets/custom_text_form_field.dart';
 import 'package:instagram/features/auth/presentation/widgets/custom_text_have_account.dart';
 
-class LoginBody extends StatelessWidget {
-  const LoginBody({super.key});
+class CustomLoginBody extends StatelessWidget {
+  const CustomLoginBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +47,12 @@ class LoginBody extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              const CustomTextHaveAccount(
+              CustomTextHaveAccount(
                 firstText: 'Do not have an email?',
                 lastText: 'Register',
+                onTap: () {
+                  Navigator.pushNamed(context, 'sign_up');
+                },
               ),
             ],
           ),

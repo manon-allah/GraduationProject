@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/features/auth/presentation/widgets/login_body.dart';
+import 'package:instagram/features/auth/presentation/widgets/custom_login_body.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,7 +12,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: LoginBody(),
+      body: CustomLoginBody(),
     );
   }
 }
