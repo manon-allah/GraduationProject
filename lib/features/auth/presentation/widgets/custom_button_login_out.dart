@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 class CustomButtonLoginOut extends StatelessWidget {
   const CustomButtonLoginOut({
     super.key,
-    required this.text, this.onTap,
+    required this.text,
+    this.onTap,
   });
   final String text;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         width: 400,
         height: 50,

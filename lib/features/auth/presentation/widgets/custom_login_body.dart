@@ -42,7 +42,9 @@ class CustomLoginBody extends StatelessWidget {
               ),
               CustomButtonLoginOut(
                 text: 'Login',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, 'navigate');
+                },
               ),
               const SizedBox(
                 height: 50,
