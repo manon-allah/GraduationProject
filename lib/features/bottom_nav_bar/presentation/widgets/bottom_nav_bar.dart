@@ -76,6 +76,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       body: PageView(
         controller: pageController,
         onPageChanged: onPageChanged,
+        physics: const BouncingScrollPhysics(),
         children: const [
           HomeScreen(),
           SearchScreen(),
