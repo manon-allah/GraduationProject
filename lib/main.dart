@@ -25,28 +25,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(360, 690),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, context) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Instagram App',
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
-            ),
-            initialRoute: 'sign_in',
-            routes: {
-              'sign_in': (context) => const LoginScreen(),
-              'sign_up': (context) => const SignupScreen(),
-              'home': (context) => const HomeScreen(),
-              'profile': (context) => const ProfileScreen(),
-              'explore': (context) => const ExploreScreen(),
-              'search': (context) => const SearchScreen(),
-              'navigate': (context) => const NavigateScreen(),
-            },
-          );
-        });
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, context) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Instagram App',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          initialRoute: 'navigate',
+          routes: {
+            'sign_in': (context) => const LoginScreen(),
+            'sign_up': (context) => const SignupScreen(),
+            'home': (context) => const HomeScreen(),
+            'profile': (context) => const ProfileScreen(),
+            'explore': (context) => const ExploreScreen(),
+            'search': (context) => const SearchScreen(),
+            'navigate': (context) => const NavigateScreen(),
+          },
+        );
+      },
+    );
   }
 }

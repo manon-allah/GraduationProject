@@ -7,7 +7,6 @@ class CustomPostBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        
         const ListTile(
           leading: CircleAvatar(
             radius: 22,
@@ -58,15 +57,15 @@ class CustomPostBody extends StatelessWidget {
                     width: 5,
                   ),
                   Image.asset(
-                    'assets/home/comment.webp',
-                    width: 27,
+                    'assets/home/comment11.png',
+                    width: 20,
                   ),
                   const SizedBox(
                     width: 5,
                   ),
                   Image.asset(
-                    'assets/home/send.jpg',
-                    width: 20,
+                    'assets/home/send11.png',
+                    width: 22,
                   ),
                   const Spacer(),
                   Padding(
@@ -74,8 +73,8 @@ class CustomPostBody extends StatelessWidget {
                       right: 15,
                     ),
                     child: Image.asset(
-                      'assets/home/save.png',
-                      width: 25,
+                      'assets/home/save11.png',
+                      width: 23,
                     ),
                   ),
                 ],

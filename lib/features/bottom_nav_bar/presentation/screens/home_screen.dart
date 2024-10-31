@@ -22,9 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 100,
               height: 40,
             ),
-            const Icon(
-              Icons.arrow_drop_down,
-              size: 30,
+            const SizedBox(
+              width: 5,
+            ),
+            Image.asset(
+              'assets/home/downarrow11.png',
+              width: 20,
             ),
           ],
         ),
@@ -42,7 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   width: 10,
                 ),
-                Image.asset('assets/home/send.jpg'),
+                Image.asset(
+                  'assets/home/message11.png',
+                  width: 23,
+                ),
                 const SizedBox(
                   width: 10,
                 ),
@@ -56,21 +62,35 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       backgroundColor: Colors.white,
-      body: ListView(
-        children: [
-          const StoriesListViewBody(),
-          SizedBox(
-            height: 700,
-            child: ListView.builder(
-                itemCount: 10,
-                scrollDirection: Axis.vertical,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return const CustomPostBody();
-                }),
+      body: CustomScrollView(
+        slivers: [
+          const SliverToBoxAdapter(
+            child: StoriesListViewBody(),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: 10,
+              (context, index) {
+                return const CustomPostBody();
+              },
+            ),
           ),
         ],
       ),
+      //  ListView(
+      //   children: [
+      //     const StoriesListViewBody(),
+      //     SizedBox(
+      //       height: 700,
+      //       child: ListView.builder(
+      //           itemCount: 10,
+      //           physics: const BouncingScrollPhysics(),
+      //           itemBuilder: (context, index) {
+      //             return const CustomPostBody();
+      //           }),
+      //     ),
+      //   ],
+      // ),
       //  ListView.builder(
       //     itemCount: 10,
       //     physics: const BouncingScrollPhysics(),
