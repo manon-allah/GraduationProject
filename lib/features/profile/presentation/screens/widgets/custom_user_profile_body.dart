@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/widgets/custom_column_text_num.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/widgets/custom_tab_bar_view.dart';
+import 'package:instagram/features/profile/presentation/screens/widgets/custom_column_text_num.dart';
+import 'package:instagram/features/profile/presentation/screens/widgets/custom_tab_bar_view.dart';
 
 class CustomUserProfileBody extends StatelessWidget {
   const CustomUserProfileBody({super.key});
@@ -60,6 +60,9 @@ class CustomUserProfileBody extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
+          ////////////////////////////////////////////
+          // user name button edit....etc
+          ///////////////////////////////////////////
           Padding(
             padding: const EdgeInsets.only(
               left: 13,
@@ -159,15 +162,20 @@ class CustomUserProfileBody extends StatelessWidget {
                 /////////////////////////////////////
                 Row(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      width: MediaQuery.of(context).size.width - 70,
-                      color: const Color(0xffEFEFEF),
-                      child: const Center(
-                        child: Text(
-                          'Edit profile',
-                          style: TextStyle(
-                            fontSize: 18,
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'edit_profile');
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        width: MediaQuery.of(context).size.width - 70,
+                        color: const Color(0xffEFEFEF),
+                        child: const Center(
+                          child: Text(
+                            'Edit profile',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ),
@@ -237,15 +245,6 @@ class CustomUserProfileBody extends StatelessWidget {
           /////////////////////////////////////
           TabBar(
             tabs: [
-              // Tab(
-              //   icon: Icon(Icons.abc),
-              // ),
-              // Tab(
-              //   icon: Icon(Icons.abc),
-              // ),
-              // Tab(
-              //   icon: Icon(Icons.abc),
-              // ),
               Tab(
                 child: Image.asset(
                   'assets/home/memory.png',
@@ -274,13 +273,12 @@ class CustomUserProfileBody extends StatelessWidget {
           // Tab bar view
           /////////////////////////////////////
           const SizedBox(
-            height: 100,
+            height: 300,
             child: TabBarView(
               children: [
                 CustomTabBarview(),
-                Text('first page'),
                 Text('Second page'),
-                // Text('third page'),
+                Text('third page'),
               ],
             ),
           ),

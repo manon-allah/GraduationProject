@@ -8,7 +8,9 @@ class StoriesListViewBody extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Padding(
-        padding: const EdgeInsets.only(left: 15,),
+        padding: const EdgeInsets.only(
+          left: 15,
+        ),
         child: Row(
           children: [
             const Stack(
@@ -30,7 +32,6 @@ class StoriesListViewBody extends StatelessWidget {
             ),
             SizedBox(
               height: 110,
-              width: MediaQuery.of(context).size.width - 100,
               child: Padding(
                 padding: const EdgeInsets.only(
                   left: 15,
@@ -52,7 +53,8 @@ class StoriesListViewBody extends StatelessWidget {
                               backgroundColor: Colors.red,
                               child: CircleAvatar(
                                 radius: 40,
-                                backgroundImage: AssetImage('assets/posts/2.jpeg'),
+                                backgroundImage:
+                                    AssetImage('assets/posts/2.jpeg'),
                               ),
                             ),
                             SizedBox(

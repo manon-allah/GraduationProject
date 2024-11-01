@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/widgets/custom_profile_body.dart';
+import 'package:instagram/features/profile/presentation/screens/widgets/custom_profile_body.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -21,23 +21,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
             fontSize: 27,
           ),
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               right: 15,
             ),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.add_box_outlined,
                   size: 25,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 17,
                 ),
-                Icon(
-                  Icons.menu,
-                  size: 25,
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, 'setting');
+                  },
+                  child: const Icon(
+                    Icons.menu,
+                    size: 25,
+                  ),
                 ),
               ],
             ),

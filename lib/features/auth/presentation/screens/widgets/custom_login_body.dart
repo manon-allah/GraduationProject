@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/features/auth/presentation/widgets/custom_button_login_out.dart';
-import 'package:instagram/features/auth/presentation/widgets/custom_text_form_field.dart';
-import 'package:instagram/features/auth/presentation/widgets/custom_text_have_account.dart';
+import 'package:instagram/features/auth/presentation/screens/widgets/custom_button_login_out.dart';
+import 'package:instagram/features/auth/presentation/screens/widgets/custom_text_form_field.dart';
+import 'package:instagram/features/auth/presentation/screens/widgets/custom_text_have_account.dart';
 
 class CustomLoginBody extends StatelessWidget {
   const CustomLoginBody({super.key});

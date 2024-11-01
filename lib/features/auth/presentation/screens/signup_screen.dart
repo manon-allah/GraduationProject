@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/features/auth/presentation/widgets/custom_signup_body.dart';
+import 'package:instagram/features/auth/presentation/screens/widgets/custom_signup_body.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

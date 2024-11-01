@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram/features/auth/presentation/screens/login_screen.dart';
 import 'package:instagram/features/auth/presentation/screens/signup_screen.dart';
+import 'package:instagram/features/edit_profile/presentation/screens/edit_profile.dart';
 import 'package:instagram/features/bottom_nav_bar/presentation/screens/explore_screen.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/screens/home_screen.dart';
+import 'package:instagram/features/home/presentation/screens/home_screen.dart';
 import 'package:instagram/features/bottom_nav_bar/presentation/screens/navigate.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/screens/profile_screen.dart';
+import 'package:instagram/features/profile/presentation/screens/profile_screen.dart';
 import 'package:instagram/features/bottom_nav_bar/presentation/screens/search_screen.dart';
 
 import 'package:instagram/firebase_options.dart';
+
+import 'features/setting/presentation/screens/setting_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,6 +48,8 @@ class MyApp extends StatelessWidget {
             'explore': (context) => const ExploreScreen(),
             'search': (context) => const SearchScreen(),
             'navigate': (context) => const NavigateScreen(),
+            'edit_profile': (context) => const EditProfile(),
+            'setting': (context) => const SettingScreen(),
           },
         );
       },

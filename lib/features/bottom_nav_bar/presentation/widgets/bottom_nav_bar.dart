@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/features/bottom_nav_bar/presentation/screens/chatting_screen.dart';
 import 'package:instagram/features/bottom_nav_bar/presentation/screens/explore_screen.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/screens/home_screen.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/screens/profile_screen.dart';
+import 'package:instagram/features/home/presentation/screens/home_screen.dart';
+import 'package:instagram/features/profile/presentation/screens/profile_screen.dart';
 import 'package:instagram/features/bottom_nav_bar/presentation/screens/search_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -42,36 +42,40 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
-        child: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: navigationTapped,
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.grey,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_rounded),
-              label: '',
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: navigationTapped,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        items: [
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.home_rounded),
+            label: '',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.search_rounded),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/home/vedioexploree.png',
+              width: 22,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search_rounded),
-              label: '',
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/home/bagshop.png',
+              width: 22,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.camera_enhance_rounded),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.messenger),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: '',
-            ),
-          ],
-        ),
+            label: '',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: '',
+          ),
+        ],
       ),
       body: PageView(
         controller: pageController,

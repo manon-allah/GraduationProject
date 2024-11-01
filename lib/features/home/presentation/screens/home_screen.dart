@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/widgets/custom_post_body.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/widgets/stories_list_view_body.dart';
+import 'package:instagram/features/home/presentation/screens/widgets/custom_post_body.dart';
+import 'package:instagram/features/home/presentation/screens/widgets/stories_list_view_body.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,9 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               width: 5,
             ),
-            Image.asset(
-              'assets/home/downarrow11.png',
-              width: 20,
+            Transform.rotate(
+              angle: 4.71239,
+              child: const Icon(
+                Icons.arrow_back_ios_new,
+                size: 20,
+              ),
             ),
           ],
         ),
