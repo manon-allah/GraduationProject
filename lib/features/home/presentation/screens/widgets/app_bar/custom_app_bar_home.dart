@@ -35,7 +35,7 @@ class CustomAppBarHome extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: const EdgeInsets.only(
               right: 15,
@@ -49,9 +49,14 @@ class CustomAppBarHome extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                Image.asset(
-                  'assets/home/message11.png',
-                  width: 23,
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, 'chatting');
+                  },
+                  child: Image.asset(
+                    'assets/home/message11.png',
+                    width: 23,
+                  ),
                 ),
                 const SizedBox(
                   width: 10,

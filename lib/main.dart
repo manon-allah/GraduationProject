@@ -7,10 +7,11 @@ import 'package:instagram/features/bottom_nav_bar/presentation/screens/explore_s
 import 'package:instagram/features/home/presentation/screens/home_screen.dart';
 import 'package:instagram/features/bottom_nav_bar/presentation/screens/navigate.dart';
 import 'package:instagram/features/profile/presentation/screens/profile_screen.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/screens/search_screen.dart';
+import 'package:instagram/features/search/presentation/screens/search_screen.dart';
 
 import 'package:instagram/firebase_options.dart';
 
+import 'features/chatting/presentation/screens/chatting_screen.dart';
 import 'features/setting/presentation/screens/setting_screen.dart';
 
 void main() async {
@@ -44,6 +45,7 @@ class Instagram extends StatelessWidget {
         'navigate': (context) => const NavigateScreen(),
         'edit_profile': (context) => const EditProfile(),
         'setting': (context) => const SettingScreen(),
+        'chatting': (context) => const ChattingScreen(),
       },
     );
   }

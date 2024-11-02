@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/screens/chatting_screen.dart';
+import 'package:instagram/features/chatting/presentation/screens/chatting_screen.dart';
 import 'package:instagram/features/bottom_nav_bar/presentation/screens/explore_screen.dart';
 import 'package:instagram/features/home/presentation/screens/home_screen.dart';
 import 'package:instagram/features/profile/presentation/screens/profile_screen.dart';
-import 'package:instagram/features/bottom_nav_bar/presentation/screens/search_screen.dart';
+import 'package:instagram/features/search/presentation/screens/search_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

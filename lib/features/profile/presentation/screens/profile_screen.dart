@@ -16,13 +16,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return const CustomScrollView(
       slivers: [
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: CustomAppBarProfile(),
         ),
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: CustomProfileBody(),
         ),
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: CustomTabBarBody(),
         ),
         // SliverList(
