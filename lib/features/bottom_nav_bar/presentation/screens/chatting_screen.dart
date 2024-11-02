@@ -10,10 +10,8 @@ class ChattingScreen extends StatefulWidget {
 class _ChattingScreenState extends State<ChattingScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Chatting Screen'),
-      ),
+    return const Center(
+      child: Text('Chatting Screen'),
     );
   }
 }

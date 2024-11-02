@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/features/profile/presentation/screens/widgets/custom_profile_body.dart';
 
+import 'widgets/custom_app_bar_profile.dart';
+import 'widgets/custom_tab_bar_body.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -11,45 +14,26 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          'username',
-          style: TextStyle(
-            fontSize: 27,
-          ),
+    return const CustomScrollView(
+      slivers: [
+        const SliverToBoxAdapter(
+          child: CustomAppBarProfile(),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 15,
-            ),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.add_box_outlined,
-                  size: 25,
-                ),
-                const SizedBox(
-                  width: 17,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, 'setting');
-                  },
-                  child: const Icon(
-                    Icons.menu,
-                    size: 25,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      body: const CustomProfileBody(),
+        const SliverToBoxAdapter(
+          child: CustomProfileBody(),
+        ),
+        const SliverToBoxAdapter(
+          child: CustomTabBarBody(),
+        ),
+        // SliverList(
+        //   delegate: SliverChildBuilderDelegate(
+        //     childCount: 10,
+        //     (context, index) {
+        //       return const CustomPostBody();
+        //     },
+        //   ),
+        // ),
+      ],
     );
   }
 }

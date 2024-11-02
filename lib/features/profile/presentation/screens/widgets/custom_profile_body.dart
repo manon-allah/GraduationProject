@@ -9,7 +9,6 @@ class CustomProfileBody extends StatelessWidget {
     return const Column(
       children: [
         CustomUserProfileBody(),
-        
       ],
     );
   }

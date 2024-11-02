@@ -9,24 +9,33 @@ class EditProfile extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: const Color(0xffFAFAFA),
         centerTitle: true,
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Cancel',
-              style: TextStyle(
-                fontSize: 17,
-                color: Color(0xFF606060),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  fontSize: 17,
+                  color: Color(0xFF606060),
+                ),
               ),
             ),
-            Text('Edit Profile'),
-            Text(
-              'Done',
-              style: TextStyle(
-                fontSize: 17,
-                color: Colors.blue,
+            const Text('Edit Profile'),
+            InkWell(
+              onTap: () {},
+              child: const Text(
+                'Done',
+                style: TextStyle(
+                  fontSize: 17,
+                  color: Colors.blue,
+                ),
               ),
             ),
           ],

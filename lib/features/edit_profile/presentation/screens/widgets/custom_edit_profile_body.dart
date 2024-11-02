@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'custom_change_photo.dart';
+
 class CustomEditProfile extends StatelessWidget {
   const CustomEditProfile({super.key});
 
@@ -10,29 +12,8 @@ class CustomEditProfile extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        //////////////////////////////////////////////
         //  photo text change photo 
-        /////////////////////////////////////////////
-        Column(
-          children: [
-            Align(
-              alignment: Alignment.center,
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('assets/posts/2.jpeg'),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Change Profile Photo',
-              style: TextStyle(
-                color: Colors.blue,
-              ),
-            ),
-          ],
-        ),
+        CustomChangePhoto(),
         
       ],
     );

@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram/features/auth/presentation/screens/login_screen.dart';
 import 'package:instagram/features/auth/presentation/screens/signup_screen.dart';
 import 'package:instagram/features/edit_profile/presentation/screens/edit_profile.dart';
@@ -19,39 +18,32 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(const Instagram());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Instagram extends StatelessWidget {
+  const Instagram({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, context) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Instagram App',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          initialRoute: 'navigate',
-          routes: {
-            'sign_in': (context) => const LoginScreen(),
-            'sign_up': (context) => const SignupScreen(),
-            'home': (context) => const HomeScreen(),
-            'profile': (context) => const ProfileScreen(),
-            'explore': (context) => const ExploreScreen(),
-            'search': (context) => const SearchScreen(),
-            'navigate': (context) => const NavigateScreen(),
-            'edit_profile': (context) => const EditProfile(),
-            'setting': (context) => const SettingScreen(),
-          },
-        );
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Instagram App',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      initialRoute: 'navigate',
+      routes: {
+        'sign_in': (context) => const LoginScreen(),
+        'sign_up': (context) => const SignupScreen(),
+        'home': (context) => const HomeScreen(),
+        'profile': (context) => const ProfileScreen(),
+        'explore': (context) => const ExploreScreen(),
+        'search': (context) => const SearchScreen(),
+        'navigate': (context) => const NavigateScreen(),
+        'edit_profile': (context) => const EditProfile(),
+        'setting': (context) => const SettingScreen(),
       },
     );
   }
