@@ -17,6 +17,9 @@ class StoriesListViewBody extends StatelessWidget {
         child: Row(
           children: [
             CustomAddStory(),
+            SizedBox(
+              width: 10,
+            ),
             CustomListViewStory(),
           ],
         ),
