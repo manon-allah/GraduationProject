@@ -102,9 +102,9 @@ class CustomUserProfileBody extends StatelessWidget {
               ///////////////////////////////////////
               // followed by
               //////////////////////////////////////
-              Row(
+              const Row(
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     width: 100,
                     child: Stack(
                       children: [
@@ -129,34 +129,34 @@ class CustomUserProfileBody extends StatelessWidget {
                       ],
                     ),
                   ),
-                  RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                        text: 'Followed by ',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w100,
-                        ),
-                      ),
-                    ]),
-                  ),
-                  // Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: [
-                  //     Row(
-                  //       children: [
-                  //         Text('Followed by '),
-                  //         Text(
-                  //           'username,username',
-                  //           style: TextStyle(
-                  //             fontWeight: FontWeight.w900,
-                  //           ),
-                  //         ),
-                  //       ],
+                  // RichText(
+                  //   text: TextSpan(children: [
+                  //     TextSpan(
+                  //       text: 'Followed by ',
+                  //       style: TextStyle(
+                  //         // color: Colors.black,
+                  //         fontWeight: FontWeight.w100,
+                  //       ),
                   //     ),
-                  //     Text('and 100 others'),
-                  //   ],
+                  //   ]),
                   // ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text('Followed by '),
+                          Text(
+                            'username,username',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text('and 100 others'),
+                    ],
+                  ),
                 ],
               ),
               const SizedBox(
@@ -174,7 +174,7 @@ class CustomUserProfileBody extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       width: MediaQuery.of(context).size.width - 70,
-                      color: const Color(0xffEFEFEF),
+                      // color: const Color(0xffEFEFEF),
                       child: const Center(
                         child: Text(
                           'Edit profile',
@@ -188,17 +188,7 @@ class CustomUserProfileBody extends StatelessWidget {
                   const SizedBox(
                     width: 5,
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    width: 40,
-                    color: const Color(0xffEFEFEF),
-                    child: Center(
-                      child: Image.asset(
-                        'assets/home/personadd.png',
-                        width: 23,
-                      ),
-                    ),
-                  ),
+                  const Icon(Icons.person_add),
                 ],
               ),
               const SizedBox(

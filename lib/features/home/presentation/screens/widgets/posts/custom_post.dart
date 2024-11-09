@@ -18,22 +18,19 @@ class CustomPost extends StatelessWidget {
           width: double.infinity,
           height: 390,
         ),
-        Container(
-          color: Colors.white,
-          child: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 15,
-              ),
-              // react in prost....etc
-              CustomReactPost(),
-              // numbers of likes....etc
-              CustomLikeNumber(),
-              // username description....etc
-              CustomUserNameDescription(),
-            ],
-          ),
+        const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 15,
+            ),
+            // react in prost....etc
+            CustomReactPost(),
+            // numbers of likes....etc
+            CustomLikeNumber(),
+            // username description....etc
+            CustomUserNameDescription(),
+          ],
         ),
       ],
     );

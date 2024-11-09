@@ -13,8 +13,8 @@ class CustomSearchBar extends StatelessWidget {
       ),
       child: TextField(
         decoration: InputDecoration(
-          filled: true,
-          fillColor: const Color(0xFFD9D9D9),
+          // filled: true,
+          // fillColor: const Color(0xFFD9D9D9),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide.none,

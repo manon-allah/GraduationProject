@@ -56,6 +56,7 @@ class CustomAppBarHome extends StatelessWidget {
                   child: Image.asset(
                     'assets/home/message11.png',
                     width: 23,
+                    
                   ),
                 ),
                 const SizedBox(
