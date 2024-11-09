@@ -13,7 +13,7 @@ class CustomPost extends StatelessWidget {
     return Column(
       children: [
         Image.asset(
-          'assets/posts/1.jpeg',
+          'assets/posts/3.jpeg',
           fit: BoxFit.fill,
           width: double.infinity,
           height: 390,

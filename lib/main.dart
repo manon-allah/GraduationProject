@@ -1,5 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram/core/services/get_it_service.dart';
+import 'package:instagram/features/auth/domain/repos/auth_repo.dart';
+import 'package:instagram/features/auth/presentation/manager/cubit/signup_cubit.dart';
 import 'package:instagram/features/auth/presentation/screens/login_screen.dart';
 import 'package:instagram/features/auth/presentation/screens/signup_screen.dart';
 import 'package:instagram/features/edit_profile/presentation/screens/edit_profile.dart';
@@ -11,6 +15,7 @@ import 'package:instagram/features/search/presentation/screens/search_screen.dar
 
 import 'package:instagram/firebase_options.dart';
 
+import 'core/services/caching.dart';
 import 'features/chatting/presentation/screens/chatting_screen.dart';
 import 'features/setting/presentation/screens/setting_screen.dart';
 
@@ -19,6 +24,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await CacheHelper.cachIntialization();
+  setupGetIt();
   runApp(const Instagram());
 }
 
@@ -27,26 +34,35 @@ class Instagram extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Instagram App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SignupCubit(
+            getIt<AuthRepo>(),
+          ),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Instagram App',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        initialRoute: 'navigate',
+        routes: {
+          'sign_in': (context) => const LoginScreen(),
+          'sign_up': (context) => const SignupScreen(),
+          'home': (context) => const HomeScreen(),
+          'profile': (context) => const ProfileScreen(),
+          'explore': (context) => const ExploreScreen(),
+          'search': (context) => const SearchScreen(),
+          'navigate': (context) => const NavigateScreen(),
+          'edit_profile': (context) => const EditProfile(),
+          'setting': (context) => const SettingScreen(),
+          'chatting': (context) => const ChattingScreen(),
+        },
       ),
-      initialRoute: 'navigate',
-      routes: {
-        'sign_in': (context) => const LoginScreen(),
-        'sign_up': (context) => const SignupScreen(),
-        'home': (context) => const HomeScreen(),
-        'profile': (context) => const ProfileScreen(),
-        'explore': (context) => const ExploreScreen(),
-        'search': (context) => const SearchScreen(),
-        'navigate': (context) => const NavigateScreen(),
-        'edit_profile': (context) => const EditProfile(),
-        'setting': (context) => const SettingScreen(),
-        'chatting': (context) => const ChattingScreen(),
-      },
     );
   }
 }

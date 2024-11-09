@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../chatting/presentation/screens/widgets/custom_search_bar.dart';
+import 'widgets/custom_search_body.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -20,7 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
         SliverToBoxAdapter(
-          child: CustomSearchBar(),
+          child: CustomSearchBody(),
         ),
       ],
     );
