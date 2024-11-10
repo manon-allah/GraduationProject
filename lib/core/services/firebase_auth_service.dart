@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:instagram/core/errors/exepsions.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -11,6 +10,7 @@ class FirebaseAuthService {
     required String email,
     required String password,
   }) async {
+    String err = 'Something wrong';
     try {
       if (email.isNotEmpty || password.isNotEmpty) {
         // signup user
@@ -20,7 +20,6 @@ class FirebaseAuthService {
           password: password,
         );
         print(userCredential.user!.uid);
-
         // add user to firebase
         await _firestore.collection('users').doc(userCredential.user!.uid).set({
           'email': email,
@@ -29,11 +28,33 @@ class FirebaseAuthService {
           'followers': [],
           'following': [],
         });
-        print('Create User Success');
+        err = 'Create User Success';
       }
     } catch (e) {
-      throw CustomException(message: 'something wrong');
+      err = e.toString();
     }
-    throw CustomException(message: 'something wrong');
+    return err;
+  }
+
+  // login
+  Future<String> loginUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    String err = 'Something wrong';
+    try {
+      if (email.isNotEmpty || password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        err = 'Login Success';
+      } else {
+        err = 'Please enter all fields';
+      }
+    } catch (e) {
+      err = e.toString();
+    }
+    return err;
   }
 }
