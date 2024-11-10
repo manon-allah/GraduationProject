@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/core/services/get_it_service.dart';
-import 'package:instagram/features/auth/domain/repos/auth_repo.dart';
 import 'package:instagram/features/auth/presentation/manager/cubit/signup_cubit.dart';
 import 'package:instagram/features/auth/presentation/screens/login_screen.dart';
 import 'package:instagram/features/auth/presentation/screens/signup_screen.dart';
@@ -39,9 +38,7 @@ class Instagram extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SignupCubit(
-            getIt<AuthRepo>(),
-          ),
+          create: (context) => SignupCubit(),
         ),
         BlocProvider(
           create: (context) => SwitchCubit()..changeTheme(ThemeState.light),
@@ -54,7 +51,7 @@ class Instagram extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: ThemeData.light(),
               title: 'Instagram App',
-              initialRoute: 'navigate',
+              initialRoute: 'sign_up',
               routes: {
                 'sign_in': (context) => const LoginScreen(),
                 'sign_up': (context) => const SignupScreen(),
@@ -73,7 +70,7 @@ class Instagram extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: ThemeData.dark(),
               title: 'Instagram App',
-              initialRoute: 'navigate',
+              initialRoute: 'sign_up',
               routes: {
                 'sign_in': (context) => const LoginScreen(),
                 'sign_up': (context) => const SignupScreen(),

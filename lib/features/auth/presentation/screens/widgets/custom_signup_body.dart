@@ -15,95 +15,91 @@ class CustomSignupBody extends StatefulWidget {
 class _CustomSignupBodyState extends State<CustomSignupBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  late String email, name, password;
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            autovalidateMode: autovalidateMode,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 281,
-                ),
-                Image.asset(
-                  'assets/login_out/instatextw.png',
-                  width: 244,
-                  height: 68,
-                ),
-                const SizedBox(
-                  height: 21,
-                ),
-                CustomTextFormField(
-                  onSaved: (value) {
-                    name = value!;
-                  },
-                  hint: 'Name',
-                  textInputType: TextInputType.name,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                CustomTextFormField(
-                  onSaved: (value) {
-                    email = value!;
-                  },
-                  hint: 'Email',
-                  textInputType: TextInputType.emailAddress,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                CustomTextFormField(
-                  onSaved: (value) {
-                    password = value!;
-                  },
-                  hint: 'password',
-                  textInputType: TextInputType.visiblePassword,
-                ),
-                const SizedBox(
-                  height: 92,
-                ),
-                CustomButtonLoginOut(
-                  text: 'Signup',
-                  onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                      context
-                          .read<SignupCubit>()
-                          .createUserWithEmailAndPassword(
-                            email,
-                            password,
-                            name,
+    return BlocConsumer<SignupCubit, SignupState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        final signupCubit = context.read<SignupCubit>();
+        return Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                autovalidateMode: autovalidateMode,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 281,
+                    ),
+                    Image.asset(
+                      'assets/login_out/instatextw.png',
+                      width: 244,
+                      height: 68,
+                    ),
+                    const SizedBox(
+                      height: 21,
+                    ),
+                    CustomTextFormField(
+                      controller: emailController,
+                      hint: 'Email',
+                      textInputType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CustomTextFormField(
+                      controller: passwordController,
+                      hint: 'password',
+                      textInputType: TextInputType.visiblePassword,
+                    ),
+                    const SizedBox(
+                      height: 92,
+                    ),
+                    CustomButtonLoginOut(
+                      text: 'Signup',
+                      onTap: () {
+                        if (formKey.currentState!.validate()) {
+                          formKey.currentState!.save();
+                          signupCubit.createUser(
+                            email: emailController.text,
+                            password: passwordController.text,
                           );
-                    } else {
-                      setState(() {
-                        autovalidateMode = AutovalidateMode.always;
-                      });
-                    }
-                  },
+                        } else {
+                          setState(() {
+                            autovalidateMode = AutovalidateMode.always;
+                          });
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    CustomTextHaveAccount(
+                      firstText: 'Do you have an email?',
+                      lastText: 'Login',
+                      onTap: () {
+                        Navigator.pushNamed(context, 'sign_in');
+                      },
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
-                CustomTextHaveAccount(
-                  firstText: 'Do you have an email?',
-                  lastText: 'Login',
-                  onTap: () {
-                    Navigator.pushNamed(context, 'sign_in');
-                  },
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

@@ -1,27 +1,39 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram/core/errors/exepsions.dart';
 
 class FirebaseAuthService {
-  Future<User> createUserWithEmailAndPassword(
-      {required String email, required String password}) async {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  // signup
+  Future<String> signUpUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return credential.user!;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        throw CustomException(message: 'The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        throw CustomException(
-            message: 'The account already exists for that email.');
-      }else{
-        throw CustomException(message: 'An error occured , please try later.');
+      if (email.isNotEmpty || password.isNotEmpty) {
+        // signup user
+        UserCredential userCredential =
+            await _auth.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        print(userCredential.user!.uid);
+
+        // add user to firebase
+        await _firestore.collection('users').doc(userCredential.user!.uid).set({
+          'email': email,
+          'password': password,
+          'uId': userCredential.user!.uid,
+          'followers': [],
+          'following': [],
+        });
+        print('Create User Success');
       }
     } catch (e) {
-      throw CustomException(message: 'An error occured , please try later.');
+      throw CustomException(message: 'something wrong');
     }
+    throw CustomException(message: 'something wrong');
   }
 }

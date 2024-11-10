@@ -5,15 +5,17 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required this.hint,
     required this.textInputType,
-    this.onSaved,
+    this.onSaved, this.controller,
   });
   final String hint;
   final TextInputType textInputType;
   final void Function(String?)? onSaved;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'This field is required.';
