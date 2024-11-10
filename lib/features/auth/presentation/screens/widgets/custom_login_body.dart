@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:instagram/features/auth/presentation/manager/sign/sign_cubit.dart';
 import 'package:instagram/features/auth/presentation/screens/widgets/custom_button_login_out.dart';
 import 'package:instagram/features/auth/presentation/screens/widgets/custom_text_form_field.dart';
 import 'package:instagram/features/auth/presentation/screens/widgets/custom_text_have_account.dart';
 
 import '../../../../../core/functions/snack_bar_function.dart';
+import '../../../../../core/utils/app_router.dart';
 
 class CustomLoginBody extends StatefulWidget {
   const CustomLoginBody({super.key});
@@ -25,7 +27,6 @@ class _CustomLoginBodyState extends State<CustomLoginBody> {
     passwordController.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignCubit, SignState>(
@@ -33,13 +34,15 @@ class _CustomLoginBodyState extends State<CustomLoginBody> {
         if (state is LoginFailure) {
           showSnackbar('something wrong', context);
         } else {
-          Navigator.pushReplacementNamed(context, 'navigate');
+          GoRouter.of(context)
+              .pushReplacementNamed(AppRouter.kNavigationScreen);
+          // Navigator.pushReplacementNamed(context, 'navigate');
         }
       },
       builder: (context, state) {
         final loginCubit = context.read<SignCubit>();
         return Scaffold(
-          body: state is !LoginSuccess
+          body: state is! LoginSuccess
               ? Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: SingleChildScrollView(
@@ -90,7 +93,9 @@ class _CustomLoginBodyState extends State<CustomLoginBody> {
                           firstText: 'Do not have an email?',
                           lastText: 'Register',
                           onTap: () {
-                            Navigator.pushNamed(context, 'sign_up');
+                            GoRouter.of(context)
+                                .pushNamed(AppRouter.kSignupScreen);
+                            // Navigator.pushNamed(context, 'sign_up');
                           },
                         ),
                       ],

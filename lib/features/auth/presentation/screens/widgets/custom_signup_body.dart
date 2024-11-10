@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:instagram/core/utils/app_router.dart';
 import 'package:instagram/features/auth/presentation/manager/sign/sign_cubit.dart';
 import 'package:instagram/features/auth/presentation/screens/widgets/custom_button_login_out.dart';
 import 'package:instagram/features/auth/presentation/screens/widgets/custom_text_form_field.dart';
@@ -33,14 +35,15 @@ class _CustomSignupBodyState extends State<CustomSignupBody> {
       listener: (context, state) {
         if (state is SignupFailure) {
           showSnackbar('something wrong', context);
-        }else{
-          Navigator.pushNamed(context, 'sign_in');
+        } else {
+          GoRouter.of(context).pushNamed(AppRouter.kSignupScreen);
+          // Navigator.pushNamed(context, 'sign_in');
         }
       },
       builder: (context, state) {
         final signupCubit = context.read<SignCubit>();
         return Scaffold(
-          body: state is !SignupSuccess
+          body: state is! SignupSuccess
               ? Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: SingleChildScrollView(
@@ -100,7 +103,9 @@ class _CustomSignupBodyState extends State<CustomSignupBody> {
                             firstText: 'Do you have an email?',
                             lastText: 'Login',
                             onTap: () {
-                              Navigator.pushNamed(context, 'sign_in');
+                              GoRouter.of(context)
+                                  .pushNamed(AppRouter.kloginScreen);
+                              // Navigator.pushNamed(context, 'sign_in');
                             },
                           ),
                         ],
