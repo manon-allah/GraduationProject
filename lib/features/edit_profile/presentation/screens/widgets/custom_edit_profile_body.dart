@@ -2,16 +2,41 @@ import 'package:flutter/material.dart';
 
 import 'custom_text_field.dart';
 
-class CustomEditProfile extends StatelessWidget {
+class CustomEditProfile extends StatefulWidget {
   const CustomEditProfile({super.key});
 
   @override
+  State<CustomEditProfile> createState() => _CustomEditProfileState();
+}
+
+class _CustomEditProfileState extends State<CustomEditProfile> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController websiteController = TextEditingController();
+  TextEditingController bioController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    userNameController.dispose();
+    websiteController.dispose();
+    bioController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    genderController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           //  photo text change photo
@@ -24,10 +49,10 @@ class CustomEditProfile extends StatelessWidget {
                   backgroundImage: AssetImage('assets/posts/2.jpeg'),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 'Change Profile Photo',
                 style: TextStyle(
                   color: Colors.blue,
@@ -35,37 +60,41 @@ class CustomEditProfile extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           //  some info
-          const Column(
+          Column(
             children: [
               CustomTextField(
+                controller: nameController,
                 text: 'Name',
               ),
               CustomTextField(
+                controller: userNameController,
                 text: 'UserName',
               ),
               CustomTextField(
+                controller: websiteController,
                 text: 'Website',
               ),
               CustomTextField(
+                controller: bioController,
                 text: 'Bio',
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
-          Divider(
+          const Divider(
             endIndent: 15,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           // switch
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(
               left: 15,
             ),
@@ -77,19 +106,22 @@ class CustomEditProfile extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           //  private info
-          const Column(
+          Column(
             children: [
               CustomTextField(
+                controller: emailController,
                 text: 'Email',
               ),
               CustomTextField(
+                controller: phoneController,
                 text: 'Phone',
               ),
               CustomTextField(
+                controller: genderController,
                 text: 'Gender',
               ),
             ],

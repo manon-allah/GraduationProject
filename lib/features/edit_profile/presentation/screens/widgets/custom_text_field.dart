@@ -4,9 +4,11 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.text,
+    this.controller,
   });
 
   final String text;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,17 +26,11 @@ class CustomTextField extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              const SizedBox(
+              SizedBox(
                 width: 270,
                 child: TextField(
-                    // decoration: InputDecoration(
-                    //   border: UnderlineInputBorder(
-                    //     borderSide: BorderSide(
-                    //       color: Colors.grey,
-                    //     ),
-                    //   ),
-                    // ),
-                    ),
+                  controller: controller,
+                ),
               ),
             ],
           ),
