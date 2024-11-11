@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +21,7 @@ class AddUserDataCubit extends Cubit<AddUserDataState> {
     required String email,
     required String phone,
     required String gender,
+    required Uint8List photoUrl,
   }) async {
     String err = 'Something wrong!';
     try {
@@ -28,7 +31,9 @@ class AddUserDataCubit extends Cubit<AddUserDataState> {
           bio.isNotEmpty ||
           email.isNotEmpty ||
           phone.isNotEmpty ||
-          gender.isNotEmpty) {
+          gender.isNotEmpty||
+          photoUrl.isNotEmpty
+          ) {
         await firestore.collection('users').doc(auth.currentUser!.uid).set({
           'name': name,
           'userName': userName,
@@ -37,6 +42,9 @@ class AddUserDataCubit extends Cubit<AddUserDataState> {
           'email': email,
           'phone': phone,
           'gender': gender,
+          'imageUrl': photoUrl,
+          'followers': [],
+          'following': [],
         });
         err = 'Add User Success!';
         emit(AddUserDataSuccess());
