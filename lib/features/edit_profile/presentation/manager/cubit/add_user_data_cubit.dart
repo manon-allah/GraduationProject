@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../core/services/storage_service.dart';
+
 part 'add_user_data_state.dart';
 
 class AddUserDataCubit extends Cubit<AddUserDataState> {
@@ -31,9 +33,11 @@ class AddUserDataCubit extends Cubit<AddUserDataState> {
           bio.isNotEmpty ||
           email.isNotEmpty ||
           phone.isNotEmpty ||
-          gender.isNotEmpty||
-          photoUrl.isNotEmpty
-          ) {
+          gender.isNotEmpty ||
+          photoUrl.isNotEmpty) {
+        // store profileUrl
+        String profileUrl = await StorageService()
+            .uploadImageToStorage('profilePhoto', photoUrl, false);
         await firestore.collection('users').doc(auth.currentUser!.uid).set({
           'name': name,
           'userName': userName,
@@ -42,7 +46,7 @@ class AddUserDataCubit extends Cubit<AddUserDataState> {
           'email': email,
           'phone': phone,
           'gender': gender,
-          'imageUrl': photoUrl,
+          'imageUrl': profileUrl,
           'followers': [],
           'following': [],
         });

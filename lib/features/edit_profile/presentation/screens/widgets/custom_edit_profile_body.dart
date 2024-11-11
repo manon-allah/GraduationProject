@@ -132,7 +132,7 @@ class _CustomEditProfileState extends State<CustomEditProfile> {
                     ),
                     TextButton(
                       onPressed: () {
-                        chooseImage();
+                        
                       },
                       child: const Text(
                         'Change Profile Photo',
