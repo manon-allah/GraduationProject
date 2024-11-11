@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/utils/app_router.dart';
 import '../auth/presentation/manager/sign/sign_cubit.dart';
+import '../edit_profile/presentation/manager/cubit/add_user_data_cubit.dart';
 import '../setting/data/enums/theme_state.dart';
 import '../setting/presentation/manager/switch/switch_cubit.dart';
 
@@ -15,6 +16,9 @@ class CustomMainScreen extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => SignCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AddUserDataCubit(),
         ),
         BlocProvider(
           create: (context) => SwitchCubit()..changeTheme(ThemeState.light),
