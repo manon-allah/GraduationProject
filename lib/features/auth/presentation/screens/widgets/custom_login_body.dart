@@ -36,7 +36,7 @@ class _CustomLoginBodyState extends State<CustomLoginBody> {
         } else {
           GoRouter.of(context)
               .pushReplacementNamed(AppRouter.kNavigationScreen);
-          // Navigator.pushReplacementNamed(context, 'navigate');
+          
         }
       },
       builder: (context, state) {

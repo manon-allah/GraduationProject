@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../../core/utils/app_router.dart';
 
 class CustomAppBarProfile extends StatelessWidget {
   const CustomAppBarProfile({super.key});
@@ -34,7 +37,7 @@ class CustomAppBarProfile extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, 'setting');
+                    GoRouter.of(context).pushNamed(AppRouter.kSettingsScreen);
                   },
                   child: const Icon(
                     Icons.menu,

@@ -1,6 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:instagram/features/auth/presentation/screens/login_screen.dart';
 import 'package:instagram/features/auth/presentation/screens/signup_screen.dart';
+import 'package:instagram/features/edit_profile/presentation/screens/edit_profile.dart';
+import 'package:instagram/features/setting/presentation/screens/setting_screen.dart';
 
 import '../../features/bottom_nav_bar/presentation/screens/navigate.dart';
 
@@ -8,6 +10,8 @@ abstract class AppRouter {
   static const kSignupScreen = 'signupScreen';
   static const kloginScreen = 'loginScreen';
   static const kNavigationScreen = 'navigation';
+  static const kSettingsScreen = 'settingsScreen';
+  static const kEditScreen = 'editScreen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -24,6 +28,16 @@ abstract class AppRouter {
         path: '/navigation',
         name: kNavigationScreen,
         builder: (context, state) => const NavigateScreen(),
+      ),
+      GoRoute(
+        path: '/settingsScreen',
+        name: kSettingsScreen,
+        builder: (context, state) => const SettingScreen(),
+      ),
+      GoRoute(
+        path: '/editScreen',
+        name: kEditScreen,
+        builder: (context, state) => const EditProfile(),
       ),
     ],
   );

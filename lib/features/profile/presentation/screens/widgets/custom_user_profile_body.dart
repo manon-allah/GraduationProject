@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:instagram/core/utils/app_router.dart';
 import 'package:instagram/features/profile/presentation/screens/widgets/custom_column_text_num.dart';
 
 class CustomUserProfileBody extends StatelessWidget {
@@ -169,12 +171,12 @@ class CustomUserProfileBody extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, 'edit_profile');
+                      GoRouter.of(context).pushNamed(AppRouter.kEditScreen); 
                     },
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       width: MediaQuery.of(context).size.width - 70,
-                      // color: const Color(0xffEFEFEF),
+                      
                       child: const Center(
                         child: Text(
                           'Edit profile',
