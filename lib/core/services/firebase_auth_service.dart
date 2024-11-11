@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../features/auth/data/models/user_model.dart';
+
 class FirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -20,14 +22,18 @@ class FirebaseAuthService {
           password: password,
         );
         print(userCredential.user!.uid);
+
+        // add to model
+        UserModel userModel = UserModel(
+          uid: userCredential.user!.uid,
+          email: email,
+          password: password,
+        );
         // add user to firebase
-        await _firestore.collection('users').doc(userCredential.user!.uid).set({
-          'email': email,
-          'password': password,
-          'uId': userCredential.user!.uid,
-          'followers': [],
-          'following': [],
-        });
+        await _firestore
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set(userModel.toMap());
         err = 'Create User Success';
       }
     } catch (e) {
