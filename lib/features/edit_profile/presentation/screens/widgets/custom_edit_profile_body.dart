@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/features/edit_profile/presentation/screens/widgets/custom_private_info.dart';
 
-import 'custom_change_photo.dart';
-import 'custom_user_info.dart';
+import 'custom_text_field.dart';
 
 class CustomEditProfile extends StatelessWidget {
   const CustomEditProfile({super.key});
@@ -17,12 +15,46 @@ class CustomEditProfile extends StatelessWidget {
             height: 30,
           ),
           //  photo text change photo
-          CustomChangePhoto(),
+          Column(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('assets/posts/2.jpeg'),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Change Profile Photo',
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
           SizedBox(
             height: 15,
           ),
           //  some info
-          CustomUserInfo(),
+          const Column(
+            children: [
+              CustomTextField(
+                text: 'Name',
+              ),
+              CustomTextField(
+                text: 'UserName',
+              ),
+              CustomTextField(
+                text: 'Website',
+              ),
+              CustomTextField(
+                text: 'Bio',
+              ),
+            ],
+          ),
           SizedBox(
             height: 15,
           ),
@@ -49,7 +81,19 @@ class CustomEditProfile extends StatelessWidget {
             height: 30,
           ),
           //  private info
-          CustomPrivateInfo(),
+          const Column(
+            children: [
+              CustomTextField(
+                text: 'Email',
+              ),
+              CustomTextField(
+                text: 'Phone',
+              ),
+              CustomTextField(
+                text: 'Gender',
+              ),
+            ],
+          ),
         ],
       ),
     );
