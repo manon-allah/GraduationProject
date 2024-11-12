@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -27,6 +28,7 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
     final getData = BlocProvider.of<GetDataCubit>(context).addUserModel;
     return BlocConsumer<AddPostCubit, AddPostState>(
       listener: (context, state) {
@@ -68,7 +70,7 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
                         addPostCubit.addPost(
                           description: captionController.text,
                           img: widget.imageUrl,
-                          uid: getData?.uId ?? '',
+                          uid: auth.currentUser!.uid,
                           userName: getData?.userName ?? 'UserName',
                           profileImage: getData?.imageUrl ?? imageUrlOnline,
                         );
