@@ -36,6 +36,7 @@ class _CustomSignupBodyState extends State<CustomSignupBody> {
         if (state is SignupFailure) {
           showSnackbar('something wrong', context);
         } else {
+          // showSnackbar('Create User Success', context);
           GoRouter.of(context).pushNamed(AppRouter.kloginScreen);
         }
       },
@@ -104,7 +105,6 @@ class _CustomSignupBodyState extends State<CustomSignupBody> {
                             onTap: () {
                               GoRouter.of(context)
                                   .pushNamed(AppRouter.kloginScreen);
-                              
                             },
                           ),
                         ],

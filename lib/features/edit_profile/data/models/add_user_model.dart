@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddUserModel {
   String? uId;
@@ -40,5 +41,23 @@ class AddUserModel {
       'flowers': flowers,
       'following': following,
     };
+  }
+
+  //
+  static AddUserModel fromSnapshot(DocumentSnapshot snap) {
+    var snapshot = snap.data() as Map<String, dynamic>;
+    return AddUserModel(
+      uId: snapshot['uId'],
+      name: snapshot['name'],
+      userName: snapshot['userName'],
+      website: snapshot['website'],
+      bio: snapshot['bio'],
+      email: snapshot['email'],
+      phone: snapshot['phone'],
+      gender: snapshot['gender'],
+      imageUrl: snapshot['imageUrl'],
+      flowers: snapshot['flowers'],
+      following: snapshot['following'],
+    );
   }
 }

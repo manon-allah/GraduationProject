@@ -34,9 +34,9 @@ class _CustomLoginBodyState extends State<CustomLoginBody> {
         if (state is LoginFailure) {
           showSnackbar('something wrong', context);
         } else {
+          // showSnackbar('Login Success', context);
           GoRouter.of(context)
               .pushReplacementNamed(AppRouter.kNavigationScreen);
-          
         }
       },
       builder: (context, state) {
@@ -83,7 +83,6 @@ class _CustomLoginBodyState extends State<CustomLoginBody> {
                               email: emailController.text,
                               password: passwordController.text,
                             );
-                            // Navigator.pushReplacementNamed(context, 'navigate');
                           },
                         ),
                         const SizedBox(
