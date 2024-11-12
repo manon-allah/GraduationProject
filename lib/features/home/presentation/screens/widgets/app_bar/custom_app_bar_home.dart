@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:instagram/core/utils/app_router.dart';
 
 class CustomAppBarHome extends StatelessWidget {
   const CustomAppBarHome({super.key});
@@ -49,22 +51,21 @@ class CustomAppBarHome extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, 'chatting');
-                  },
-                  child: Image.asset(
-                    'assets/home/message11.png',
-                    width: 23,
-                    
-                  ),
+                Image.asset(
+                  'assets/home/message11.png',
+                  width: 23,
                 ),
                 const SizedBox(
                   width: 10,
                 ),
-                const Icon(
-                  Icons.add_box_outlined,
-                  size: 25,
+                IconButton(
+                  onPressed: () {
+                    GoRouter.of(context).pushNamed(AppRouter.kAddPostScreen);
+                  },
+                  icon: const Icon(
+                    Icons.add_box_outlined,
+                    size: 25,
+                  ),
                 ),
               ],
             ),
