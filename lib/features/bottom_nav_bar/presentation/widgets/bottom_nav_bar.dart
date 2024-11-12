@@ -46,20 +46,23 @@ class _BottomNavBarState extends State<BottomNavBar> {
         currentIndex: _currentIndex,
         onTap: navigationTapped,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
         items: [
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_rounded,
+              color: _currentIndex == 0 ? Colors.black : Colors.grey,
+            ),
             label: '',
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search_rounded,
+                color: _currentIndex == 1 ? Colors.black : Colors.grey),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/home/vedioexploree.png',
+              color: _currentIndex == 2 ? Colors.black : Colors.grey,
               width: 22,
             ),
             label: '',
@@ -67,12 +70,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/home/bagshop.png',
+              color: _currentIndex == 3 ? Colors.black : Colors.grey,
               width: 22,
             ),
             label: '',
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+              color: _currentIndex == 4 ? Colors.black : Colors.grey,
+            ),
             label: '',
           ),
         ],
