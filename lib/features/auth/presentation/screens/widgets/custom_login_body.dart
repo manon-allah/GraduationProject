@@ -34,7 +34,7 @@ class _CustomLoginBodyState extends State<CustomLoginBody> {
         if (state is LoginFailure) {
           showSnackbar('something wrong', context);
         } else {
-          // showSnackbar('Login Success', context);
+          showSnackbar('Login Success', context);
           GoRouter.of(context)
               .pushReplacementNamed(AppRouter.kNavigationScreen);
         }
@@ -52,7 +52,7 @@ class _CustomLoginBodyState extends State<CustomLoginBody> {
                           height: 281,
                         ),
                         Image.asset(
-                          'assets/login_out/instatextw.png',
+                          'assets/login_out/instatextw-removebg-preview.png',
                           width: 244,
                           height: 68,
                         ),

@@ -36,7 +36,7 @@ class _CustomSignupBodyState extends State<CustomSignupBody> {
         if (state is SignupFailure) {
           showSnackbar('something wrong', context);
         } else {
-          // showSnackbar('Create User Success', context);
+          showSnackbar('Create User Success', context);
           GoRouter.of(context).pushNamed(AppRouter.kloginScreen);
         }
       },
@@ -56,7 +56,7 @@ class _CustomSignupBodyState extends State<CustomSignupBody> {
                             height: 281,
                           ),
                           Image.asset(
-                            'assets/login_out/instatextw.png',
+                            'assets/login_out/instatextw-removebg-preview.png',
                             width: 244,
                             height: 68,
                           ),

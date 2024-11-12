@@ -11,7 +11,7 @@ class FirestoreService {
 
   Future<String> uploadPost(
     String description,
-    Uint8List file,
+    Uint8List img,
     String uid,
     String userName,
     String profileImage,
@@ -20,7 +20,7 @@ class FirestoreService {
     String res = 'Some error occurred';
     try {
       String photoUrl =
-          await StorageService().uploadImageToStorage('posts', file, true);
+          await StorageService().uploadImageToStorage('posts', img, true);
       String postId = const Uuid().v1();
       PostModel post = PostModel(
         description: description,

@@ -7,10 +7,7 @@ class CustomAppBarHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 50,
-      ),
+    return SafeArea(
       child: Row(
         children: [
           Padding(
@@ -38,35 +35,29 @@ class CustomAppBarHome extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 15,
-            ),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.favorite_border_outlined,
+          Row(
+            children: [
+              const Icon(
+                Icons.favorite_border_outlined,
+                size: 25,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Image.asset(
+                'assets/home/message11.png',
+                width: 23,
+              ),
+              IconButton(
+                onPressed: () {
+                  GoRouter.of(context).pushNamed(AppRouter.kAddPostScreen);
+                },
+                icon: const Icon(
+                  Icons.add_box_outlined,
                   size: 25,
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Image.asset(
-                  'assets/home/message11.png',
-                  width: 23,
-                ),
-                IconButton(
-                  onPressed: () {
-                    GoRouter.of(context).pushNamed(AppRouter.kAddPostScreen);
-                    
-                  },
-                  icon: const Icon(
-                    Icons.add_box_outlined,
-                    size: 25,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
