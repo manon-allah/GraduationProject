@@ -55,9 +55,6 @@ class CustomAppBarHome extends StatelessWidget {
                   'assets/home/message11.png',
                   width: 23,
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
                 IconButton(
                   onPressed: () {
                     GoRouter.of(context).pushNamed(AppRouter.kAddPostScreen);

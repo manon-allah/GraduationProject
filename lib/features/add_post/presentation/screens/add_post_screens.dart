@@ -7,8 +7,22 @@ class AddPostScreens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: CustomAddPostBody(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Add Post'),
+        actions: [
+          TextButton(
+              onPressed: () {},
+              child: const Text(
+                'Post',
+                style: TextStyle(
+                  fontSize: 23,
+                  color: Colors.blue,
+                ),
+              )),
+        ],
+      ),
+      body: const CustomAddPostBody(),
     );
   }
 }
