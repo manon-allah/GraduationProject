@@ -52,6 +52,7 @@ class _CustomEditProfileState extends State<CustomEditProfile> {
     return BlocConsumer<AddUserDataCubit, AddUserDataState>(
       listener: (context, state) {
         if (state is AddUserDataSuccess) {
+          showSnackbar('Success', context);
           GoRouter.of(context).pop();
         } else {
           showSnackbar('Something wrong', context);

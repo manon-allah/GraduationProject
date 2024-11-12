@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:instagram/features/edit_profile/data/models/add_user_model.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../core/services/storage_service.dart';
@@ -14,6 +15,7 @@ class AddUserDataCubit extends Cubit<AddUserDataState> {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
+  AddUserModel? addUserModel;
 
   Future<String> addUserData({
     required String name,
@@ -38,19 +40,24 @@ class AddUserDataCubit extends Cubit<AddUserDataState> {
         // store profileUrl
         String profileUrl = await StorageService()
             .uploadImageToStorage('profilePhoto', photoUrl, false);
-            // store in firestore
-        await firestore.collection('users').doc(auth.currentUser!.uid).set({
-          'name': name,
-          'userName': userName,
-          'website': website,
-          'bio': bio,
-          'email': email,
-          'phone': phone,
-          'gender': gender,
-          'imageUrl': profileUrl,
-          'followers': [],
-          'following': [],
-        });
+        // store in model
+        addUserModel = AddUserModel(
+          name: name,
+          userName: userName,
+          website: website,
+          bio: bio,
+          email: email,
+          phone: phone,
+          gender: gender,
+          imageUrl: profileUrl,
+          flowers: [],
+          following: [],
+        );
+
+        // store in firestore
+        await firestore.collection('users').doc(auth.currentUser!.uid).set(
+              addUserModel!.toMap(),
+            );
         err = 'Add User Success!';
         emit(AddUserDataSuccess());
       } else {

@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 
 class AddUserModel {
   String? uId;
@@ -9,7 +8,7 @@ class AddUserModel {
   final String email;
   final String phone;
   final String gender;
-  final Uint8List imageUrl;
+  final String imageUrl;
   final List flowers;
   final List following;
 
