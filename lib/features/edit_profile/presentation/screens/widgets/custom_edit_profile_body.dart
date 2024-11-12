@@ -41,7 +41,7 @@ class _CustomEditProfileState extends State<CustomEditProfile> {
 
   // pick image
   void chooseImage() async {
-    Uint8List image = selectImage(ImageSource.gallery);
+    Uint8List image = await selectImage(ImageSource.gallery);
     setState(() {
       _image = image;
     });
@@ -132,7 +132,7 @@ class _CustomEditProfileState extends State<CustomEditProfile> {
                     ),
                     TextButton(
                       onPressed: () {
-                        
+                        chooseImage();
                       },
                       child: const Text(
                         'Change Profile Photo',

@@ -38,6 +38,7 @@ class AddUserDataCubit extends Cubit<AddUserDataState> {
         // store profileUrl
         String profileUrl = await StorageService()
             .uploadImageToStorage('profilePhoto', photoUrl, false);
+            // store in firestore
         await firestore.collection('users').doc(auth.currentUser!.uid).set({
           'name': name,
           'userName': userName,
