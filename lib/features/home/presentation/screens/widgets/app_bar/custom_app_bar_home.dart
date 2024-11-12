@@ -58,6 +58,7 @@ class CustomAppBarHome extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     GoRouter.of(context).pushNamed(AppRouter.kAddPostScreen);
+                    
                   },
                   icon: const Icon(
                     Icons.add_box_outlined,
