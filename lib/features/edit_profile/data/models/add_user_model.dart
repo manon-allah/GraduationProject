@@ -37,8 +37,8 @@ class AddUserModel {
       'phone': phone,
       'gender': gender,
       'imageUrl': imageUrl,
-      'flowers': [],
-      'following': [],
+      'flowers': flowers,
+      'following': following,
     };
   }
 }
