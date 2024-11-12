@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram/constants.dart';
 import 'package:instagram/core/functions/pick_image_function.dart';
 import 'package:instagram/core/functions/snack_bar_function.dart';
 import 'package:instagram/features/edit_profile/presentation/manager/cubit/add_user_data_cubit.dart';
@@ -124,8 +125,7 @@ class _CustomEditProfileState extends State<CustomEditProfile> {
                             )
                           : const CircleAvatar(
                               radius: 70,
-                              backgroundImage: NetworkImage(
-                                  'https://static-00.iconduck.com/assets.00/profile-icon-2048x2048-yj5zf8da.png'),
+                              backgroundImage: NetworkImage(imageUrlOnline),
                             ),
                     ),
                     const SizedBox(
