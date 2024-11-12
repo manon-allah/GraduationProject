@@ -9,6 +9,7 @@ import 'package:instagram/core/functions/pick_image_function.dart';
 import 'package:instagram/core/functions/snack_bar_function.dart';
 import 'package:instagram/features/edit_profile/presentation/manager/cubit/add_user_data_cubit.dart';
 
+import '../../../../profile/presentation/manager/cubit/get_data_cubit.dart';
 import 'custom_text_field.dart';
 
 class CustomEditProfile extends StatefulWidget {
@@ -54,6 +55,7 @@ class _CustomEditProfileState extends State<CustomEditProfile> {
       listener: (context, state) {
         if (state is AddUserDataSuccess) {
           showSnackbar('Success', context);
+          BlocProvider.of<GetDataCubit>(context).getRefreshData();
           GoRouter.of(context).pop();
         } else {
           showSnackbar('Something wrong', context);
