@@ -94,7 +94,6 @@ class _CustomLoginBodyState extends State<CustomLoginBody> {
                           onTap: () {
                             GoRouter.of(context)
                                 .pushNamed(AppRouter.kSignupScreen);
-                            // Navigator.pushNamed(context, 'sign_up');
                           },
                         ),
                       ],

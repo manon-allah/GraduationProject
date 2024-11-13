@@ -19,12 +19,19 @@ class CustomAddPostBody extends StatefulWidget {
 
 class _CustomAddPostBodyState extends State<CustomAddPostBody> {
   TextEditingController captionController = TextEditingController();
+  bool isLoading = false;
 
   @override
   void dispose() {
     super.dispose();
     captionController.dispose();
   }
+
+  // void clearImage() {
+  //   setState(() {
+  //     widget.imageUrl = null;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,11 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
     return BlocConsumer<AddPostCubit, AddPostState>(
       listener: (context, state) {
         if (state is AddPostSuccess) {
+          setState(() {
+            isLoading = false;
+          });
           showSnackbar('Posted Success', context);
+          GoRouter.of(context).pop();
         } else {
           showSnackbar('some error occured', context);
         }
@@ -41,103 +52,118 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
       builder: (context, state) {
         final addPostCubit = context.read<AddPostCubit>();
         return SafeArea(
-          child: Column(
-            children: [
-              // app bar
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back,
-                    ),
-                  ),
-                  const Text(
-                    'Add Post',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      right: 8,
-                    ),
-                    child: TextButton(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // app bar
+                Row(
+                  children: [
+                    IconButton(
                       onPressed: () {
-                        addPostCubit.addPost(
-                          description: captionController.text,
-                          img: widget.imageUrl,
-                          uid: auth.currentUser!.uid,
-                          userName: getData?.userName ?? 'UserName',
-                          profileImage: getData?.imageUrl ?? imageUrlOnline,
-                        );
+                        GoRouter.of(context).pop();
                       },
-                      child: const Text(
-                        'Post',
-                        style: TextStyle(
-                          fontSize: 23,
-                          color: Colors.blue,
+                      icon: const Icon(
+                        Icons.arrow_back,
+                      ),
+                    ),
+                    const Text(
+                      'Add Post',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        right: 8,
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          addPostCubit.addPost(
+                            description: captionController.text,
+                            img: widget.imageUrl,
+                            uid: auth.currentUser!.uid,
+                            userName: getData?.userName ?? 'UserName',
+                            profileImage: getData?.imageUrl ?? imageUrlOnline,
+                          );
+                        },
+                        child: const Text(
+                          'Post',
+                          style: TextStyle(
+                            fontSize: 23,
+                            color: Colors.blue,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              ///////////////////
-              // content
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
+                  ],
                 ),
-                child: Column(
+                ///////////////////
+                // content
+                Column(
                   children: [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    isLoading
+                        ? const LinearProgressIndicator(
+                            color: Colors.blue,
+                          )
+                        : const SizedBox(),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        top: 20,
+                      ),
+                      child: Column(
                         children: [
-                          // Profile picture
-                          CircleAvatar(
-                            radius: 30,
-                            backgroundImage: NetworkImage(
-                                getData?.imageUrl ?? imageUrlOnline),
-                          ),
-                          // write a caption
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: TextField(
-                              controller: captionController,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Write a caption...',
-                              ),
-                              maxLines: 8,
-                            ),
-                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Profile picture
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: NetworkImage(
+                                      getData?.imageUrl ?? imageUrlOnline),
+                                ),
+                                // write a caption
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.7,
+                                  child: TextField(
+                                    controller: captionController,
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Write a caption...',
+                                    ),
+                                    maxLines: 8,
+                                  ),
+                                ),
+                              ]),
                           // post photo
                           SizedBox(
-                            width: 45,
-                            height: 45,
-                            child: AspectRatio(
-                              aspectRatio: 480 / 450,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: MemoryImage(widget.imageUrl),
-                                    fit: BoxFit.fill,
-                                    alignment: FractionalOffset.topCenter,
-                                  ),
+                            width: 400,
+                            height: 400,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                image: DecorationImage(
+                                  image: MemoryImage(widget.imageUrl),
+                                  fit: BoxFit.fill,
+                                  alignment: FractionalOffset.topCenter,
                                 ),
                               ),
                             ),
                           ),
-                        ]),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
