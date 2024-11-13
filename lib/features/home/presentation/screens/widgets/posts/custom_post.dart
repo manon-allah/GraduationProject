@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'custom_like_number.dart';
-import 'custom_react_post.dart';
-import 'custom_user_description.dart';
 
 class CustomPost extends StatelessWidget {
   const CustomPost({
@@ -12,24 +9,125 @@ class CustomPost extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(
-          'assets/posts/3.jpeg',
-          fit: BoxFit.fill,
-          width: double.infinity,
-          height: 390,
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 5,
+          ),
+          child: Image.asset(
+            'assets/posts/3.jpeg',
+            fit: BoxFit.fill,
+            width: double.infinity,
+            height: 390,
+          ),
         ),
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             // react in prost....etc
-            CustomReactPost(),
+
+            Row(
+              children: [
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.favorite_border_outlined,
+                    size: 25,
+                  ),
+                ),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {},
+                  icon: Image.asset(
+                    'assets/home/comment11.png',
+                    width: 20,
+                  ),
+                ),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {},
+                  icon: Image.asset(
+                    'assets/home/send11.png',
+                    width: 22,
+                  ),
+                ),
+                const Spacer(),
+                IconButton(
+                  onPressed: () {},
+                  icon: Image.asset(
+                    'assets/home/save11.png',
+                    width: 23,
+                  ),
+                ),
+              ],
+            ),
             // numbers of likes....etc
-            CustomLikeNumber(),
+            const Padding(
+              padding: EdgeInsets.only(
+                left: 15,
+                top: 5,
+              ),
+              child: Text(
+                '0 '
+                'Likes',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
             // username description....etc
-            CustomUserNameDescription(),
+            const Padding(
+              padding: EdgeInsets.only(
+                left: 15,
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    'UserName',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Description',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 15,
+              ),
+              child: InkWell(
+                onTap: () {},
+                child: const Text(
+                  'View all 16 comments',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+            ),
+            const Text(
+              '13/11/2024',
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 17,
+              ),
+            ),
           ],
         ),
       ],

@@ -14,29 +14,58 @@ class CustomListTileUserName extends StatelessWidget {
       builder: (context, state) {
         final getData = context.read<GetDataCubit>().addUserModel;
         return ListTile(
-          leading: CircleAvatar(
-            radius: 22,
-            backgroundColor: Colors.red,
-            child: CircleAvatar(
-              radius: 20,
-              backgroundImage:
-                  NetworkImage(getData?.imageUrl ?? imageUrlOnline),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 8,
             ),
-          ),
-          title: Text(
-            getData?.userName ?? 'no data',
-            style: const TextStyle(
-              fontSize: 15,
+            leading: CircleAvatar(
+              radius: 22,
+              backgroundColor: Colors.red,
+              child: CircleAvatar(
+                radius: 20,
+                backgroundImage:
+                    NetworkImage(getData?.imageUrl ?? imageUrlOnline),
+              ),
             ),
-          ),
-          subtitle: Text(
-            getData?.bio ?? 'no data',
-            style: const TextStyle(
-              fontSize: 13,
+            title: Text(
+              getData?.userName ?? 'UserName',
+              style: const TextStyle(
+                fontSize: 15,
+              ),
             ),
-          ),
-          trailing: const Icon(Icons.more_horiz),
-        );
+            subtitle: Text(
+              getData?.bio ?? 'Bio',
+              style: const TextStyle(
+                fontSize: 13,
+              ),
+            ),
+            trailing: IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => Dialog(
+                          child: ListView(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 15,
+                            ),
+                            shrinkWrap: true,
+                            children: ['Delete']
+                                .map((e) => InkWell(
+                                      onTap: () {},
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 15,
+                                          vertical: 10,
+                                        ),
+                                        child: Text(e),
+                                      ),
+                                    ))
+                                .toList(),
+                          ),
+                        ));
+              },
+              icon: const Icon(Icons.more_horiz),
+            ));
       },
     );
   }

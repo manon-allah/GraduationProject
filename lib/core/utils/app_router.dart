@@ -5,7 +5,7 @@ import 'package:instagram/features/edit_profile/presentation/screens/edit_profil
 import 'package:instagram/features/setting/presentation/screens/setting_screen.dart';
 
 import '../../features/add_post/presentation/screens/add_post_screens.dart';
-import '../../features/bottom_nav_bar/presentation/screens/navigate.dart';
+import '../../features/bottom_nav_bar/presentation/screens/navigate_screen.dart';
 
 abstract class AppRouter {
   static const kSignupScreen = 'signupScreen';

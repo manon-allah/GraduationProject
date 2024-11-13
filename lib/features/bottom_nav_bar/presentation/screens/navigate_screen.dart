@@ -5,16 +5,16 @@ import 'package:instagram/features/home/presentation/screens/home_screen.dart';
 import 'package:instagram/features/profile/presentation/screens/profile_screen.dart';
 import 'package:instagram/features/search/presentation/screens/search_screen.dart';
 
-class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+class NavigateScreen extends StatefulWidget {
+  const NavigateScreen({super.key});
 
   @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
+  State<NavigateScreen> createState() => _NavigateScreenState();
 }
 
 int _currentIndex = 0;
 
-class _BottomNavBarState extends State<BottomNavBar> {
+class _NavigateScreenState extends State<NavigateScreen> {
   late PageController pageController;
 
   @override
@@ -42,6 +42,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: PageView(
+        controller: pageController,
+        onPageChanged: onPageChanged,
+        physics: const NeverScrollableScrollPhysics(),
+        children: const [
+          HomeScreen(),
+          SearchScreen(),
+          ExploreScreen(),
+          ChattingScreen(),
+          ProfileScreen(),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: navigationTapped,
@@ -82,18 +94,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
             label: '',
           ),
-        ],
-      ),
-      body: PageView(
-        controller: pageController,
-        onPageChanged: onPageChanged,
-        // physics: const BouncingScrollPhysics(),
-        children: const [
-          HomeScreen(),
-          SearchScreen(),
-          ExploreScreen(),
-          ChattingScreen(),
-          ProfileScreen(),
         ],
       ),
     );
