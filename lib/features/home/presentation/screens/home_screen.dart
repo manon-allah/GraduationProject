@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/features/home/presentation/screens/widgets/posts/custom_post_body.dart';
@@ -19,23 +20,58 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocConsumer<SwitchCubit, SwitchState>(
       listener: (context, state) {},
       builder: (context, state) {
-        return CustomScrollView(
-          slivers: [
-            const SliverToBoxAdapter(
-              child: CustomAppBarHome(),
-            ),
-            const SliverToBoxAdapter(
-              child: StoriesListViewBody(),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                childCount: 10,
-                (context, index) {
-                  return const CustomPostBody();
-                },
-              ),
-            ),
-          ],
+        return Scaffold(
+          body: StreamBuilder(
+            stream: FirebaseFirestore.instance.collection('posts').snapshots(),
+            builder: (context,
+                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.black,
+                  ),
+                );
+              }
+              return CustomScrollView(
+                slivers: [
+                  const SliverToBoxAdapter(
+                    child: CustomAppBarHome(),
+                  ),
+                  const SliverToBoxAdapter(
+                    child: StoriesListViewBody(),
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: snapshot.data!.docs.length,
+                      (context, index) {
+                        return CustomPostBody(
+                          snap: snapshot.data!.docs[index].data(),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+          // CustomScrollView(
+          //   slivers: [
+          //     const SliverToBoxAdapter(
+          //       child: CustomAppBarHome(),
+          //     ),
+          //     const SliverToBoxAdapter(
+          //       child: StoriesListViewBody(),
+          //     ),
+          //     SliverList(
+          //       delegate: SliverChildBuilderDelegate(
+          //         childCount: 10,
+          //         (context, index) {
+          //           return const CustomPostBody();
+          //         },
+          //       ),
+          //     ),
+          //   ],
+          // ),
         );
       },
     );
