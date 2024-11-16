@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 
-import '../../../../chatting/presentation/screens/widgets/custom_search_bar.dart';
 import 'custom_grid_view.dart';
 
-class CustomSearchBody extends StatelessWidget {
+class CustomSearchBody extends StatefulWidget {
   const CustomSearchBody({super.key});
 
   @override
+  State<CustomSearchBody> createState() => _CustomSearchBodyState();
+}
+
+class _CustomSearchBodyState extends State<CustomSearchBody> {
+  
+
+  @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        CustomSearchBar(),
-        CustomGridView(),
-      ],
+    return SafeArea(
+      child: Column(
+        children: [
+          
+
+          CustomGridView(),
+        ],
+      ),
     );
   }
 }

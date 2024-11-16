@@ -19,7 +19,7 @@ class CustomSearchBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide.none,
           ),
-          hintText: 'Search',
+          hintText: 'Search for users',
           prefixIcon: const Icon(
             Icons.search,
             size: 18,
