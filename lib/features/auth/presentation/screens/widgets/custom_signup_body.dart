@@ -7,8 +7,6 @@ import 'package:instagram/features/auth/presentation/screens/widgets/custom_butt
 import 'package:instagram/features/auth/presentation/screens/widgets/custom_text_form_field.dart';
 import 'package:instagram/features/auth/presentation/screens/widgets/custom_text_have_account.dart';
 
-import '../../../../../core/functions/snack_bar_function.dart';
-
 class CustomSignupBody extends StatefulWidget {
   const CustomSignupBody({super.key});
 
@@ -31,94 +29,75 @@ class _CustomSignupBodyState extends State<CustomSignupBody> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignCubit, SignState>(
-      listener: (context, state) {
-        if (state is SignupFailure) {
-          showSnackbar('something wrong', context);
-        } else {
-          showSnackbar('Create User Success', context);
-          GoRouter.of(context).pushNamed(AppRouter.kloginScreen);
-        }
-      },
-      builder: (context, state) {
-        final signupCubit = context.read<SignCubit>();
-        return Scaffold(
-          body: state is! SignupSuccess
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: formKey,
-                      autovalidateMode: autovalidateMode,
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 281,
-                          ),
-                          Image.asset(
-                            'assets/login_out/instatextw-removebg-preview.png',
-                            width: 244,
-                            height: 68,
-                          ),
-                          const SizedBox(
-                            height: 21,
-                          ),
-                          CustomTextFormField(
-                            controller: emailController,
-                            hint: 'Email',
-                            textInputType: TextInputType.emailAddress,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          CustomTextFormField(
-                            controller: passwordController,
-                            obscureText: true,
-                            hint: 'password',
-                            textInputType: TextInputType.visiblePassword,
-                          ),
-                          const SizedBox(
-                            height: 92,
-                          ),
-                          CustomButtonLoginOut(
-                            text: 'Signup',
-                            onTap: () {
-                              if (formKey.currentState!.validate()) {
-                                formKey.currentState!.save();
-                                signupCubit.createUser(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                );
-                              } else {
-                                setState(() {
-                                  autovalidateMode = AutovalidateMode.always;
-                                });
-                              }
-                            },
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          CustomTextHaveAccount(
-                            firstText: 'Do you have an email?',
-                            lastText: 'Login',
-                            onTap: () {
-                              GoRouter.of(context)
-                                  .pushNamed(AppRouter.kloginScreen);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                )
-              : const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.black,
-                  ),
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            autovalidateMode: autovalidateMode,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 281,
                 ),
-        );
-      },
+                Image.asset(
+                  'assets/login_out/instatextw-removebg-preview.png',
+                  width: 244,
+                  height: 68,
+                ),
+                const SizedBox(
+                  height: 21,
+                ),
+                CustomTextFormField(
+                  controller: emailController,
+                  hint: 'Email',
+                  textInputType: TextInputType.emailAddress,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                CustomTextFormField(
+                  controller: passwordController,
+                  obscureText: true,
+                  hint: 'password',
+                  textInputType: TextInputType.visiblePassword,
+                ),
+                const SizedBox(
+                  height: 92,
+                ),
+                CustomButtonLoginOut(
+                  text: 'Signup',
+                  onTap: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      BlocProvider.of<SignCubit>(context).createUser(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                      GoRouter.of(context).pushNamed(AppRouter.kloginScreen);
+                    } else {
+                      setState(() {
+                        autovalidateMode = AutovalidateMode.always;
+                      });
+                    }
+                  },
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                CustomTextHaveAccount(
+                  firstText: 'Do you have an email?',
+                  lastText: 'Login',
+                  onTap: () {
+                    GoRouter.of(context).pushNamed(AppRouter.kloginScreen);
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
