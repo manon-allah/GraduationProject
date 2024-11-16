@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
+import 'package:instagram/core/utils/app_router.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -60,14 +63,26 @@ class _SearchScreenState extends State<SearchScreen> {
                 return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          snapshot.data!.docs[index]['imageUrl'],
+                    return InkWell(
+                      onTap: () {
+                        if (FirebaseAuth.instance.currentUser!.uid ==
+                            snapshot.data!.docs[index]['uId']) {
+                          GoRouter.of(context)
+                              .pushNamed(AppRouter.kProfileScreen);
+                        } else {
+                          GoRouter.of(context)
+                              .pushNamed(AppRouter.kNewFollowerScreen);
+                        }
+                      },
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            snapshot.data!.docs[index]['imageUrl'],
+                          ),
                         ),
+                        title: Text(snapshot.data!.docs[index]['userName']),
+                        subtitle: Text(snapshot.data!.docs[index]['name']),
                       ),
-                      title: Text(snapshot.data!.docs[index]['userName']),
-                      subtitle: Text(snapshot.data!.docs[index]['name']),
                     );
                   },
                 );

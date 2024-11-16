@@ -2,11 +2,13 @@ import 'package:go_router/go_router.dart';
 import 'package:instagram/features/auth/presentation/screens/login_screen.dart';
 import 'package:instagram/features/auth/presentation/screens/signup_screen.dart';
 import 'package:instagram/features/edit_profile/presentation/screens/edit_profile.dart';
+import 'package:instagram/features/profile/presentation/screens/profile_screen.dart';
 import 'package:instagram/features/setting/presentation/screens/setting_screen.dart';
 
 import '../../features/add_post/presentation/screens/add_post_screens.dart';
 import '../../features/bottom_nav_bar/presentation/screens/navigate_screen.dart';
 import '../../features/home/presentation/screens/comment_screen.dart';
+import '../../features/profile/presentation/screens/new_follower_screen.dart';
 
 abstract class AppRouter {
   static const kSignupScreen = 'signupScreen';
@@ -16,6 +18,8 @@ abstract class AppRouter {
   static const kEditScreen = 'editScreen';
   static const kAddPostScreen = 'addPostScreen';
   static const kCommentScreen = 'commentScreen';
+  static const kProfileScreen = 'profileScreen';
+  static const kNewFollowerScreen = 'newFollowerScreen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -52,6 +56,16 @@ abstract class AppRouter {
         path: '/commentScreen',
         name: kCommentScreen,
         builder: (context, state) => const CommentScreen(),
+      ),
+      GoRoute(
+        path: '/profileScreen',
+        name: kProfileScreen,
+        builder: (context, state) => const ProfileScreen(),
+      ),
+      GoRoute(
+        path: '/newFollowerScreen',
+        name: kNewFollowerScreen,
+        builder: (context, state) => const NewFollowerScreen(),
       ),
     ],
   );

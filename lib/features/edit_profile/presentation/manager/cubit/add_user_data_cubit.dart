@@ -52,6 +52,7 @@ class AddUserDataCubit extends Cubit<AddUserDataState> {
           imageUrl: profileUrl,
           flowers: [],
           following: [],
+          uId: auth.currentUser!.uid,
         );
 
         // store in firestore

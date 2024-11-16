@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddUserModel {
+  final String uId;
   final String name;
   final String userName;
   final String website;
@@ -13,6 +14,7 @@ class AddUserModel {
   final List following;
 
   AddUserModel({
+    required this.uId,
     required this.name,
     required this.userName,
     required this.website,
@@ -28,6 +30,7 @@ class AddUserModel {
   Map<String, dynamic> toMap() {
     return {
       'name': name,
+      'uId': uId,
       'userName': userName,
       'website': website,
       'bio': bio,
@@ -45,6 +48,7 @@ class AddUserModel {
     var snapshot = snap.data() as Map<String, dynamic>;
     return AddUserModel(
       name: snapshot['name'],
+      uId: snapshot['uId'],
       userName: snapshot['userName'],
       website: snapshot['website'],
       bio: snapshot['bio'],

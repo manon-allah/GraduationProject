@@ -9,16 +9,14 @@ import '../../../../../core/utils/app_router.dart';
 import '../../manager/cubit/get_data_cubit.dart';
 import 'custom_column_text_num.dart';
 
-class CustomProfileBody extends StatefulWidget {
-  const CustomProfileBody({
-    super.key,
-  });
+class CustomNewFollowerBody extends StatefulWidget {
+  const CustomNewFollowerBody({super.key});
 
   @override
-  State<CustomProfileBody> createState() => _CustomProfileBodyState();
+  State<CustomNewFollowerBody> createState() => _CustomNewFollowerBodyState();
 }
 
-class _CustomProfileBodyState extends State<CustomProfileBody> {
+class _CustomNewFollowerBodyState extends State<CustomNewFollowerBody> {
   int postLength = 0;
 
   @override
@@ -205,7 +203,7 @@ class _CustomProfileBodyState extends State<CustomProfileBody> {
                           width: MediaQuery.of(context).size.width - 70,
                           child: const Center(
                             child: Text(
-                              'Edit profile',
+                              'Follow',
                               style: TextStyle(
                                 fontSize: 18,
                               ),
