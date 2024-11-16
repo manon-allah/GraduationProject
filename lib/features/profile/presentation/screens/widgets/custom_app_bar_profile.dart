@@ -21,7 +21,7 @@ class CustomAppBarProfile extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                getData?.userName ?? 'no data',
+                getData?.userName ?? 'UserName',
                 style: const TextStyle(
                   fontSize: 27,
                 ),

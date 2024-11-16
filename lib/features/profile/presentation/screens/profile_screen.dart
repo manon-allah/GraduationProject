@@ -14,26 +14,28 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: CustomAppBarProfile(),
-        ),
-        SliverToBoxAdapter(
-          child: CustomProfileBody(),
-        ),
-        SliverToBoxAdapter(
-          child: CustomTabBarBody(),
-        ),
-        // SliverList(
-        //   delegate: SliverChildBuilderDelegate(
-        //     childCount: 10,
-        //     (context, index) {
-        //       return const CustomPostBody();
-        //     },
-        //   ),
-        // ),
-      ],
+    return const Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: CustomAppBarProfile(),
+          ),
+          SliverToBoxAdapter(
+            child: CustomProfileBody(),
+          ),
+          SliverToBoxAdapter(
+            child: CustomTabBarBody(),
+          ),
+          // SliverList(
+          //   delegate: SliverChildBuilderDelegate(
+          //     childCount: 10,
+          //     (context, index) {
+          //       return const CustomPostBody();
+          //     },
+          //   ),
+          // ),
+        ],
+      ),
     );
   }
 }

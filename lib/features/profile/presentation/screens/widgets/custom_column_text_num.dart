@@ -6,14 +6,26 @@ class CustomColumnTextNum extends StatelessWidget {
     required this.num,
     required this.text,
   });
-  final String num;
+  final int num;
   final String text;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(num),
-        Text(text),
+        Text(
+          num.toString(),
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        Text(
+          text,
+          style: const TextStyle(
+            fontSize: 17,
+            color: Colors.grey,
+          ),
+        ),
       ],
     );
   }
