@@ -44,6 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     delegate: SliverChildBuilderDelegate(
                       childCount: snapshot.data!.docs.length,
                       (context, index) {
+                        // if (snapshot.data!.docs.isEmpty) {
+                        //   return const Center(
+                        //     child: Text(
+                        //       'No Posts yet',
+                        //       style: TextStyle(color: Colors.black),
+                        //     ),
+                        //   );
+                        // }
                         return CustomPostBody(
                           snap: snapshot.data!.docs[index].data(),
                         );

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:instagram/core/functions/snack_bar_function.dart';
 import 'package:instagram/core/utils/app_router.dart';
 import 'package:instagram/features/home/presentation/manager/cubit/like_cubit.dart';
 import 'package:instagram/features/profile/presentation/manager/cubit/get_data_cubit.dart';
 import 'package:intl/intl.dart';
+
+import '../../../../../add_post/presentation/manager/cubit/post_cubit.dart';
 // import '../../../../../../constants.dart';
 
 class CustomPostBody extends StatelessWidget {
@@ -14,6 +17,7 @@ class CustomPostBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final getData = BlocProvider.of<GetDataCubit>(context).addUserModel;
+    final getPost = BlocProvider.of<PostCubit>(context);
     return BlocBuilder<LikeCubit, LikeState>(
       builder: (context, state) {
         final likeCubit = context.read<LikeCubit>();
@@ -58,7 +62,12 @@ class CustomPostBody extends StatelessWidget {
                               shrinkWrap: true,
                               children: ['Delete']
                                   .map((e) => InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          getPost.deletePost(snap['postId']);
+                                          
+                                          GoRouter.of(context).pop();
+                                          showSnackbar('Deleted', context);
+                                        },
                                         child: Container(
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 15,
