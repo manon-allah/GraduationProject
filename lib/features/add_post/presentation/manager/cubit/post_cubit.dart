@@ -5,10 +5,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram/core/services/firestore_service.dart';
 import 'package:meta/meta.dart';
 
-part 'add_post_state.dart';
+part 'post_state.dart';
 
-class AddPostCubit extends Cubit<AddPostState> {
-  AddPostCubit() : super(AddPostInitial());
+class PostCubit extends Cubit<PostState> {
+  PostCubit() : super(PostInitial());
 
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -37,11 +37,13 @@ class AddPostCubit extends Cubit<AddPostState> {
     return err;
   }
 
-  // delete the post 
+  // delete the post
   Future<void> deletePost(String postId) async {
     try {
       await _firestore.collection('posts').doc(postId).delete();
+      emit(DeletePostSuccess());
     } catch (e) {
+      emit(DeletePostFailure());
       print(e.toString());
     }
   }

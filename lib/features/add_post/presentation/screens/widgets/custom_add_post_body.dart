@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:instagram/constants.dart';
 import 'package:instagram/core/functions/snack_bar_function.dart';
-import 'package:instagram/features/add_post/presentation/manager/cubit/add_post_cubit.dart';
+import 'package:instagram/features/add_post/presentation/manager/cubit/post_cubit.dart';
 import 'package:instagram/features/profile/presentation/manager/cubit/get_data_cubit.dart';
 
 class CustomAddPostBody extends StatefulWidget {
@@ -37,7 +37,7 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
   Widget build(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
     final getData = BlocProvider.of<GetDataCubit>(context).addUserModel;
-    return BlocConsumer<AddPostCubit, AddPostState>(
+    return BlocConsumer<PostCubit, PostState>(
       listener: (context, state) {
         if (state is AddPostSuccess) {
           setState(() {
@@ -50,7 +50,7 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
         }
       },
       builder: (context, state) {
-        final addPostCubit = context.read<AddPostCubit>();
+        final addPostCubit = context.read<PostCubit>();
         return SafeArea(
           child: SingleChildScrollView(
             child: Column(

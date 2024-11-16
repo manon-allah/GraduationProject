@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram/features/add_post/presentation/manager/cubit/add_post_cubit.dart';
+import 'package:instagram/features/add_post/presentation/manager/cubit/post_cubit.dart';
 import 'package:instagram/features/home/presentation/manager/cubit/like_cubit.dart';
 
 import '../../core/utils/app_router.dart';
@@ -27,7 +27,7 @@ class CustomMainScreen extends StatelessWidget {
           create: (context) => GetDataCubit()..getRefreshData(),
         ),
         BlocProvider(
-          create: (context) => AddPostCubit(),
+          create: (context) => PostCubit(),
         ),
         BlocProvider(
           create: (context) => LikeCubit(),
