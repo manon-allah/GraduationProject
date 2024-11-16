@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:instagram/core/utils/app_router.dart';
 import 'package:instagram/features/home/presentation/manager/cubit/like_cubit.dart';
 import 'package:instagram/features/profile/presentation/manager/cubit/get_data_cubit.dart';
 import 'package:intl/intl.dart';
@@ -119,7 +121,10 @@ class CustomPostBody extends StatelessWidget {
                         ),
                         IconButton(
                           padding: EdgeInsets.zero,
-                          onPressed: () {},
+                          onPressed: () {
+                            GoRouter.of(context)
+                                .pushNamed(AppRouter.kCommentScreen);
+                          },
                           icon: Image.asset(
                             'assets/home/comment11.png',
                             width: 20,

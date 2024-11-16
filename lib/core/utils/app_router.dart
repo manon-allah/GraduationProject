@@ -6,6 +6,7 @@ import 'package:instagram/features/setting/presentation/screens/setting_screen.d
 
 import '../../features/add_post/presentation/screens/add_post_screens.dart';
 import '../../features/bottom_nav_bar/presentation/screens/navigate_screen.dart';
+import '../../features/home/presentation/screens/comment_screen.dart';
 
 abstract class AppRouter {
   static const kSignupScreen = 'signupScreen';
@@ -14,6 +15,7 @@ abstract class AppRouter {
   static const kSettingsScreen = 'settingsScreen';
   static const kEditScreen = 'editScreen';
   static const kAddPostScreen = 'addPostScreen';
+  static const kCommentScreen = 'commentScreen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -45,6 +47,11 @@ abstract class AppRouter {
         path: '/addPostScreen',
         name: kAddPostScreen,
         builder: (context, state) => const AddPostScreens(),
+      ),
+      GoRoute(
+        path: '/commentScreen',
+        name: kCommentScreen,
+        builder: (context, state) => const CommentScreen(),
       ),
     ],
   );
