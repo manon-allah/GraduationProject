@@ -33,7 +33,7 @@ class CustomMainScreen extends StatelessWidget {
           create: (context) => LikeCubit(),
         ),
         BlocProvider(
-          create: (context) => SwitchCubit()..changeTheme(ThemeState.light),
+          create: (context) => SwitchCubit()..changeTheme(ThemeState.initial),
         ),
       ],
       child: BlocBuilder<SwitchCubit, SwitchState>(
