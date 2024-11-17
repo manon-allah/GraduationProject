@@ -9,36 +9,32 @@ class CustomAddStory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetDataCubit, GetDataState>(
-      builder: (context, state) {
-        final getData = context.read<GetDataCubit>().addUserModel;
-        return Column(
+    final getData = BlocProvider.of<GetDataCubit>(context).addUserModel;
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.bottomRight,
           children: [
-            Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundImage:
-                      NetworkImage(getData?.imageUrl ?? imageUrlOnline),
-                ),
-                const CircleAvatar(
-                  radius: 13,
-                  backgroundColor: Colors.blue,
-                  child: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+            CircleAvatar(
+              radius: 40,
+              backgroundImage:
+                  NetworkImage(getData?.imageUrl ?? imageUrlOnline),
             ),
-            const SizedBox(
-              height: 5,
+            const CircleAvatar(
+              radius: 13,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
             ),
-            Text(getData?.userName ?? 'no data'),
           ],
-        );
-      },
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Text(getData?.userName ?? 'UserName'),
+      ],
     );
   }
 }

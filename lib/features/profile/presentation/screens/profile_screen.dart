@@ -23,6 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int postLength = 0;
   int followers = 0;
   int following = 0;
+  bool isFollowing = false;
 
   @override
   void initState() {
@@ -43,6 +44,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     postLength = postSnap.docs.length;
     followers = userSnap.data()!['flowers'].length;
     following = userSnap.data()!['following'].length;
+    isFollowing = userSnap
+        .data()!['flowers']
+        .contains(FirebaseAuth.instance.currentUser!.uid);
 
     setState(() {});
   }
@@ -240,23 +244,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   /////////////////////////////////////
                   Row(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          GoRouter.of(context).pushNamed(AppRouter.kEditScreen);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(5),
-                          width: MediaQuery.of(context).size.width - 70,
-                          child: const Center(
-                            child: Text(
-                              'Edit profile',
-                              style: TextStyle(
-                                fontSize: 18,
+                      FirebaseAuth.instance.currentUser!.uid == widget.uId
+                          ? InkWell(
+                              onTap: () {
+                                GoRouter.of(context)
+                                    .pushNamed(AppRouter.kEditScreen);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(5),
+                                width: MediaQuery.of(context).size.width - 70,
+                                child: const Center(
+                                  child: Text(
+                                    'Edit profile',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
+                            )
+                          : isFollowing
+                              ? InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    width:
+                                        MediaQuery.of(context).size.width - 70,
+                                    child: const Center(
+                                      child: Text(
+                                        'UnFollow',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    color: Colors.blue,
+                                    width:
+                                        MediaQuery.of(context).size.width - 70,
+                                    child: const Center(
+                                      child: Text(
+                                        'Follow',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                       const SizedBox(
                         width: 5,
                       ),
@@ -306,6 +347,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ],
               ),
+              // FutureBuilder(
+              //     future: FirebaseFirestore.instance
+              //         .collection('posts')
+              //         .where('uId', isEqualTo: widget.uId)
+              //         .get(),
+              //     builder: (context, snapshot) {
+              //       if (snapshot.connectionState == ConnectionState.waiting) {
+              //         return const Center(
+              //           child: CircularProgressIndicator(),
+              //         );
+              //       }
+              //       return GridView.builder(
+              //         gridDelegate:
+              //             const SliverGridDelegateWithFixedCrossAxisCount(
+              //           crossAxisCount: 3,
+              //           mainAxisSpacing: 2,
+              //           crossAxisSpacing: 2,
+              //         ),
+              //         itemCount: snapshot.data!.docs.length,
+              //         itemBuilder: (context, index) {
+              //           DocumentSnapshot snap = snapshot.data!.docs[index];
+              //           return Container(
+              //             child: Image(
+              //               image: NetworkImage(
+              //                 snap['postUrl'],
+              //               ),
+              //               fit: BoxFit.fill,
+              //             ),
+              //           );
+              //         },
+              //       );
+              //     }),
             ],
           ),
         ),

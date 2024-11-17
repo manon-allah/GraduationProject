@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
@@ -66,11 +65,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        if (FirebaseAuth.instance.currentUser!.uid ==
-                            snapshot.data!.docs[index]['uId']) {
-                          GoRouter.of(context)
-                              .pushNamed(AppRouter.kProfileScreen);
-                        }
+                        GoRouter.of(context)
+                            .pushNamed(AppRouter.kProfileScreen);
                       },
                       child: ListTile(
                         leading: CircleAvatar(

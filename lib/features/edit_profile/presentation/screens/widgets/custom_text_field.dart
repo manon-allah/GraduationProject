@@ -5,9 +5,11 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.text,
     this.controller,
+    this.isread = false,
   });
 
   final String text;
+  final bool isread;
   final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class CustomTextField extends StatelessWidget {
               SizedBox(
                 width: 270,
                 child: TextField(
+                  readOnly: isread,
                   controller: controller,
                 ),
               ),
