@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram/features/edit_profile/data/models/add_user_model.dart';
@@ -30,7 +32,7 @@ class FirebaseAuthService {
           email: email,
           password: password,
         );
-        print(userCredential.user!.uid);
+        log(userCredential.user!.uid);
 
         // add to model
         UserModel userModel = UserModel(
@@ -44,7 +46,7 @@ class FirebaseAuthService {
           phone: '',
           gender: '',
           imageUrl: '',
-          flowers: [],
+          followers: [],
           following: [],
         );
         // add user to firebase

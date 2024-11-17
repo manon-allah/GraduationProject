@@ -10,7 +10,7 @@ class AddUserModel {
   final String phone;
   final String gender;
   final String imageUrl;
-  final List flowers;
+  final List followers;
   final List following;
 
   AddUserModel({
@@ -23,7 +23,7 @@ class AddUserModel {
     required this.phone,
     required this.gender,
     required this.imageUrl,
-    required this.flowers,
+    required this.followers,
     required this.following,
   });
 
@@ -38,7 +38,7 @@ class AddUserModel {
       'phone': phone,
       'gender': gender,
       'imageUrl': imageUrl,
-      'flowers': flowers,
+      'flowers': followers,
       'following': following,
     };
   }
@@ -56,7 +56,7 @@ class AddUserModel {
       phone: snapshot['phone'],
       gender: snapshot['gender'],
       imageUrl: snapshot['imageUrl'],
-      flowers: snapshot['flowers'],
+      followers: snapshot['flowers'],
       following: snapshot['following'],
     );
   }

@@ -9,7 +9,7 @@ class UserModel {
   final String phone;
   final String gender;
   final String imageUrl;
-  final List flowers;
+  final List followers;
   final List following;
 
   UserModel({
@@ -23,7 +23,7 @@ class UserModel {
     required this.phone,
     required this.gender,
     required this.imageUrl,
-    required this.flowers,
+    required this.followers,
     required this.following,
   });
 
@@ -39,7 +39,7 @@ class UserModel {
       'phone': phone,
       'gender': gender,
       'imageUrl': imageUrl,
-      'flowers': flowers,
+      'flowers': followers,
       'following': following,
     };
   }

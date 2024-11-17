@@ -25,6 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: TextFormField(
           controller: searchController,
           onFieldSubmitted: (value) {
@@ -69,9 +70,6 @@ class _SearchScreenState extends State<SearchScreen> {
                             snapshot.data!.docs[index]['uId']) {
                           GoRouter.of(context)
                               .pushNamed(AppRouter.kProfileScreen);
-                        } else {
-                          GoRouter.of(context)
-                              .pushNamed(AppRouter.kNewFollowerScreen);
                         }
                       },
                       child: ListTile(

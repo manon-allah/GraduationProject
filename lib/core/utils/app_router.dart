@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:instagram/features/auth/presentation/screens/login_screen.dart';
 import 'package:instagram/features/auth/presentation/screens/signup_screen.dart';
@@ -8,7 +9,6 @@ import 'package:instagram/features/setting/presentation/screens/setting_screen.d
 import '../../features/add_post/presentation/screens/add_post_screens.dart';
 import '../../features/bottom_nav_bar/presentation/screens/navigate_screen.dart';
 import '../../features/home/presentation/screens/comment_screen.dart';
-import '../../features/profile/presentation/screens/new_follower_screen.dart';
 
 abstract class AppRouter {
   static const kSignupScreen = 'signupScreen';
@@ -19,7 +19,7 @@ abstract class AppRouter {
   static const kAddPostScreen = 'addPostScreen';
   static const kCommentScreen = 'commentScreen';
   static const kProfileScreen = 'profileScreen';
-  static const kNewFollowerScreen = 'newFollowerScreen';
+
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -60,12 +60,9 @@ abstract class AppRouter {
       GoRoute(
         path: '/profileScreen',
         name: kProfileScreen,
-        builder: (context, state) => const ProfileScreen(),
-      ),
-      GoRoute(
-        path: '/newFollowerScreen',
-        name: kNewFollowerScreen,
-        builder: (context, state) => const NewFollowerScreen(),
+        builder: (context, state) => ProfileScreen(
+          uId: FirebaseAuth.instance.currentUser!.uid,
+        ),
       ),
     ],
   );

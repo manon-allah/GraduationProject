@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/features/chatting/presentation/screens/chatting_screen.dart';
 import 'package:instagram/features/bottom_nav_bar/presentation/screens/explore_screen.dart';
@@ -46,12 +47,14 @@ class _NavigateScreenState extends State<NavigateScreen> {
         controller: pageController,
         onPageChanged: onPageChanged,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [
-          HomeScreen(),
-          SearchScreen(),
-          ExploreScreen(),
-          ChattingScreen(),
-          ProfileScreen(),
+        children: [
+          const HomeScreen(),
+          const SearchScreen(),
+          const ExploreScreen(),
+          const ChattingScreen(),
+          ProfileScreen(
+            uId: FirebaseAuth.instance.currentUser!.uid,
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

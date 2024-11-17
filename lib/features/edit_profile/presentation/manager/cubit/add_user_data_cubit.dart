@@ -50,7 +50,7 @@ class AddUserDataCubit extends Cubit<AddUserDataState> {
           phone: phone,
           gender: gender,
           imageUrl: profileUrl,
-          flowers: [],
+          followers: [],
           following: [],
           uId: auth.currentUser!.uid,
         );
