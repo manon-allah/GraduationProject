@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/features/home/presentation/screens/widgets/posts/custom_post_body.dart';
@@ -22,7 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, state) {
         return Scaffold(
           body: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('posts').snapshots(),
+            stream: FirebaseFirestore.instance
+                .collection('posts')
+                .where('uId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                .snapshots(),
             builder: (context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

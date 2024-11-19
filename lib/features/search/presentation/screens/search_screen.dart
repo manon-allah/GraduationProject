@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
@@ -83,7 +84,11 @@ class _SearchScreenState extends State<SearchScreen> {
               },
             )
           : FutureBuilder(
-              future: FirebaseFirestore.instance.collection('posts').get(),
+              future: FirebaseFirestore.instance
+                  .collection('posts')
+                  .where('uId',
+                      isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                  .get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(

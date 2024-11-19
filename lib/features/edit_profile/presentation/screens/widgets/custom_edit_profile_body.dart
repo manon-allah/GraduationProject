@@ -55,6 +55,11 @@ class _CustomEditProfileState extends State<CustomEditProfile> {
       listener: (context, state) {
         if (state is AddUserDataSuccess) {
           showSnackbar('Success', context);
+          Future.delayed(
+            const Duration(
+              milliseconds: 300,
+            ),
+          );
           BlocProvider.of<GetDataCubit>(context).getRefreshData();
           GoRouter.of(context).pop();
         } else {

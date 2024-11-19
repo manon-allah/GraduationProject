@@ -69,7 +69,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Row(
                 children: [
                   Text(
-                    userData['userName'] ?? 'UserName',
+                    userData['userName'].toString().isEmpty
+                        ? 'UserName'
+                        : userData['userName'],
                     style: const TextStyle(
                       fontSize: 27,
                     ),
@@ -111,8 +113,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     backgroundColor: Colors.red,
                     child: CircleAvatar(
                       radius: 45,
-                      backgroundImage:
-                          NetworkImage(userData['imageUrl'] ?? imageUrlOnline),
+                      backgroundImage: NetworkImage(
+                        userData['imageUrl'].toString().isEmpty
+                            ? imageUrlOnline
+                            : userData['imageUrl'],
+                      ),
                     ),
                   ),
                   Expanded(
@@ -152,13 +157,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        userData['userName'] ?? 'UserName',
+                        userData['userName'].toString().isEmpty
+                            ? 'UserName'
+                            : userData['userName'],
                         style: const TextStyle(
                           fontSize: 24,
                         ),
                       ),
                       Text(
-                        userData['bio'] ?? 'Bio',
+                        userData['bio'].toString().isEmpty
+                            ? 'Bio'
+                            : userData['bio'],
                         style: const TextStyle(
                           fontSize: 20,
                           color: Colors.grey,
@@ -172,7 +181,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         onPressed: () {},
                         child: Text(
-                          userData['website'] ?? 'Website',
+                          userData['website'].toString().isEmpty
+                              ? 'Website'
+                              : userData['website'],
                           style: const TextStyle(
                             fontSize: 18,
                             color: Colors.blue,

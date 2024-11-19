@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram/features/edit_profile/data/models/add_user_model.dart';
 
+import '../../constants.dart';
 import '../../features/auth/data/models/user_model.dart';
 
 class FirebaseAuthService {
@@ -82,5 +83,11 @@ class FirebaseAuthService {
       err = e.toString();
     }
     return err;
+  }
+
+  getTokenOfUser() async {
+    String token = _auth.currentUser!.uid;
+    log('token ============================>$token');
+    cashing.setData(key: 'token', value: token);
   }
 }
