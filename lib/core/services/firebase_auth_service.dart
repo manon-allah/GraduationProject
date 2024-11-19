@@ -79,15 +79,14 @@ class FirebaseAuthService {
       } else {
         err = 'Please enter all fields';
       }
+      String token = _auth.currentUser!.uid;
+      print('token =====================>$token');
+      cashing.setData(key: 'token', value: token);
+
+      print('token from cache =======>${cashing.getData(key: 'token')}');
     } catch (e) {
       err = e.toString();
     }
     return err;
-  }
-
-  getTokenOfUser() async {
-    String token = _auth.currentUser!.uid;
-    log('token ============================>$token');
-    cashing.setData(key: 'token', value: token);
   }
 }
