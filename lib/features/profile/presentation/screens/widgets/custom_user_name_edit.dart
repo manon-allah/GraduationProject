@@ -4,7 +4,11 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/app_router.dart';
 
 class CustomUserNameEdit extends StatelessWidget {
-  const CustomUserNameEdit({super.key});
+  const CustomUserNameEdit({
+    super.key,
+    required this.userData,
+  });
+  final Map<String, dynamic> userData;
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +21,13 @@ class CustomUserNameEdit extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'UserName',
+              userData['userName'] ?? 'username',
               style: const TextStyle(
                 fontSize: 24,
               ),
             ),
             Text(
-              'Bio',
+              userData['bio'] ?? 'bio',
               style: const TextStyle(
                 fontSize: 20,
                 color: Colors.grey,
@@ -37,7 +41,7 @@ class CustomUserNameEdit extends StatelessWidget {
               ),
               onPressed: () {},
               child: Text(
-                'Website',
+                userData['website'] ?? 'Website',
                 style: const TextStyle(
                   fontSize: 18,
                   color: Colors.blue,

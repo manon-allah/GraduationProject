@@ -4,14 +4,18 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/app_router.dart';
 
 class CustomAppBarProfile extends StatelessWidget {
-  const CustomAppBarProfile({super.key});
+  const CustomAppBarProfile({
+    super.key,
+    required this.userName,
+  });
+  final String userName;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Text(
-          'UserNmae',
+          userName == '' ? 'UserName' : userName,
           style: const TextStyle(
             fontSize: 27,
           ),

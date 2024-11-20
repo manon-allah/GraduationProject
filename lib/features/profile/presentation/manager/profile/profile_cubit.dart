@@ -33,12 +33,10 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       emit(UserDataSuccess(
         userData: userData,
+        postLength: postLength,
         followers: followers,
         following: following,
         isFollowing: isFollowing,
-      ));
-      emit(PostLengthSuccess(
-        postLength: postLength,
       ));
     } catch (e) {
       emit(ProfileFailure(message: e.toString()));

@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../constants.dart';
 import 'custom_column_text_num.dart';
 
 class CustomPhotoPostsFollowers extends StatelessWidget {
-  const CustomPhotoPostsFollowers({super.key});
+  const CustomPhotoPostsFollowers({
+    super.key,
+    required this.postLength,
+    required this.followers,
+    required this.following,
+    required this.isFollowing,
+    required this.photoUrl,
+  });
+  final String photoUrl;
+  final int postLength;
+  final int followers;
+  final int following;
+  final bool isFollowing;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +26,7 @@ class CustomPhotoPostsFollowers extends StatelessWidget {
           child: CircleAvatar(
             radius: 45,
             backgroundImage: NetworkImage(
-              imageUrlOnline,
+              photoUrl,
             ),
           ),
         ),
@@ -26,15 +36,15 @@ class CustomPhotoPostsFollowers extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               CustomColumnTextNum(
-                num: 10,
+                num: postLength,
                 text: 'Posts',
               ),
               CustomColumnTextNum(
-                num: 10,
+                num: followers,
                 text: 'Followes',
               ),
               CustomColumnTextNum(
-                num: 10,
+                num: following,
                 text: 'Following',
               ),
             ],
