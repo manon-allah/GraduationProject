@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_tab_bar_view.dart';
 
 class CustomTabBarBody extends StatelessWidget {
-  const CustomTabBarBody({super.key});
-
+  const CustomTabBarBody({
+    super.key,
+    required this.posts,
+  });
+  final List<QueryDocumentSnapshot> posts;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -43,13 +47,15 @@ class CustomTabBarBody extends StatelessWidget {
           //////////////////////////////////////
           // Tab bar view
           /////////////////////////////////////
-          const SizedBox(
+          SizedBox(
             height: 300,
             child: TabBarView(
               children: [
-                CustomTabBarview(),
-                Text('Second page'),
-                Text('third page'),
+                CustomTabBarview(
+                  posts: posts,
+                ),
+                const Text('Second page'),
+                const Text('third page'),
               ],
             ),
           ),

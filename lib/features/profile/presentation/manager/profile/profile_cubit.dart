@@ -24,6 +24,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       var postSnap = await Firestore.collection('posts')
           .where('uId', isEqualTo: currentUid)
           .get();
+      var postData = postSnap.docs;
       int postLength = postSnap.docs.length;
 
       // get followers and following
@@ -33,6 +34,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       emit(UserDataSuccess(
         userData: userData,
+        posts: postData,
         postLength: postLength,
         followers: followers,
         following: following,

@@ -24,6 +24,7 @@ class ProfileScreen extends StatelessWidget {
                 followers: state.followers,
                 following: state.following,
                 isFollowing: state.isFollowing,
+                posts: state.posts,
               );
             }
             return const Center(child: CircularProgressIndicator());
