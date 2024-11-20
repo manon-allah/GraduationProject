@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram/features/profile/presentation/manager/cubit/get_data_cubit.dart';
+import 'package:instagram/features/profile/presentation/manager/get_data/get_data_cubit.dart';
 
 class CustomAppBarChat extends StatelessWidget {
   const CustomAppBarChat({super.key});

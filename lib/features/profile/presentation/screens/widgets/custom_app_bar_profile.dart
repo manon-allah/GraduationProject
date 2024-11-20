@@ -19,20 +19,26 @@ class CustomAppBarProfile extends StatelessWidget {
         const Spacer(),
         Row(
           children: [
-            const Icon(
-              Icons.add_box_outlined,
-              size: 25,
+            IconButton(
+              padding: EdgeInsets.zero,
+              onPressed: () {
+                GoRouter.of(context).pushNamed(
+                  AppRouter.kAddPostScreen,
+                );
+              },
+              icon: const Icon(
+                Icons.add_box_outlined,
+                size: 25,
+              ),
             ),
-            const SizedBox(
-              width: 17,
-            ),
-            InkWell(
-              onTap: () {
+            IconButton(
+              padding: EdgeInsets.zero,
+              onPressed: () {
                 GoRouter.of(context).pushNamed(
                   AppRouter.kSettingsScreen,
                 );
               },
-              child: const Icon(
+              icon: const Icon(
                 Icons.menu,
                 size: 25,
               ),

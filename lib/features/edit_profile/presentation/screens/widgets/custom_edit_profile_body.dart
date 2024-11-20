@@ -9,7 +9,7 @@ import 'package:instagram/core/functions/pick_image_function.dart';
 import 'package:instagram/core/functions/snack_bar_function.dart';
 import 'package:instagram/features/edit_profile/presentation/manager/cubit/add_user_data_cubit.dart';
 
-import '../../../../profile/presentation/manager/cubit/get_data_cubit.dart';
+import '../../../../profile/presentation/manager/get_data/get_data_cubit.dart';
 import 'custom_text_field.dart';
 
 class CustomEditProfile extends StatefulWidget {

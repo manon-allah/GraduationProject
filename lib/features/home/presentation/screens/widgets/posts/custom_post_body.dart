@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:instagram/core/functions/snack_bar_function.dart';
 import 'package:instagram/core/utils/app_router.dart';
 import 'package:instagram/features/home/presentation/manager/cubit/like_cubit.dart';
-import 'package:instagram/features/profile/presentation/manager/cubit/get_data_cubit.dart';
+import 'package:instagram/features/profile/presentation/manager/get_data/get_data_cubit.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../add_post/presentation/manager/cubit/post_cubit.dart';

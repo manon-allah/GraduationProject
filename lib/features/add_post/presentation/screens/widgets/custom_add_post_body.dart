@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:instagram/constants.dart';
 import 'package:instagram/core/functions/snack_bar_function.dart';
 import 'package:instagram/features/add_post/presentation/manager/cubit/post_cubit.dart';
-import 'package:instagram/features/profile/presentation/manager/cubit/get_data_cubit.dart';
+import 'package:instagram/features/profile/presentation/manager/get_data/get_data_cubit.dart';
 
 class CustomAddPostBody extends StatefulWidget {
   const CustomAddPostBody({super.key, required this.imageUrl});
