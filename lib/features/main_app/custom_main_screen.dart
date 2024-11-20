@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:instagram/constants.dart';
 import 'package:instagram/features/add_post/presentation/manager/cubit/post_cubit.dart';
 import 'package:instagram/features/home/presentation/manager/cubit/like_cubit.dart';
+import 'package:instagram/features/search/presentation/manager/cubit/search_cubit.dart';
 
 import '../../core/utils/app_router.dart';
 import '../auth/presentation/manager/sign/sign_cubit.dart';
@@ -34,6 +35,9 @@ class CustomMainScreen extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LikeCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SearchCubit(),
         ),
         BlocProvider(
           create: (context) => SwitchCubit()..changeTheme(ThemeState.initial),
