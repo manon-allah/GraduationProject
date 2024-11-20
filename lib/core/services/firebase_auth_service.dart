@@ -83,7 +83,7 @@ class FirebaseAuthService {
       print('token =====================>$token');
       cashing.setData(key: 'token', value: token);
 
-      print('token from cache =======>${cashing.getData(key: 'token')}');
+      print('token from cache =============>${cashing.getData(key: 'token')}');
     } catch (e) {
       err = e.toString();
     }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:instagram/constants.dart';
 import 'package:instagram/features/add_post/presentation/manager/cubit/post_cubit.dart';
 import 'package:instagram/features/home/presentation/manager/cubit/like_cubit.dart';
 
@@ -15,6 +17,7 @@ class CustomMainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final token = cashing.getData(key: 'token');
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -38,21 +41,18 @@ class CustomMainScreen extends StatelessWidget {
       ],
       child: BlocBuilder<SwitchCubit, SwitchState>(
         builder: (context, state) {
-          if (state is SwitchLightTheme) {
-            return MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData.light(),
-              title: 'Instagram App',
-              routerConfig: AppRouter.router,
-            );
-          } else {
-            return MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData.dark(),
-              title: 'Instagram App',
-              routerConfig: AppRouter.router,
-            );
-          }
+          final router = GoRouter(
+            initialLocation: token != null ? '/navigation' : '/',
+            routes: AppRouter.routes,
+          );
+          final theme =
+              state is SwitchLightTheme ? ThemeData.light() : ThemeData.dark();
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: theme,
+            title: 'Instagram App',
+            routerConfig: router,
+          );
         },
       ),
     );

@@ -20,50 +20,48 @@ abstract class AppRouter {
   static const kCommentScreen = 'commentScreen';
   static const kProfileScreen = 'profileScreen';
 
-  static final router = GoRouter(
-    routes: [
-      GoRoute(
-        path: '/',
-        name: kloginScreen,
-        builder: (context, state) => const LoginScreen(),
+  static final List<GoRoute> routes = [
+    GoRoute(
+      path: '/',
+      name: kloginScreen,
+      builder: (context, state) => const LoginScreen(),
+    ),
+    GoRoute(
+      path: '/signupScreen',
+      name: kSignupScreen,
+      builder: (context, state) => const SignupScreen(),
+    ),
+    GoRoute(
+      path: '/navigation',
+      name: kNavigationScreen,
+      builder: (context, state) => const NavigateScreen(),
+    ),
+    GoRoute(
+      path: '/settingsScreen',
+      name: kSettingsScreen,
+      builder: (context, state) => const SettingScreen(),
+    ),
+    GoRoute(
+      path: '/editScreen',
+      name: kEditScreen,
+      builder: (context, state) => const EditProfile(),
+    ),
+    GoRoute(
+      path: '/addPostScreen',
+      name: kAddPostScreen,
+      builder: (context, state) => const AddPostScreens(),
+    ),
+    GoRoute(
+      path: '/commentScreen',
+      name: kCommentScreen,
+      builder: (context, state) => const CommentScreen(),
+    ),
+    GoRoute(
+      path: '/profileScreen',
+      name: kProfileScreen,
+      builder: (context, state) => ProfileScreen(
+        uId: FirebaseAuth.instance.currentUser!.uid,
       ),
-      GoRoute(
-        path: '/signupScreen',
-        name: kSignupScreen,
-        builder: (context, state) => const SignupScreen(),
-      ),
-      GoRoute(
-        path: '/navigation',
-        name: kNavigationScreen,
-        builder: (context, state) => const NavigateScreen(),
-      ),
-      GoRoute(
-        path: '/settingsScreen',
-        name: kSettingsScreen,
-        builder: (context, state) => const SettingScreen(),
-      ),
-      GoRoute(
-        path: '/editScreen',
-        name: kEditScreen,
-        builder: (context, state) => const EditProfile(),
-      ),
-      GoRoute(
-        path: '/addPostScreen',
-        name: kAddPostScreen,
-        builder: (context, state) => const AddPostScreens(),
-      ),
-      GoRoute(
-        path: '/commentScreen',
-        name: kCommentScreen,
-        builder: (context, state) => const CommentScreen(),
-      ),
-      GoRoute(
-        path: '/profileScreen',
-        name: kProfileScreen,
-        builder: (context, state) => ProfileScreen(
-          uId: FirebaseAuth.instance.currentUser!.uid,
-        ),
-      ),
-    ],
-  );
+    ),
+  ];
 }
