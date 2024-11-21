@@ -27,44 +27,45 @@ class CustomProfileBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 15,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // app bar
+                CustomAppBarProfile(
+                  userName: userData['userName'],
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                // photo and number of posts.....etc
+                CustomPhotoPostsFollowers(
+                  postLength: postLength,
+                  followers: followers,
+                  following: following,
+                  isFollowing: isFollowing,
+                  photoUrl: userData['imageUrl'],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                // user name button edit....etc
+                CustomUserNameEdit(
+                  userData: userData,
+                ),
+              ],
+            ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // app bar
-              CustomAppBarProfile(
-                userName: userData['userName'],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              // photo and number of posts.....etc
-              CustomPhotoPostsFollowers(
-                postLength: postLength,
-                followers: followers,
-                following: following,
-                isFollowing: isFollowing,
-                photoUrl: userData['imageUrl'],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              // user name button edit....etc
-              CustomUserNameEdit(
-                userData: userData,
-              ),
-              // show posts
-              // const CustomPostGridProfile(),
-              CustomTabBarBody(
-                posts: posts,
-              ),
-            ],
+          // show posts
+          CustomTabBarBody(
+            posts: posts,
           ),
-        ),
+        ],
       ),
     );
   }

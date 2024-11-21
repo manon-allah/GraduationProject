@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram/constants.dart';
 import 'package:instagram/features/home/presentation/screens/widgets/posts/custom_post_body.dart';
 import 'package:instagram/features/home/presentation/screens/widgets/story/stories_list_view_body.dart';
 import 'package:instagram/features/setting/presentation/manager/switch/switch_cubit.dart';
@@ -16,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final uId = cashing.getData(key: 'token');
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SwitchCubit, SwitchState>(
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
           body: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('posts')
-                .where('uId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                .where('uId', isEqualTo: uId)
                 .snapshots(),
             builder: (context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -33,6 +34,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 return const Center(
                   child: CircularProgressIndicator(
                     color: Colors.black,
+                  ),
+                );
+              }
+              if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                return const Center(
+                  child: Text(
+                    'No Posts yet',
+                    style: TextStyle(color: Colors.black),
                   ),
                 );
               }
@@ -48,14 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     delegate: SliverChildBuilderDelegate(
                       childCount: snapshot.data!.docs.length,
                       (context, index) {
-                        // if (snapshot.data!.docs.isEmpty) {
-                        //   return const Center(
-                        //     child: Text(
-                        //       'No Posts yet',
-                        //       style: TextStyle(color: Colors.black),
-                        //     ),
-                        //   );
-                        // }
                         return CustomPostBody(
                           snap: snapshot.data!.docs[index].data(),
                         );
@@ -66,24 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
           ),
-          // CustomScrollView(
-          //   slivers: [
-          //     const SliverToBoxAdapter(
-          //       child: CustomAppBarHome(),
-          //     ),
-          //     const SliverToBoxAdapter(
-          //       child: StoriesListViewBody(),
-          //     ),
-          //     SliverList(
-          //       delegate: SliverChildBuilderDelegate(
-          //         childCount: 10,
-          //         (context, index) {
-          //           return const CustomPostBody();
-          //         },
-          //       ),
-          //     ),
-          //   ],
-          // ),
         );
       },
     );
