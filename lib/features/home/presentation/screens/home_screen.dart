@@ -60,58 +60,5 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
-    // BlocConsumer<SwitchCubit, SwitchState>(
-    //   listener: (context, state) {},
-    //   builder: (context, state) {
-    //     return Scaffold(
-    //       body: StreamBuilder(
-    //         stream: FirebaseFirestore.instance
-    //             .collection('posts')
-    //             .where('uId', isEqualTo: uId)
-    //             // .where('datePublished', isNotEqualTo: null)
-    //             // .orderBy('datePublished', descending: true)
-    //             .snapshots(),
-    //         builder: (context,
-    //             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-    //           if (snapshot.connectionState == ConnectionState.waiting) {
-    //             return const Center(
-    //               child: CircularProgressIndicator(
-    //                 color: Colors.black,
-    //               ),
-    //             );
-    //           }
-    //           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-    //             return const Center(
-    //               child: Text(
-    //                 'No Posts yet',
-    //                 style: TextStyle(color: Colors.black),
-    //               ),
-    //             );
-    //           }
-    //           return CustomScrollView(
-    //             slivers: [
-    //               const SliverToBoxAdapter(
-    //                 child: CustomAppBarHome(),
-    //               ),
-    //               const SliverToBoxAdapter(
-    //                 child: StoriesListViewBody(),
-    //               ),
-    //               SliverList(
-    //                 delegate: SliverChildBuilderDelegate(
-    //                   childCount: snapshot.data!.docs.length,
-    //                   (context, index) {
-    //                     return CustomPostBody(
-    //                       snap: snapshot.data!.docs[index].data(),
-    //                     );
-    //                   },
-    //                 ),
-    //               ),
-    //             ],
-    //           );
-    //         },
-    //       ),
-    //     );
-    //   },
-    // );
   }
 }

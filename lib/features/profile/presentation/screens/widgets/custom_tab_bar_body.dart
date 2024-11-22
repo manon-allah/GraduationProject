@@ -47,8 +47,7 @@ class CustomTabBarBody extends StatelessWidget {
           //////////////////////////////////////
           // Tab bar view
           /////////////////////////////////////
-          SizedBox(
-            height: 300,
+          Expanded(
             child: TabBarView(
               children: [
                 CustomTabBarview(

@@ -8,8 +8,12 @@ class CustomUserNameEdit extends StatelessWidget {
   const CustomUserNameEdit({
     super.key,
     required this.userData,
+    required this.isFollowing,
+    required this.uId,
   });
   final Map<String, dynamic> userData;
+  final bool isFollowing;
+  final String uId;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,10 @@ class CustomUserNameEdit extends StatelessWidget {
           height: 10,
         ),
         // button edit profile
-        const CustomButtonEditProfile(),
+        CustomButtonEditProfile(
+          isFollowing: isFollowing,
+          uId: uId,
+        ),
         const SizedBox(
           height: 15,
         ),

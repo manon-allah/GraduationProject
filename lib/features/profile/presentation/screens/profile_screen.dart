@@ -18,18 +18,15 @@ class ProfileScreen extends StatelessWidget {
         body: BlocBuilder<ProfileCubit, ProfileState>(
           builder: (context, state) {
             if (state is UserDataSuccess) {
-              return CustomScrollView(slivers: [
-                SliverToBoxAdapter(
-                  child: CustomProfileBody(
-                    userData: state.userData,
-                    postLength: state.postLength,
-                    followers: state.followers,
-                    following: state.following,
-                    isFollowing: state.isFollowing,
-                    posts: state.posts,
-                  ),
-                ),
-              ]);
+              return CustomProfileBody(
+                uId: uId,
+                userData: state.userData,
+                postLength: state.postLength,
+                followers: state.followers,
+                following: state.following,
+                isFollowing: state.isFollowing,
+                posts: state.posts,
+              );
             }
             return const Center(
               child: CircularProgressIndicator(),

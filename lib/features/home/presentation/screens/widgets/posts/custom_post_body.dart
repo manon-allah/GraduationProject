@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:instagram/core/functions/snack_bar_function.dart';
 import 'package:instagram/core/utils/app_router.dart';
-import 'package:instagram/features/home/presentation/manager/like_cubit/like_cubit.dart';
+import 'package:instagram/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:instagram/features/profile/presentation/manager/get_data/get_data_cubit.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../add_post/presentation/manager/cubit/post_cubit.dart';
-// import '../../../../../../constants.dart';
 
 class CustomPostBody extends StatelessWidget {
   const CustomPostBody({super.key, required this.snap});
@@ -18,9 +17,9 @@ class CustomPostBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final getData = BlocProvider.of<GetDataCubit>(context).addUserModel;
     final getPost = BlocProvider.of<PostCubit>(context);
-    return BlocBuilder<LikeCubit, LikeState>(
+    return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        final likeCubit = context.read<LikeCubit>();
+        final likeCubit = context.read<HomeCubit>();
         return Column(
           children: [
             //////////////////////////////////////////////////////////
@@ -105,7 +104,6 @@ class CustomPostBody extends StatelessWidget {
                       height: 15,
                     ),
                     // react in prost....etc
-
                     Row(
                       children: [
                         IconButton(

@@ -15,10 +15,11 @@ class CustomProfileBody extends StatelessWidget {
     required this.following,
     required this.isFollowing,
     required this.posts,
+    required this.uId,
   });
   final Map<String, dynamic> userData;
   final List<QueryDocumentSnapshot> posts;
-
+  final String uId;
   final int postLength;
   final int followers;
   final int following;
@@ -27,44 +28,55 @@ class CustomProfileBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 15,
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // app bar
+                  CustomAppBarProfile(
+                    userName: userData['userName'],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  // photo and number of posts.....etc
+                  CustomPhotoPostsFollowers(
+                    postLength: postLength,
+                    followers: followers,
+                    following: following,
+                    isFollowing: isFollowing,
+                    photoUrl: userData['imageUrl'],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  // user name button edit....etc
+                  CustomUserNameEdit(
+                    isFollowing: isFollowing,
+                    uId: uId,
+                    userData: userData,
+                  ),
+                ],
+              ),
             ),
+          ),
+          SliverFillRemaining(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // app bar
-                CustomAppBarProfile(
-                  userName: userData['userName'],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                // photo and number of posts.....etc
-                CustomPhotoPostsFollowers(
-                  postLength: postLength,
-                  followers: followers,
-                  following: following,
-                  isFollowing: isFollowing,
-                  photoUrl: userData['imageUrl'],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                // user name button edit....etc
-                CustomUserNameEdit(
-                  userData: userData,
+                Expanded(
+                  child: CustomTabBarBody(
+                    posts: posts,
+                  ),
                 ),
               ],
             ),
-          ),
-          // show posts
-          CustomTabBarBody(
-            posts: posts,
-          ),
+          )
         ],
       ),
     );

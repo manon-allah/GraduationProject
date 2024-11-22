@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:instagram/features/search/presentation/manager/cubit/search_cubit.dart';
 
-import '../../../../../core/utils/app_router.dart';
+import '../../../../profile/presentation/screens/profile_screen.dart';
 
 class CustomSearchListView extends StatelessWidget {
   const CustomSearchListView({super.key});
@@ -21,8 +20,16 @@ class CustomSearchListView extends StatelessWidget {
                     final user = state.users[index];
                     return InkWell(
                       onTap: () {
-                        GoRouter.of(context)
-                            .pushNamed(AppRouter.kProfileScreen);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfileScreen(
+                              uId: state.users[index]['uId'],
+                            ),
+                          ),
+                        );
+                        // GoRouter.of(context)
+                        //     .pushNamed(AppRouter.kProfileScreen);
                       },
                       child: ListTile(
                         leading: CircleAvatar(

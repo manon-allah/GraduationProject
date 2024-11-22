@@ -16,3 +16,6 @@ class HomeFailure extends HomeState {
   final String message;
   HomeFailure(this.message);
 }
+
+final class LikeSuccess extends HomeState {}
+final class LikeFailure extends HomeState {}

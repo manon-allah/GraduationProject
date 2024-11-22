@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:instagram/features/auth/presentation/screens/login_screen.dart';
 import 'package:instagram/features/auth/presentation/screens/signup_screen.dart';
 import 'package:instagram/features/edit_profile/presentation/screens/edit_profile.dart';
-import 'package:instagram/features/profile/presentation/screens/profile_screen.dart';
 import 'package:instagram/features/setting/presentation/screens/setting_screen.dart';
 
 import '../../features/add_post/presentation/screens/add_post_screens.dart';
@@ -56,12 +54,12 @@ abstract class AppRouter {
       name: kCommentScreen,
       builder: (context, state) => const CommentScreen(),
     ),
-    GoRoute(
-      path: '/profileScreen',
-      name: kProfileScreen,
-      builder: (context, state) => ProfileScreen(
-        uId: FirebaseAuth.instance.currentUser!.uid,
-      ),
-    ),
+    // GoRoute(
+    //   path: '/profileScreen',
+    //   name: kProfileScreen,
+    //   builder: (context, state) => ProfileScreen(
+    //     uId: FirebaseAuth.instance.currentUser!.uid,
+    //   ),
+    // ),
   ];
 }

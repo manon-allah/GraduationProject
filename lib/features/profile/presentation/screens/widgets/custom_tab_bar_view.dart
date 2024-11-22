@@ -12,7 +12,7 @@ class CustomTabBarview extends StatelessWidget {
     return GridView.builder(
       itemCount: posts.length,
       shrinkWrap: true,
-      // physics: const NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         mainAxisSpacing: 1,
