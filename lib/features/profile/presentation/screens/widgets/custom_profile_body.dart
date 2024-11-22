@@ -42,9 +42,6 @@ class CustomProfileBody extends StatelessWidget {
                   CustomAppBarProfile(
                     userName: userData['userName'],
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
                   // photo and number of posts.....etc
                   CustomPhotoPostsFollowers(
                     postLength: postLength,
@@ -76,7 +73,7 @@ class CustomProfileBody extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

@@ -58,7 +58,7 @@ abstract class AppRouter {
     //   path: '/profileScreen',
     //   name: kProfileScreen,
     //   builder: (context, state) => ProfileScreen(
-    //     uId: FirebaseAuth.instance.currentUser!.uid,
+    //     uId: 
     //   ),
     // ),
   ];
