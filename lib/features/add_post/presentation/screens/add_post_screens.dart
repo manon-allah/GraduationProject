@@ -39,7 +39,7 @@ class _AddPostScreensState extends State<AddPostScreens> {
                 child: const Text('choose from gallary'),
                 onPressed: () async {
                   GoRouter.of(context).pop();
-                  Uint8List image = await selectImage(ImageSource.gallery);;
+                  Uint8List image = await selectImage(ImageSource.gallery);
                   setState(() {
                     _image = image;
                   });
