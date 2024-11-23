@@ -11,10 +11,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   FirebaseFirestore Firestore = FirebaseFirestore.instance;
   String currentUid = cashing.getData(key: 'token');
 
-  getProfileData(String uId) async {
+  getProfileData(String uIdUser) async {
     try {
       var userSnap =
-          await FirebaseFirestore.instance.collection('users').doc(uId).get();
+          await FirebaseFirestore.instance.collection('users').doc(uIdUser).get();
       if (!userSnap.exists) {
         emit(ProfileFailure(message: 'User not found'));
       }
@@ -22,7 +22,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       // post count
       var postSnap = await Firestore.collection('posts')
-          .where('uId', isEqualTo: currentUid)
+          .where('uId', isEqualTo: uIdUser)
           .get();
       var postData = postSnap.docs;
       int postLength = postSnap.docs.length;
