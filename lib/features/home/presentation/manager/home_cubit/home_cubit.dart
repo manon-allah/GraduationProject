@@ -38,14 +38,14 @@ class HomeCubit extends Cubit<HomeState> {
     List likes,
   ) async {
     try {
-      if(likes.contains(uId)) {
+      if (likes.contains(uId)) {
         await firestore.collection('posts').doc(postId).update({
-        'likes': FieldValue.arrayRemove([uId]),
-      });
+          'likes': FieldValue.arrayRemove([uId]),
+        });
       } else {
         await firestore.collection('posts').doc(postId).update({
-        'likes': FieldValue.arrayUnion([uId]),
-      });
+          'likes': FieldValue.arrayUnion([uId]),
+        });
       }
       emit(LikeSuccess());
       
