@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:instagram/constants.dart';
 import '../../../../../core/utils/app_router.dart';
+import 'custom_button_profile.dart';
 
 class CustomButtonEditProfile extends StatelessWidget {
   const CustomButtonEditProfile({
@@ -14,108 +15,118 @@ class CustomButtonEditProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentUId = cashing.getData(key: 'token');
     return Row(
       children: [
-        Row(
-          children: [
-            CustomButton(
-              width: MediaQuery.of(context).size.width - 70,
-              fontSize: 18,
-              text: 'Edit profile',
-              onTap: () {
-                GoRouter.of(context).pushNamed(AppRouter.kEditScreen);
-              },
-              colorText: Colors.black,
-              colorContainer: const Color(0xFFEFEFEF),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Container(
-              padding: const EdgeInsets.all(5),
-              color: const Color(0xFFEFEFEF),
-              child: const Icon(
-                Icons.person_add,
-              ),
-            ),
-          ],
-        ),
-
-        // InkWell(
-        //   onTap: () {},
-        //   child: Container(
-        //     padding: const EdgeInsets.all(5),
-        //     width: MediaQuery.of(context).size.width - 70,
-        //     child: const Center(
-        //       child: Text(
-        //         'UnFollow',
-        //         style: TextStyle(
-        //           fontSize: 18,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // InkWell(
-        //   onTap: () {},
-        //   child: Container(
-        //     padding: const EdgeInsets.all(5),
-        //     color: Colors.blue,
-        //     width: MediaQuery.of(context).size.width - 70,
-        //     child: const Center(
-        //       child: Text(
-        //         'Follow',
-        //         style: TextStyle(
-        //           fontSize: 20,
-        //           color: Colors.white,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
+        currentUId == uId
+            ? Row(
+                children: [
+                  CustomButton(
+                    width: MediaQuery.of(context).size.width - 70,
+                    fontSize: 18,
+                    text: 'Edit profile',
+                    onTap: () {
+                      GoRouter.of(context).pushNamed(AppRouter.kEditScreen);
+                    },
+                    colorText: Colors.black,
+                    colorContainer: const Color(0xFFEFEFEF),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    color: const Color(0xFFEFEFEF),
+                    child: const Icon(
+                      Icons.person_add,
+                    ),
+                  ),
+                ],
+              )
+            : isFollowing
+                ? CustomButton(
+                    width: MediaQuery.of(context).size.width - 6,
+                    fontSize: 18,
+                    text: 'UnFollow',
+                    onTap: () {},
+                    colorText: Colors.black,
+                    colorContainer: const Color(0xFFEFEFEF),
+                  )
+                : Column(
+                    children: [
+                      CustomButton(
+                        width: MediaQuery.of(context).size.width - 33,
+                        fontSize: 20,
+                        text: 'Follow',
+                        onTap: () {},
+                        colorText: Colors.white,
+                        colorContainer: Colors.blue,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 22,
+                            ),
+                            color: const Color(0xFFEFEFEF),
+                            child: const Text(
+                              'Message',
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 22,
+                            ),
+                            color: const Color(0xFFEFEFEF),
+                            child: const Text(
+                              'SubScribe',
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 22,
+                            ),
+                            color: const Color(0xFFEFEFEF),
+                            child: const Text(
+                              'Contact',
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            color: const Color(0xFFEFEFEF),
+                            child: const Icon(
+                              Icons.person_add,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
       ],
-    );
-  }
-}
-
-class CustomButton extends StatelessWidget {
-  const CustomButton({
-    super.key,
-    this.onTap,
-    required this.width,
-    required this.text,
-    required this.colorText,
-    required this.colorContainer,
-    required this.fontSize,
-  });
-  final void Function()? onTap;
-  final double width;
-  final String text;
-  final Color colorText;
-  final Color colorContainer;
-
-  final double fontSize;
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      // () {
-      //
-      // },
-      child: Container(
-        padding: const EdgeInsets.all(5),
-        color: colorContainer,
-        width: width,
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-              fontSize: fontSize,
-              color: colorText,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
