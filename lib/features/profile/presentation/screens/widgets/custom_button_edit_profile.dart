@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:instagram/constants.dart';
+import 'package:instagram/features/profile/presentation/manager/cubit/follow_cubit.dart';
 import '../../../../../core/utils/app_router.dart';
-import '../../manager/profile/profile_cubit.dart';
 import 'custom_button_profile.dart';
 
 class CustomButtonEditProfile extends StatefulWidget {
@@ -37,132 +37,136 @@ class _CustomButtonEditProfileState extends State<CustomButtonEditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    final profileCubit = BlocProvider.of<ProfileCubit>(context);
-    return Row(
-      children: [
-        currentUserId == widget.uId
-            ? Row(
-                children: [
-                  CustomButton(
-                    width: MediaQuery.of(context).size.width - 70,
-                    fontSize: 18,
-                    text: 'Edit profile',
-                    onTap: () {
-                      GoRouter.of(context).pushNamed(AppRouter.kEditScreen);
-                    },
-                    colorText: Colors.black,
-                    colorContainer: const Color(0xFFEFEFEF),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    color: const Color(0xFFEFEFEF),
-                    child: const Icon(
-                      Icons.person_add,
-                    ),
-                  ),
-                ],
-              )
-            : widget.isFollowing
-                ? CustomButton(
-                    width: MediaQuery.of(context).size.width - 33,
-                    fontSize: 18,
-                    text: 'UnFollow',
-                    onTap: () async {
-                      await profileCubit.followUser(
-                          currentUserId, widget.userData['uId']);
+    final followCubit = context.read<FollowCubit>();
+    return BlocBuilder<FollowCubit, FollowState>(
+      builder: (context, state) {
+        return Row(
+          children: [
+            currentUserId == widget.uId
+                ? Row(
+                    children: [
+                      CustomButton(
+                        width: MediaQuery.of(context).size.width - 70,
+                        fontSize: 18,
+                        text: 'Edit profile',
+                        onTap: () {
+                          GoRouter.of(context).pushNamed(AppRouter.kEditScreen);
+                        },
+                        colorText: Colors.black,
+                        colorContainer: const Color(0xFFEFEFEF),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(5),
+                        color: const Color(0xFFEFEFEF),
+                        child: const Icon(
+                          Icons.person_add,
+                        ),
+                      ),
+                    ],
+                  )
+                : widget.isFollowing
+                    ? CustomButton(
+                        width: MediaQuery.of(context).size.width - 33,
+                        fontSize: 18,
+                        text: 'UnFollow',
+                        onTap: () async {
+                          await followCubit.followUser(
+                              currentUserId, widget.userData['uId']);
                           setState(() {
                             isFollowing = false;
                             followers--;
                           });
-                    },
-                    colorText: Colors.black,
-                    colorContainer: const Color(0xFFEFEFEF),
-                  )
-                : Column(
-                    children: [
-                      CustomButton(
-                        width: MediaQuery.of(context).size.width - 33,
-                        fontSize: 20,
-                        text: 'Follow',
-                        onTap: () async {
-                          await profileCubit.followUser(
-                              currentUserId, widget.userData['uId']);
-                          setState(() {
-                            isFollowing = true;
-                            followers++;
-                          });
                         },
-                        colorText: Colors.white,
-                        colorContainer: Colors.blue,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
+                        colorText: Colors.black,
+                        colorContainer: const Color(0xFFEFEFEF),
+                      )
+                    : Column(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 5,
-                              horizontal: 22,
-                            ),
-                            color: const Color(0xFFEFEFEF),
-                            child: const Text(
-                              'Message',
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
-                            ),
+                          CustomButton(
+                            width: MediaQuery.of(context).size.width - 33,
+                            fontSize: 20,
+                            text: 'Follow',
+                            onTap: () async {
+                              await followCubit.followUser(
+                                  currentUserId, widget.userData['uId']);
+                              setState(() {
+                                isFollowing = true;
+                                followers++;
+                              });
+                            },
+                            colorText: Colors.white,
+                            colorContainer: Colors.blue,
                           ),
                           const SizedBox(
-                            width: 5,
+                            height: 10,
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 5,
-                              horizontal: 22,
-                            ),
-                            color: const Color(0xFFEFEFEF),
-                            child: const Text(
-                              'SubScribe',
-                              style: TextStyle(
-                                fontSize: 18,
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 5,
+                                  horizontal: 22,
+                                ),
+                                color: const Color(0xFFEFEFEF),
+                                child: const Text(
+                                  'Message',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 5,
-                              horizontal: 22,
-                            ),
-                            color: const Color(0xFFEFEFEF),
-                            child: const Text(
-                              'Contact',
-                              style: TextStyle(
-                                fontSize: 18,
+                              const SizedBox(
+                                width: 5,
                               ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            color: const Color(0xFFEFEFEF),
-                            child: const Icon(
-                              Icons.person_add,
-                            ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 5,
+                                  horizontal: 22,
+                                ),
+                                color: const Color(0xFFEFEFEF),
+                                child: const Text(
+                                  'SubScribe',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 5,
+                                  horizontal: 22,
+                                ),
+                                color: const Color(0xFFEFEFEF),
+                                child: const Text(
+                                  'Contact',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                padding: const EdgeInsets.all(5),
+                                color: const Color(0xFFEFEFEF),
+                                child: const Icon(
+                                  Icons.person_add,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-      ],
+          ],
+        );
+      },
     );
   }
 }

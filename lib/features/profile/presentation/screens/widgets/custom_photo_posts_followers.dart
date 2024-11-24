@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram/features/profile/presentation/manager/cubit/follow_cubit.dart';
 import 'custom_column_text_num.dart';
 
 class CustomPhotoPostsFollowers extends StatelessWidget {
@@ -18,39 +20,43 @@ class CustomPhotoPostsFollowers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CircleAvatar(
-          radius: 48,
-          backgroundColor: Colors.red,
-          child: CircleAvatar(
-            radius: 45,
-            backgroundImage: NetworkImage(
-              photoUrl,
+    return BlocBuilder<FollowCubit, FollowState>(
+      builder: (context, state) {
+        return Row(
+          children: [
+            CircleAvatar(
+              radius: 48,
+              backgroundColor: Colors.red,
+              child: CircleAvatar(
+                radius: 45,
+                backgroundImage: NetworkImage(
+                  photoUrl,
+                ),
+              ),
             ),
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CustomColumnTextNum(
-                num: postLength,
-                text: 'Posts',
+            Expanded(
+              flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomColumnTextNum(
+                    num: postLength,
+                    text: 'Posts',
+                  ),
+                  CustomColumnTextNum(
+                    num: followers,
+                    text: 'Followes',
+                  ),
+                  CustomColumnTextNum(
+                    num: following,
+                    text: 'Following',
+                  ),
+                ],
               ),
-              CustomColumnTextNum(
-                num: followers,
-                text: 'Followes',
-              ),
-              CustomColumnTextNum(
-                num: following,
-                text: 'Following',
-              ),
-            ],
-          ),
-        ),
-      ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

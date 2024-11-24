@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:instagram/constants.dart';
 import 'package:instagram/features/add_post/presentation/manager/cubit/post_cubit.dart';
+import 'package:instagram/features/profile/presentation/manager/cubit/follow_cubit.dart';
 import 'package:instagram/features/search/presentation/manager/cubit/search_cubit.dart';
 
 import '../../core/utils/app_router.dart';
@@ -35,6 +36,9 @@ class CustomMainScreen extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => SearchCubit(),
+        ),
+        BlocProvider(
+          create: (context) => FollowCubit(),
         ),
         BlocProvider(
           create: (context) => HomeCubit()..getPosts(currentUserId),
