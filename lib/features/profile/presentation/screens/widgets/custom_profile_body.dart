@@ -58,6 +58,7 @@ class CustomProfileBody extends StatelessWidget {
                     isFollowing: isFollowing,
                     uId: uId,
                     userData: userData,
+                    followers: followers,
                   ),
                 ],
               ),

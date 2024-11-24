@@ -10,8 +10,10 @@ class CustomUserNameEdit extends StatelessWidget {
     required this.userData,
     required this.isFollowing,
     required this.uId,
+    required this.followers,
   });
   final Map<String, dynamic> userData;
+  final int followers;
   final bool isFollowing;
   final String uId;
 
@@ -35,6 +37,8 @@ class CustomUserNameEdit extends StatelessWidget {
         CustomButtonEditProfile(
           isFollowing: isFollowing,
           uId: uId,
+          userData: userData,
+          followers: followers,
         ),
         const SizedBox(
           height: 15,

@@ -1,24 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:instagram/constants.dart';
 import '../../../../../core/utils/app_router.dart';
+import '../../manager/profile/profile_cubit.dart';
 import 'custom_button_profile.dart';
 
-class CustomButtonEditProfile extends StatelessWidget {
+class CustomButtonEditProfile extends StatefulWidget {
   const CustomButtonEditProfile({
     super.key,
     required this.uId,
     required this.isFollowing,
+    required this.userData,
+    required this.followers,
   });
   final String uId;
   final bool isFollowing;
+  final int followers;
+  final Map<String, dynamic> userData;
+
+  @override
+  State<CustomButtonEditProfile> createState() =>
+      _CustomButtonEditProfileState();
+}
+
+class _CustomButtonEditProfileState extends State<CustomButtonEditProfile> {
+  late bool isFollowing;
+  late int followers;
+
+  @override
+  void initState() {
+    super.initState();
+    isFollowing = widget.isFollowing;
+    followers = widget.followers;
+  }
 
   @override
   Widget build(BuildContext context) {
-    final currentUId = cashing.getData(key: 'token');
+    final profileCubit = BlocProvider.of<ProfileCubit>(context);
     return Row(
       children: [
-        currentUId == uId
+        currentUserId == widget.uId
             ? Row(
                 children: [
                   CustomButton(
@@ -43,12 +65,19 @@ class CustomButtonEditProfile extends StatelessWidget {
                   ),
                 ],
               )
-            : isFollowing
+            : widget.isFollowing
                 ? CustomButton(
-                    width: MediaQuery.of(context).size.width - 6,
+                    width: MediaQuery.of(context).size.width - 33,
                     fontSize: 18,
                     text: 'UnFollow',
-                    onTap: () {},
+                    onTap: () async {
+                      await profileCubit.followUser(
+                          currentUserId, widget.userData['uId']);
+                          setState(() {
+                            isFollowing = false;
+                            followers--;
+                          });
+                    },
                     colorText: Colors.black,
                     colorContainer: const Color(0xFFEFEFEF),
                   )
@@ -58,7 +87,14 @@ class CustomButtonEditProfile extends StatelessWidget {
                         width: MediaQuery.of(context).size.width - 33,
                         fontSize: 20,
                         text: 'Follow',
-                        onTap: () {},
+                        onTap: () async {
+                          await profileCubit.followUser(
+                              currentUserId, widget.userData['uId']);
+                          setState(() {
+                            isFollowing = true;
+                            followers++;
+                          });
+                        },
                         colorText: Colors.white,
                         colorContainer: Colors.blue,
                       ),
