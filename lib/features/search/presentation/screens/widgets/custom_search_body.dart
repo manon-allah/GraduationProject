@@ -19,8 +19,7 @@ class _CustomSearchBodyState extends State<CustomSearchBody> {
   @override
   void initState() {
     super.initState();
-    final uId = cashing.getData(key: 'token');
-    BlocProvider.of<SearchCubit>(context).getPosts(uId);
+    BlocProvider.of<SearchCubit>(context).getPosts(currentUserId);
   }
 
   @override
