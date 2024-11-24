@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
+
 part 'logout_state.dart';
 
 class LogoutCubit extends Cubit<LogoutState> {

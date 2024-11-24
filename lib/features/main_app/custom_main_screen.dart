@@ -5,7 +5,7 @@ import 'package:instagram/constants.dart';
 import 'package:instagram/features/add_post/presentation/manager/cubit/post_cubit.dart';
 import 'package:instagram/features/profile/presentation/manager/cubit/follow_cubit.dart';
 import 'package:instagram/features/search/presentation/manager/cubit/search_cubit.dart';
-import 'package:instagram/features/setting/presentation/manager/cubit/logout_cubit.dart';
+import 'package:instagram/features/setting/presentation/manager/log_out/logout_cubit.dart';
 
 import '../../core/utils/app_router.dart';
 import '../auth/presentation/manager/sign/sign_cubit.dart';

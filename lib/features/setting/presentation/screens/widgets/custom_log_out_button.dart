@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:instagram/constants.dart';
-import 'package:instagram/features/setting/presentation/manager/cubit/logout_cubit.dart';
+import 'package:instagram/core/functions/snack_bar_function.dart';
+import 'package:instagram/features/setting/presentation/manager/log_out/logout_cubit.dart';
 
+import '../../../../../constants.dart';
 import '../../../../../core/utils/app_router.dart';
 
 class CustomLogOutButton extends StatelessWidget {
@@ -11,7 +12,6 @@ class CustomLogOutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return BlocBuilder<LogoutCubit, LogoutState>(
       builder: (context, state) {
         final logOutCubit = BlocProvider.of<LogoutCubit>(context);
@@ -28,6 +28,7 @@ class CustomLogOutButton extends StatelessWidget {
                 onPressed: () {
                   logOutCubit.logOut();
                   cashing.deleteData(key: 'token');
+                  showSnackbar('Logged Out', context);
                   GoRouter.of(context)
                       .pushReplacementNamed(AppRouter.kloginScreen);
                 },
