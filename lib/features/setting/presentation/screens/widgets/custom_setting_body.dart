@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram/features/setting/data/enums/theme_state.dart';
-import 'package:instagram/features/setting/presentation/manager/switch/switch_cubit.dart';
+import 'custom_language_app.dart';
+import 'custom_light_dark_mode.dart';
+import 'custom_log_out_button.dart';
 
 class CustomSettingBody extends StatefulWidget {
   const CustomSettingBody({super.key});
@@ -13,95 +13,28 @@ class CustomSettingBody extends StatefulWidget {
 class _CustomSettingBodyState extends State<CustomSettingBody> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SwitchCubit, SwitchState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        final switchCubit = context.read<SwitchCubit>();
-        return Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 15,
+    return const Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 15,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 50,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 50,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Choose Light mode or Dark mode : ',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 190,
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            switchCubit.changeTheme(ThemeState.light);
-                          },
-                          child: const Text(
-                            'Light',
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      SizedBox(
-                        width: 190,
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            switchCubit.changeTheme(ThemeState.dark);
-                          },
-                          child: const Text(
-                            'Dark',
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              Row(
-                children: [
-                  const Text(
-                    'Choose Arabic or English Language',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.language_rounded,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          const CustomLightDarkMode(),
+          const SizedBox(
+            height: 50,
           ),
-        );
-      },
+          const CustomLanguageApp(),
+          Spacer(),
+          const CustomLogOutButton(),
+          const SizedBox(
+            height: 30,
+          )
+        ],
+      ),
     );
   }
 }
