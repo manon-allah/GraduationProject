@@ -25,9 +25,10 @@ class CustomLogOutButton extends StatelessWidget {
                   backgroundColor: Colors.red,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () {
-                  logOutCubit.logOut();
-                  cashing.deleteData(key: 'token');
+                onPressed: () async {
+                  await cashing.deleteData(key: 'token');
+                  print('Deleted token ===================>');
+                  await logOutCubit.logOut();
                   showSnackbar('Logged Out', context);
                   GoRouter.of(context)
                       .pushReplacementNamed(AppRouter.kloginScreen);
