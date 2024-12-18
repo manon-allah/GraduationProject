@@ -1,69 +1,96 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:instagram/constants.dart';
-import 'package:instagram/features/add_post/presentation/manager/cubit/post_cubit.dart';
-import 'package:instagram/features/profile/presentation/manager/cubit/follow_cubit.dart';
-import 'package:instagram/features/search/presentation/manager/cubit/search_cubit.dart';
-import 'package:instagram/features/setting/presentation/manager/log_out/logout_cubit.dart';
-
-import '../../core/utils/app_router.dart';
-import '../auth/presentation/manager/sign/sign_cubit.dart';
-import '../edit_profile/presentation/manager/cubit/add_user_data_cubit.dart';
-import '../home/presentation/manager/home_cubit/home_cubit.dart';
-import '../profile/presentation/manager/get_data/get_data_cubit.dart';
-import '../setting/data/enums/theme_state.dart';
-import '../setting/presentation/manager/switch/switch_cubit.dart';
+import 'package:instagram/features/post/presentation/manager/cubit/post_cubit.dart';
+import '../../core/functions/show_snake_bar.dart';
+import '../../core/themes/cubit/theme_cubit.dart';
+import '../../core/widgets/bottom_nav_bar.dart';
+import '../auth/data/repos/auth_repo_imp.dart';
+import '../auth/presentation/manager/cubit/auth_cubit.dart';
+import '../auth/presentation/pages/auth_page.dart';
+import '../home/presentation/manager/cubit/home_cubit.dart';
+import '../post/data/repos/post_repo_imp.dart';
+import '../profile/presentation/data/repos/profile_repo_imp.dart';
+import '../profile/presentation/presentation/manager/cubit/profile_cubit.dart';
+import '../search/presentation/data/repos/search_repo_imp.dart';
+import '../search/presentation/presentation/cubit/search_cubit.dart';
+import '../storage/data/repos/storage_repo_imp.dart';
 
 class CustomMainScreen extends StatelessWidget {
-  const CustomMainScreen({super.key});
+  final authRepoImp = AuthRepositoryImp();
+  final profileRepoImp = ProfileRepositotryImp();
+  final postRepoImp = PostRepositoryImp();
+  final storageRepoImp = StorageRepositoryImp();
+  final searchRepoImp = SearchRepositoryImp();
+
+  CustomMainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final token = cashing.getData(key: 'token');
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => SignCubit(),
+        // auth cubit
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(authRepo: authRepoImp)..checkAuth(),
         ),
-        BlocProvider(
-          create: (context) => AddUserDataCubit(),
+        // profile cubit
+        BlocProvider<ProfileCubit>(
+          create: (context) => ProfileCubit(
+            profileRepo: profileRepoImp,
+            storageRepo: storageRepoImp,
+          ),
         ),
-        BlocProvider(
-          create: (context) => GetDataCubit()..getRefreshData(),
+        // post cubit
+        BlocProvider<PostCubit>(
+          create: (context) => PostCubit(
+            postRepo: postRepoImp,
+            storageRepo: storageRepoImp,
+          ),
         ),
-        BlocProvider(
-          create: (context) => PostCubit(),
+        // home cubit
+        BlocProvider<HomeCubit>(
+          create: (context) => HomeCubit(
+            postRepo: postRepoImp,
+            profileRepo: profileRepoImp,
+          ),
         ),
-        BlocProvider(
-          create: (context) => SearchCubit(),
+        // search cubit
+        BlocProvider<SearchCubit>(
+          create: (context) => SearchCubit(
+            searchRepository: searchRepoImp,
+          ),
         ),
-        BlocProvider(
-          create: (context) => FollowCubit(),
-        ),
-        BlocProvider(
-          create: (context) => LogoutCubit(),
-        ),
-        BlocProvider(
-          create: (context) => HomeCubit()..getPosts(currentUserId),
-        ),
-        BlocProvider(
-          create: (context) => SwitchCubit()..changeTheme(ThemeState.initial),
+        // theme cubit
+        BlocProvider<ThemeCubit>(
+          create: (context) => ThemeCubit(),
         ),
       ],
-      child: BlocBuilder<SwitchCubit, SwitchState>(
-        builder: (context, state) {
-          final router = GoRouter(
-            initialLocation: token != null ? '/navigation' : '/',
-            routes: AppRouter.routes,
-          );
-          final theme =
-              state is SwitchLightTheme ? ThemeData.light() : ThemeData.dark();
-          return MaterialApp.router(
+      child: BlocBuilder<ThemeCubit, ThemeData>(
+        builder: (context, currentTheme) {
+          return MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: theme,
+            theme: currentTheme,
             title: 'Instagram App',
-            routerConfig: router,
+            home: BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is AuthError) {
+                  showSnackbar(state.message, context);
+                }
+              },
+              builder: (context, state) {
+                if (state is UnAuthenticated) {
+                  return const AuthPage();
+                }
+                if (state is Authenticated) {
+                  return const BottomNavBar();
+                } else {
+                  return const Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+              },
+            ),
           );
         },
       ),

@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram/core/services/get_it_service.dart';
 import 'package:instagram/firebase_options.dart';
 import 'core/services/caching.dart';
 import 'features/main_app/custom_main_screen.dart';
@@ -11,7 +10,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await CacheHelper.cachIntialization();
-  setupGetIt();
   runApp(const Instagram());
 }
 
@@ -20,6 +18,6 @@ class Instagram extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomMainScreen();
+    return CustomMainScreen();
   }
 }
