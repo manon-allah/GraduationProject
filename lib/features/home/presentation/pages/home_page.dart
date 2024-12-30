@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
             );
           } else if (state is PostsError) {
             return Center(
-              child: Text(state.message),
+              child: Text(state.message,),
             );
           } else {
             return const SizedBox();
