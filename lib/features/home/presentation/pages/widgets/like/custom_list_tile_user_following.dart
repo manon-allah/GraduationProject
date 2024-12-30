@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import '../../../../post/domain/entities/post_entity.dart';
-import '../../../../profile/presentation/domain/entities/profile_entity.dart';
-import '../../../../profile/presentation/presentation/pages/profile_page.dart';
+import '../../../../../post/domain/entities/post_entity.dart';
+import '../../../../../profile/presentation/domain/entities/profile_entity.dart';
+import '../../../../../profile/presentation/presentation/pages/profile_page.dart';
 
-class CustomListTileUser extends StatelessWidget {
+class CustomListTileUserFollowing extends StatelessWidget {
   final PostEntity post;
   final ProfileEntity user;
   final String text;
 
-  const CustomListTileUser({
+  const CustomListTileUserFollowing({
     super.key,
     required this.user,
     required this.text,
@@ -57,11 +57,10 @@ class CustomListTileUser extends StatelessWidget {
             ),
           ],
         ),
-        // trailing: Image.network(
-        //   post.postImageUrl!.first,
-        //   width: 70,
-        //   fit: BoxFit.fill,
-        // ),
+        trailing: Icon(
+          Icons.arrow_forward,
+          color: Theme.of(context).colorScheme.primary,
+        ),
       ),
     );
   }

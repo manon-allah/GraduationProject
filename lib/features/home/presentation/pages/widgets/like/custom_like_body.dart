@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../post/domain/entities/post_entity.dart';
-import '../../../../profile/presentation/presentation/manager/cubit/profile_cubit.dart';
-import 'custom_list_tile_user.dart';
+import '../../../../../post/domain/entities/post_entity.dart';
+import '../../../../../profile/presentation/presentation/manager/cubit/profile_cubit.dart';
+import 'custom_list_tile_user_like.dart';
 
 class CustomLikeBody extends StatefulWidget {
   final List<PostEntity> posts;
@@ -42,7 +42,7 @@ class _CustomLikeBodyState extends State<CustomLikeBody> {
                   if (snapshot.hasData) {
                     final user = snapshot.data;
 
-                    return CustomListTileUser(
+                    return CustomListTileUserLike(
                       text: widget.text,
                       post: post,
                       user: user!,

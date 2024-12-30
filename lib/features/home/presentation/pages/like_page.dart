@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../auth/domain/entities/user_entity.dart';
 import '../../../auth/presentation/manager/cubit/auth_cubit.dart';
 import '../manager/cubit/home_cubit.dart';
-import 'widgets/custom_like_body.dart';
+import 'widgets/like/custom_following_body.dart';
+import 'widgets/like/custom_like_body.dart';
 
 class LikePage extends StatefulWidget {
   const LikePage({super.key});
@@ -57,7 +58,7 @@ class _LikePageState extends State<LikePage> {
               final posts = state.posts;
               return TabBarView(
                 children: [
-                  CustomLikeBody(
+                  CustomFollowingBody(
                     text: 'is following you',
                     context: context,
                     emptyMessage: 'No following',
@@ -66,7 +67,7 @@ class _LikePageState extends State<LikePage> {
                   ),
                   CustomLikeBody(
                     posts: posts,
-                    text: 'liked your post',
+                    text: 'liked post',
                     context: context,
                     emptyMessage: 'No Likes',
                     uIds: like,
