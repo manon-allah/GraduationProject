@@ -23,11 +23,8 @@ class HomeCubit extends Cubit<HomeState> {
       log('user from cubit home is ======================= ${user!.following}');
 
       final posts = await postRepo.getAllPosts();
-      log('posts from cubit home is ======================= ${posts.length}');
 
       final likes = posts.expand((post) => post.likes).toList();
-
-      log('Likes list ============================= $likes');
 
       emit(HomeSuccess(
         likes,
