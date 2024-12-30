@@ -15,9 +15,7 @@ class CustomTabBarBody extends StatelessWidget {
       length: 3,
       child: Column(
         children: [
-          //////////////////////////////////////
           // Tab bar
-          /////////////////////////////////////
           TabBar(
             dividerHeight: 0,
             indicatorSize: TabBarIndicatorSize.tab,
@@ -46,17 +44,15 @@ class CustomTabBarBody extends StatelessWidget {
               ),
             ],
           ),
-          //////////////////////////////////////
           // Tab bar view
-          /////////////////////////////////////
           Expanded(
             child: TabBarView(
               children: [
                 CustomTabBarView(
                   uid: uid,
                 ),
-                const Text('Second page'),
-                const Text('third page'),
+                const Text(''),
+                const Text(''),
               ],
             ),
           ),

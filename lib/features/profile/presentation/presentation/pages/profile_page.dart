@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../auth/domain/entities/user_entity.dart';
@@ -20,12 +22,17 @@ class _ProfilePageState extends State<ProfilePage> {
   late final authCubit = context.read<AuthCubit>();
   late final profileCubit = context.read<ProfileCubit>();
 
-  late UserEntity? currentUser = authCubit.currentUser;
+  bool isOwn = false;
+
+  UserEntity? currentUser;
 
   @override
   void initState() {
     super.initState();
-    profileCubit.getCurrentProfile(widget.uid);
+    getCurrentUser();
+    profileCubit.getCurrentProfile(
+      widget.uid,
+    );
   }
 
   @override
@@ -36,9 +43,10 @@ class _ProfilePageState extends State<ProfilePage> {
           final user = state.profile;
           return Scaffold(
             body: CustomProfileBody(
+              isOwn: isOwn,
               followersCount: user.followers.length,
               followingCount: user.following.length,
-              currentUid: currentUser!.uid,
+              currentUid: currentUser!,
               isFollowing: user.followers.contains(currentUser!.uid),
               onTap: followButton,
               uid: widget.uid,
@@ -57,6 +65,14 @@ class _ProfilePageState extends State<ProfilePage> {
         }
       },
     );
+  }
+
+  void getCurrentUser() async {
+    final authCubit = context.read<AuthCubit>();
+    currentUser = authCubit.currentUser;
+
+    isOwn = (widget.uid == currentUser!.uid);
+    log('isown ============================== $isOwn');
   }
 
   void followButton() {

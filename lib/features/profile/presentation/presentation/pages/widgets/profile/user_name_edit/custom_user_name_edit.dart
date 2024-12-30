@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/features/auth/domain/entities/user_entity.dart';
 import '../../../../../domain/entities/profile_entity.dart';
 import '../list_view_story_profile/custom_list_view_story_profile.dart';
 import 'custom_button_edit_profile.dart';
@@ -6,7 +7,7 @@ import 'custom_followed_by_profile.dart';
 import 'custom_user_name_some_information.dart';
 
 class CustomUserNameEdit extends StatelessWidget {
-  final String currentUid;
+  final UserEntity currentUid;
   final String userProfile;
   final bool isFollowing;
   final ProfileEntity user;

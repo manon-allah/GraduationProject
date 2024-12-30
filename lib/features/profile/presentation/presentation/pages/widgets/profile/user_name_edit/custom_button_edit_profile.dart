@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/features/auth/domain/entities/user_entity.dart';
 import '../../../../../domain/entities/profile_entity.dart';
 import '../../../edit_profile_page.dart';
 import 'custom_button.dart';
 
 class CustomButtonEditProfile extends StatelessWidget {
-  final String currentUid;
+  final UserEntity currentUid;
   final String userProfile;
   final ProfileEntity user;
   final void Function()? onTap;
@@ -22,7 +23,7 @@ class CustomButtonEditProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        currentUid == userProfile
+        currentUid.uid == userProfile
             ? Row(
                 children: [
                   CustomButton(

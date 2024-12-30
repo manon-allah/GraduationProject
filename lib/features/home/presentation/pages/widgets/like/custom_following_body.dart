@@ -28,20 +28,20 @@ class _CustomFollowingBodyState extends State<CustomFollowingBody> {
   Widget build(BuildContext context) {
     return widget.uIds.isEmpty
         ? Center(
-            child: Text(widget.emptyMessage),
+            child: Text(
+              widget.emptyMessage,
+            ),
           )
         : ListView.builder(
             itemCount: widget.uIds.length,
             itemBuilder: (context, index) {
               final uId = widget.uIds[index];
               final post = widget.posts[index];
-
               return FutureBuilder(
                 future: context.read<ProfileCubit>().getProfile(uId),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     final user = snapshot.data;
-
                     return CustomListTileUserFollowing(
                       text: widget.text,
                       post: post,

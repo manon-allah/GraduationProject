@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     getAllPosts();
   }
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -47,7 +47,9 @@ class _HomePageState extends State<HomePage> {
             );
           } else if (state is PostsError) {
             return Center(
-              child: Text(state.message,),
+              child: Text(
+                state.message,
+              ),
             );
           } else {
             return const SizedBox();
@@ -56,6 +58,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
   void getAllPosts() {
     postCubit.getAllPosts();
   }
