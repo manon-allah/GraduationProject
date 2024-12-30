@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/themes/cubit/theme_cubit.dart';
 
@@ -11,25 +12,32 @@ class CustomLightDarkMode extends StatelessWidget {
 
     bool isDarkMode = themeCubit.isDarkMode;
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Choose Light mode or Dark mode : ',
-          style: TextStyle(
-            fontSize: 20,
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 10,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: Theme.of(context).colorScheme.primary,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'Dark mode : ',
+            style: TextStyle(
+              fontSize: 20,
+            ),
           ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        CupertinoSwitch(
-          value: isDarkMode,
-          onChanged: (value) {
-            themeCubit.toggleTheme();
-          },
-        ),
-      ],
+          CupertinoSwitch(
+            value: isDarkMode,
+            onChanged: (value) {
+              themeCubit.toggleTheme();
+            },
+          ),
+        ],
+      ),
     );
   }
 }

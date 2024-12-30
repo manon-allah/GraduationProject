@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../auth/presentation/manager/cubit/auth_cubit.dart';
 import '../like_page.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -35,12 +32,6 @@ class CustomAppBar extends StatelessWidget {
         const Spacer(),
         Row(
           children: [
-            IconButton(
-              onPressed: () {
-                context.read<AuthCubit>().logOut();
-              },
-              icon: const Icon(Icons.logout),
-            ),
             IconButton(
               onPressed: () {
                 Navigator.push(

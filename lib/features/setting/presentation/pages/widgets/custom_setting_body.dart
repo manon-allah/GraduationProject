@@ -13,24 +13,24 @@ class CustomSettingBody extends StatefulWidget {
 class _CustomSettingBodyState extends State<CustomSettingBody> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
+    return const Padding(
+      padding: EdgeInsets.symmetric(
         horizontal: 15,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
+          SizedBox(
             height: 50,
           ),
-          const CustomLightDarkMode(),
-          const SizedBox(
+          CustomLightDarkMode(),
+          SizedBox(
             height: 50,
           ),
-          const CustomLanguageApp(),
+          CustomLanguageApp(),
           Spacer(),
-          const CustomLogOutButton(),
-          const SizedBox(
+          CustomLogOutButton(),
+          SizedBox(
             height: 30,
           )
         ],
