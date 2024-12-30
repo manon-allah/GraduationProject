@@ -19,7 +19,7 @@ class CustomChatBubble extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: isCurrentUser ? Colors.green : Colors.black,
+        color: isCurrentUser ? Colors.green : Colors.grey.shade500,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,

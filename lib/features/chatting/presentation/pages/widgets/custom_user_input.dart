@@ -36,7 +36,7 @@ class CustomUserInput extends StatelessWidget {
               child: Image.asset(
                 'assets/send11.png',
                 width: 30,
-                // color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),

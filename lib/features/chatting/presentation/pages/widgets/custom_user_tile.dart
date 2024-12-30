@@ -19,13 +19,13 @@ class CustomUserTile extends StatelessWidget {
           fontSize: 20,
         ),
       ),
-      subtitle: Text(
-        'message content',
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.primary,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ),
+      // subtitle: Text(
+      //   'message content',
+      //   style: TextStyle(
+      //     color: Theme.of(context).colorScheme.primary,
+      //     overflow: TextOverflow.ellipsis,
+      //   ),
+      // ),
       leading: CircleAvatar(
         radius: 23,
         backgroundImage: NetworkImage(
@@ -33,10 +33,10 @@ class CustomUserTile extends StatelessWidget {
               'https://img.freepik.com/free-photo/spring-scene-with-flowers-butterfly_23-2150169988.jpg',
         ),
       ),
-      trailing: const CircleAvatar(
-        radius: 5,
-        backgroundColor: Colors.blue,
-      ),
+      // trailing: const CircleAvatar(
+      //   radius: 5,
+      //   backgroundColor: Colors.blue,
+      // ),
     );
   }
 }
