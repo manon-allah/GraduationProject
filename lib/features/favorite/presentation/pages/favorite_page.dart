@@ -47,7 +47,6 @@ class _FavoritePageState extends State<FavoritePage> {
         isOwnPost: isOwnPost,
         postUser: postUser,
         currrentUser: currrentUser!,
-        toggleLike: toggleLike,
       ),
     );
   }
@@ -66,29 +65,5 @@ class _FavoritePageState extends State<FavoritePage> {
         postUser = getedUser;
       });
     }
-  }
-
-  void toggleLike() async {
-    final isLiked = widget.post.likes.contains(currrentUser!.uid);
-
-    setState(() {
-      if (isLiked) {
-        widget.post.likes.remove(currrentUser!.uid);
-      } else {
-        widget.post.likes.add(currrentUser!.uid);
-      }
-    });
-
-    postCubit
-        .toggleLikePost(widget.post.id, currrentUser!.uid)
-        .catchError((error) {
-      setState(() {
-        if (isLiked) {
-          widget.post.likes.add(currrentUser!.uid);
-        } else {
-          widget.post.likes.remove(currrentUser!.uid);
-        }
-      });
-    });
   }
 }

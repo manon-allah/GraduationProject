@@ -7,19 +7,22 @@ import 'custom_favorite_number_likes.dart';
 import 'custom_favorite_react.dart';
 import 'custom_favorite_user_name_desc.dart';
 
-class CustomFavoriteDescriptionPost extends StatelessWidget {
+class CustomFavoriteDescriptionPost extends StatefulWidget {
   final UserEntity currrentUser;
-  final void Function()? toggleLike;
   final PageController nextPage;
   final PostEntity post;
   const CustomFavoriteDescriptionPost({
     super.key,
     required this.currrentUser,
-    this.toggleLike,
     required this.nextPage,
     required this.post,
   });
 
+  @override
+  State<CustomFavoriteDescriptionPost> createState() => _CustomFavoriteDescriptionPostState();
+}
+
+class _CustomFavoriteDescriptionPostState extends State<CustomFavoriteDescriptionPost> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,24 +33,23 @@ class CustomFavoriteDescriptionPost extends StatelessWidget {
         ),
         // react in post....etc
         CustomFavoriteReact(
-          currrentUser: currrentUser,
-          toggleLike: toggleLike,
-          nextPage: nextPage,
-          post: post,
+          currrentUser: widget.currrentUser,
+          nextPage: widget.nextPage,
+          post: widget.post,
         ),
         // numbers of likes....etc
         CustomFavoriteNumberLikes(
-          post: post,
+          post: widget.post,
         ),
         // username description....etc
         CustomFavoriteUserNameDesc(
-          post: post,
+          post: widget.post,
         ),
         // all comments
         const CustomAllComments(),
         // date of post
         CustomDatePost(
-          post: post,
+          post: widget.post,
         ),
       ],
     );

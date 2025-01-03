@@ -7,13 +7,11 @@ import '../../manager/cubit/favorite_cubit.dart';
 
 class CustomFavoriteReact extends StatefulWidget {
   final UserEntity currrentUser;
-  final void Function()? toggleLike;
   final PageController nextPage;
   final PostEntity post;
   const CustomFavoriteReact({
     super.key,
     required this.currrentUser,
-    this.toggleLike,
     required this.nextPage,
     required this.post,
   });
@@ -31,7 +29,15 @@ class _CustomFavoriteReactState extends State<CustomFavoriteReact> {
       children: [
         IconButton(
           padding: EdgeInsets.zero,
-          onPressed: widget.toggleLike,
+          onPressed:(){
+            setState(() {
+              if (widget.post.likes.contains(widget.currrentUser.uid)) {
+                widget.post.likes.remove(widget.currrentUser.uid);
+              } else {
+                widget.post.likes.add(widget.currrentUser.uid);
+              }
+            });
+          },
           icon: widget.post.likes.contains(widget.currrentUser.uid)
               ? const Icon(
                   Icons.favorite,
@@ -89,8 +95,11 @@ class _CustomFavoriteReactState extends State<CustomFavoriteReact> {
           },
           icon: Icon(
             isFavorite ? Icons.bookmark : Icons.bookmark_border_outlined,
+            color: isFavorite
+                ? Theme.of(context).colorScheme.inversePrimary
+                : Colors.grey,
             size: 25,
-          ), 
+          ),
         ),
       ],
     );

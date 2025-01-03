@@ -11,11 +11,9 @@ class CustomFavoriteBody extends StatefulWidget {
   final UserEntity currrentUser;
   final ProfileEntity? postUser;
   final bool isOwnPost;
-  final void Function()? toggleLike;
   const CustomFavoriteBody({
     super.key,
     required this.currrentUser,
-    this.toggleLike,
     required this.postUser,
     required this.isOwnPost,
   });
@@ -50,7 +48,6 @@ class _CustomFavoriteBodyState extends State<CustomFavoriteBody> {
                 postUser: widget.postUser,
                 deletePost: deletePost,
                 currrentUser: widget.currrentUser,
-                toggleLike: widget.toggleLike,
                 post: post,
               );
             },

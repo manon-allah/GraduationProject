@@ -6,23 +6,26 @@ import '../../../../home/presentation/pages/widgets/posts/custom_list_tile_user_
 import '../../../../profile/presentation/domain/entities/profile_entity.dart';
 import 'custom_favorite_post.dart';
 
-class CustomPostCard extends StatelessWidget {
+class CustomPostCard extends StatefulWidget {
   final ProfileEntity? postUser;
   final bool isOwnPost;
   final UserEntity currrentUser;
-  final void Function()? toggleLike;
   final Function(String id)? deletePost;
   final PostEntity post;
   const CustomPostCard({
     super.key,
     required this.post,
     required this.currrentUser,
-    this.toggleLike,
     required this.postUser,
     required this.isOwnPost,
     this.deletePost,
   });
 
+  @override
+  State<CustomPostCard> createState() => _CustomPostCardState();
+}
+
+class _CustomPostCardState extends State<CustomPostCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -36,15 +39,14 @@ class CustomPostCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomListTileUserHome(
-              isOwnPost: isOwnPost,
-              post: post,
-              postUser: postUser,
-              deletePost: deletePost,
+              isOwnPost: widget.isOwnPost,
+              post: widget.post,
+              postUser: widget.postUser,
+              deletePost: widget.deletePost,
             ),
             CustomFavoritePost(
-              currrentUser: currrentUser,
-              post: post,
-              toggleLike: toggleLike,
+              currrentUser: widget.currrentUser,
+              post: widget.post,
             ),
           ],
         ),

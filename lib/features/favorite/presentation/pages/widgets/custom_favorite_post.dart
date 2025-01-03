@@ -6,13 +6,11 @@ import 'custom_favorite_description_post.dart';
 
 class CustomFavoritePost extends StatefulWidget {
   final UserEntity currrentUser;
-  final void Function()? toggleLike;
   final PostEntity post;
   const CustomFavoritePost({
     super.key,
     required this.post,
     required this.currrentUser,
-    this.toggleLike,
   });
 
   @override
@@ -48,7 +46,6 @@ class _CustomFavoritePostState extends State<CustomFavoritePost> {
         // description of post
         CustomFavoriteDescriptionPost(
           currrentUser: widget.currrentUser,
-          toggleLike: widget.toggleLike,
           nextPage: nextPage,
           post: widget.post,
         ),
