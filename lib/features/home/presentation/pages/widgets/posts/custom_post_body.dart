@@ -61,7 +61,7 @@ class _CustomPostBodyState extends State<CustomPostBody> {
   }
 
   void getCurrentUser() async {
-    final authCubit = context.read<AuthCubit>();
+    final authCubit = context.read<AuthCubit>(); 
     currrentUser = authCubit.currentUser;
 
     isOwnPost = (widget.post.userId == currrentUser!.uid);

@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../../../../auth/domain/entities/user_entity.dart';
-import '../../../../../favorite/presentation/manager/cubit/favorite_cubit.dart';
-import '../../../../../favorite/presentation/pages/favorite_page.dart';
-import '../../../../../post/domain/entities/post_entity.dart';
+import '../../../../auth/domain/entities/user_entity.dart';
+import '../../../../post/domain/entities/post_entity.dart';
+import '../../manager/cubit/favorite_cubit.dart';
 
-class CustomReactPostHome extends StatefulWidget {
+class CustomFavoriteReact extends StatefulWidget {
   final UserEntity currrentUser;
   final void Function()? toggleLike;
   final PageController nextPage;
   final PostEntity post;
-  const CustomReactPostHome({
+  const CustomFavoriteReact({
     super.key,
-    required this.post,
-    required this.nextPage,
-    required this.toggleLike,
     required this.currrentUser,
+    this.toggleLike,
+    required this.nextPage,
+    required this.post,
   });
 
   @override
-  State<CustomReactPostHome> createState() => _CustomReactPostHomeState();
+  State<CustomFavoriteReact> createState() => _CustomFavoriteReactState();
 }
 
-class _CustomReactPostHomeState extends State<CustomReactPostHome> {
+class _CustomFavoriteReactState extends State<CustomFavoriteReact> {
   @override
   Widget build(BuildContext context) {
     final favoriteCubit = context.watch<FavoriteCubit>();
@@ -86,33 +85,12 @@ class _CustomReactPostHomeState extends State<CustomReactPostHome> {
               favoriteCubit.removeFromFavorites(widget.post);
             } else {
               favoriteCubit.addToFavorites(widget.post);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: const Text(
-                    "Added to Favorites",
-                  ),
-                  action: SnackBarAction(
-                    textColor: Theme.of(context).colorScheme.primary,
-                    label: "View",
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FavoritePage(
-                            post: widget.post,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              );
             }
           },
           icon: Icon(
             isFavorite ? Icons.bookmark : Icons.bookmark_border_outlined,
             size: 25,
-          ),
+          ), 
         ),
       ],
     );

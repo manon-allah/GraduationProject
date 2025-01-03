@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final postCubit = context.read<PostCubit>();
+  late final postCubit = context.read<PostCubit>(); 
 
   @override
   void initState() {

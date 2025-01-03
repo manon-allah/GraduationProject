@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import '../../../../../auth/domain/entities/user_entity.dart';
-import '../../../../../post/domain/entities/post_entity.dart';
-import 'custom_discription_post.dart';
+import 'package:instagram/features/post/domain/entities/post_entity.dart';
 
-class CustomPostCardHome extends StatefulWidget {
+import '../../../../auth/domain/entities/user_entity.dart';
+import 'custom_favorite_description_post.dart';
+
+class CustomFavoritePost extends StatefulWidget {
   final UserEntity currrentUser;
   final void Function()? toggleLike;
   final PostEntity post;
-  const CustomPostCardHome({
+  const CustomFavoritePost({
     super.key,
     required this.post,
-    required this.toggleLike,
     required this.currrentUser,
+    this.toggleLike,
   });
 
   @override
-  State<CustomPostCardHome> createState() => _CustomPostCardHomeState();
+  State<CustomFavoritePost> createState() => _CustomFavoritePostState();
 }
 
-class _CustomPostCardHomeState extends State<CustomPostCardHome> {
+class _CustomFavoritePostState extends State<CustomFavoritePost> {
   PageController nextPage = PageController();
   @override
   Widget build(BuildContext context) {
@@ -34,15 +35,18 @@ class _CustomPostCardHomeState extends State<CustomPostCardHome> {
                 controller: nextPage,
                 itemCount: widget.post.postImageUrl!.length,
                 itemBuilder: (context, index) {
-                  return Image.network(
-                    widget.post.postImageUrl![index],
-                    fit: BoxFit.fill,
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      widget.post.postImageUrl![index],
+                      fit: BoxFit.fill,
+                    ),
                   );
                 }),
           ),
         ),
         // description of post
-        CustomDiscriptionPost(
+        CustomFavoriteDescriptionPost(
           currrentUser: widget.currrentUser,
           toggleLike: widget.toggleLike,
           nextPage: nextPage,
