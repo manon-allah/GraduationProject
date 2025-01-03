@@ -63,7 +63,7 @@ class AuthRepositoryImp implements AuthRepository {
         password: password,
       );
       // create user
-      final user = UserEntity(
+      UserEntity user = UserEntity(
         uid: userCredential.user!.uid,
         password: '',
         email: email,

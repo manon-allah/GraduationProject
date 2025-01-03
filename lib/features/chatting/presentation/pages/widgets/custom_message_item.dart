@@ -33,8 +33,6 @@ class CustomMessageItem extends StatelessWidget {
         child: Row(
           mainAxisAlignment: mainAxisAlignment,
           children: [
-            // mainAxisAlignment == MainAxisAlignment.end
-            //     ?
             Row(
               children: [
                 CustomChatBubble(
@@ -42,35 +40,8 @@ class CustomMessageItem extends StatelessWidget {
                   timestamp: data['timestamp'],
                   isCurrentUser: isCurrentUser,
                 ),
-                // const SizedBox(
-                //   width: 10,
-                // ),
-                // CircleAvatar(
-                //   radius: 20,
-                //   backgroundImage: NetworkImage(
-                //     userData['imageProfileUrl'] ??
-                //         'https://img.freepik.com/free-photo/spring-scene-with-flowers-butterfly_23-2150169988.jpg',
-                //   ),
-                // ),
               ],
             )
-            // : Row(
-            //     children: [
-            //       // CircleAvatar(
-            //       //   radius: 20,
-            //       //   backgroundImage: NetworkImage(
-            //       //     userData['imageProfileUrl'] ??
-            //       //         'https://img.freepik.com/free-photo/spring-scene-with-flowers-butterfly_23-2150169988.jpg',
-            //       //   ),
-            //       // ),
-            //       // const SizedBox(
-            //       //   width: 10,
-            //       // ),
-            //       Text(
-            //         data['messageContent'],
-            //       ),
-            //     ],
-            //   ),
           ],
         ),
       ),

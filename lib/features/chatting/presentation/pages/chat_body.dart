@@ -17,7 +17,7 @@ class ChatBody extends StatefulWidget {
 
 class _ChatBodyState extends State<ChatBody> {
   TextEditingController messageController = TextEditingController();
-  final ChatRepository chatRepo = ChatRepoImp();
+  final ChatRepository chatRepo = ChatRepositoryImp();
 
   @override
   Widget build(BuildContext context) {

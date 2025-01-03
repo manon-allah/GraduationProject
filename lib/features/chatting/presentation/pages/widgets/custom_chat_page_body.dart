@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../data/repos/chat_repo_imp.dart';
-import '../../../domain/repos/chat_repo.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../manage/cubit/chat_cubit.dart';
 import 'custom_app_bar_chat.dart';
 import 'custom_list_item.dart';
 import 'custom_row_text.dart';
@@ -11,7 +11,6 @@ class CustomChatPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ChatRepository chatRepo = ChatRepoImp();
     return CustomScrollView(
       slivers: [
         const SliverToBoxAdapter(
@@ -23,36 +22,35 @@ class CustomChatPageBody extends StatelessWidget {
         const SliverToBoxAdapter(
           child: CustomRowText(),
         ),
-        StreamBuilder(
-          stream: chatRepo.getUsersStream(),
-          builder: (context, snapShot) {
-            if (snapShot.hasError) {
+        BlocBuilder<ChatCubit, ChatState>(
+          builder: (context, state) {
+            if (state is ChatLoading) {
+              return const SliverToBoxAdapter(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            } else if (state is ChatLoaded) {
+              final users = state.users;
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final userData = users[index];
+                    return CustomListItem(
+                      userData: userData,
+                      context: context,
+                    );
+                  },
+                  childCount: users.length,
+                ),
+              );
+            } else {
               return const SliverToBoxAdapter(
                 child: Center(
                   child: Text('Error'),
                 ),
               );
             }
-            if (snapShot.connectionState == ConnectionState.waiting) {
-              return const SliverToBoxAdapter(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            }
-            final users = snapShot.data as List<Map<String, dynamic>>;
-            return SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final userData = users[index];
-                  return CustomListItem(
-                    userData: userData,
-                    context: context,
-                  );
-                },
-                childCount: users.length,
-              ),
-            );
           },
         ),
       ],

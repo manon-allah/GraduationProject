@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../domain/entities/message_entity.dart';
 import '../../domain/repos/chat_repo.dart';
 
-class ChatRepoImp implements ChatRepository {
+class ChatRepositoryImp implements ChatRepository {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
 
