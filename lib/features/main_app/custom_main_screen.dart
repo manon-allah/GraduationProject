@@ -5,6 +5,8 @@ import 'package:instagram/features/chatting/presentation/manage/cubit/chat_cubit
 import 'package:instagram/features/favorite/data/repos/favorites_repo_implement.dart';
 import 'package:instagram/features/favorite/presentation/manager/cubit/favorite_cubit.dart';
 import 'package:instagram/features/post/presentation/manager/cubit/post_cubit.dart';
+import 'package:instagram/features/stories/data/repos/story_repo_imp.dart';
+import 'package:instagram/features/stories/presentation/manager/cubit/story_cubit.dart';
 import '../../core/functions/show_snake_bar.dart';
 import '../../core/themes/cubit/theme_cubit.dart';
 import '../../core/widgets/bottom_nav_bar.dart';
@@ -27,6 +29,7 @@ class CustomMainScreen extends StatelessWidget {
   final searchRepoImp = SearchRepositoryImp();
   final chatRepoImp = ChatRepositoryImp();
   final favoriteRepoImp = FavoritesRepositoryImpl();
+  final storyRepoImp = StoryRepositoryImp();
 
   CustomMainScreen({super.key});
 
@@ -75,6 +78,13 @@ class CustomMainScreen extends StatelessWidget {
         BlocProvider<FavoriteCubit>(
           create: (context) => FavoriteCubit(
             favoriteRepo: favoriteRepoImp,
+          ),
+        ),
+        // story cubit
+        BlocProvider<StoryCubit>(
+          create: (context) => StoryCubit(
+            storyRepo: storyRepoImp,
+            storageRepo: storageRepoImp,
           ),
         ),
         // theme cubit

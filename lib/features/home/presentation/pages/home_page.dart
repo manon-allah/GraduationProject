@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram/features/auth/domain/entities/user_entity.dart';
+import 'package:instagram/features/profile/presentation/presentation/manager/cubit/profile_cubit.dart';
+import '../../../auth/presentation/manager/cubit/auth_cubit.dart';
 import '../../../post/presentation/manager/cubit/post_cubit.dart';
 import 'widgets/custom_app_bar.dart';
 import 'widgets/custom_home_body.dart';
-import 'widgets/stories_list_view_body.dart';
+import '../../../stories/presentation/pages/widgets/stories_list_view_body.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -16,24 +19,51 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final postCubit = context.read<PostCubit>();
+  late final profileCubit = context.read<ProfileCubit>();
+
+  UserEntity? currentUser;
 
   @override
   void initState() {
     super.initState();
+    getCurrentUser();
     getAllPosts();
+    profileCubit.getCurrentProfile(
+      currentUser!.uid,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const CustomAppBar(),
+        title: BlocBuilder<ProfileCubit, ProfileState>(
+          builder: (context, state) {
+            if (state is ProfileSuccess) {
+              final user = state.profile;
+              return CustomAppBar(
+                user: user,
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
       body: CustomScrollView(
         slivers: [
-          const StoriesListViewBody(
-              // post:,
-              ),
+          BlocBuilder<ProfileCubit, ProfileState>(
+            builder: (context, state) {
+              if (state is ProfileSuccess) {
+                final user = state.profile;
+                return StoriesListViewBody(
+                  user: user,
+                );
+              }
+              return const SliverToBoxAdapter(
+                child: SizedBox(),
+              );
+            },
+          ),
           BlocBuilder<PostCubit, PostState>(
             builder: (context, state) {
               if (state is PostsLoading) {
@@ -73,6 +103,11 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  getCurrentUser() {
+    final authCubit = context.read<AuthCubit>();
+    currentUser = authCubit.currentUser;
   }
 
   void getAllPosts() {

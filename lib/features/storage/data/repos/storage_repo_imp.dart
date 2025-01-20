@@ -70,4 +70,19 @@ class StorageRepositoryImp implements StorageRepository {
       name,
     );
   }
+
+  @override
+  Future<List<String>> uploadStoriesImages(
+    List<File> paths,
+    String userId,
+    String username,
+    String name,
+  ) {
+    return uploadImages(
+      paths,
+      userId,
+      username,
+      name,
+    );
+  }
 }

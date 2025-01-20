@@ -33,8 +33,12 @@ class PostCubit extends Cubit<PostState> {
       emit(PostsLoading());
       final List<File> imageFiles =
           imageUrls.map((path) => File(path)).toList();
-      List<String> images =
-          await storageRepo.uploadPostImages(imageFiles, userId , 'userposts' , 'posts');
+      List<String> images = await storageRepo.uploadPostImages(
+        imageFiles,
+        userId,
+        'userposts',
+        'posts',
+      );
 
       final newPost = PostEntity(
         id: id,

@@ -1,7 +1,20 @@
 import 'dart:io';
 
 abstract class StorageRepository {
-  Future<String?> uploadProfileImage(String path , String fileName);
-  Future<List<String>> uploadPostImages(List<File> paths , String fileName , String username , String name);
-
+  Future<String?> uploadProfileImage(
+    String path,
+    String fileName,
+  );
+  Future<List<String>> uploadPostImages(
+    List<File> paths,
+    String fileName,
+    String username,
+    String name,
+  );
+  Future<List<String>> uploadStoriesImages(
+    List<File> paths,
+    String fileName,
+    String username,
+    String name,
+  );
 }

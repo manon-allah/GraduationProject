@@ -1,7 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram/features/auth/domain/entities/user_entity.dart';
+import 'package:instagram/features/profile/presentation/domain/entities/profile_entity.dart';
+import 'package:instagram/features/stories/presentation/pages/upload_story.dart';
+import '../../../../auth/presentation/manager/cubit/auth_cubit.dart';
 
-class StoriesListViewBody extends StatelessWidget {
-  const StoriesListViewBody({super.key});
+class StoriesListViewBody extends StatefulWidget {
+  final ProfileEntity user;
+  const StoriesListViewBody({
+    super.key,
+    required this.user,
+  });
+
+  @override
+  State<StoriesListViewBody> createState() => _StoriesListViewBodyState();
+}
+
+class _StoriesListViewBodyState extends State<StoriesListViewBody> {
+  List<String>? imgs = [];
+
+  UserEntity? currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +40,7 @@ class StoriesListViewBody extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  const Column(
+                  Column(
                     children: [
                       Stack(
                         alignment: Alignment.bottomRight,
@@ -24,23 +48,39 @@ class StoriesListViewBody extends StatelessWidget {
                           CircleAvatar(
                             radius: 40,
                             backgroundImage: NetworkImage(
-                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s',
+                              widget.user.imageProfileUrl.isNotEmpty
+                                  ? widget.user.imageProfileUrl
+                                  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s',
                             ),
                           ),
                           CircleAvatar(
                             radius: 13,
                             backgroundColor: Colors.blue,
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UploadStory(
+                                      user: widget.user,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                      Text('UserName'),
+                      Text(widget.user.userName.isNotEmpty
+                          ? widget.user.userName
+                          : 'UserName'),
                     ],
                   ),
                   const SizedBox(
@@ -79,6 +119,11 @@ class StoriesListViewBody extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  getCurrentUser() {
+    final authCubit = context.read<AuthCubit>();
+    currentUser = authCubit.currentUser;
   }
 }
 
