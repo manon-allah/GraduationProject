@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/features/chatting/presentation/pages/chat_page.dart';
+import 'package:instagram/features/explore/presentation/pages/explore_page.dart';
 import '../../features/auth/presentation/manager/cubit/auth_cubit.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/profile/presentation/presentation/pages/profile_page.dart';
@@ -52,7 +53,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         children: [
           const HomePage(),
           const SearchPage(),
-          // const ExploreScreen(),
+          const ExplorePage(),
           const ChatPage(),
           ProfilePage(
             uid: uid,
