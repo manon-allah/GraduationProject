@@ -12,7 +12,10 @@ class StorageRepositoryImp implements StorageRepository {
   }
 
   Future<String?> uploadFile(
-      String path, String fileName, String folder) async {
+    String path,
+    String fileName,
+    String folder,
+  ) async {
     try {
       final file = File(path);
 
@@ -29,7 +32,11 @@ class StorageRepositoryImp implements StorageRepository {
   }
 
   Future<List<String>> uploadImages(
-      List<File> paths , String userId) async {
+    List<File> paths,
+    String userId,
+    String username,
+    String name,
+  ) async {
     try {
       List<String> imageUrls = [];
 
@@ -38,7 +45,7 @@ class StorageRepositoryImp implements StorageRepository {
       for (var image in paths) {
         final fileName =
             '${DateTime.now().millisecondsSinceEpoch}_${image.path.split('/').last}';
-        final ref = storageRef.child('userposts/$userId/posts/$fileName');
+        final ref = storageRef.child('$username/$userId/$name/$fileName');
         await ref.putFile(image);
         final downloadUrl = await ref.getDownloadURL();
         imageUrls.add(downloadUrl);
@@ -51,7 +58,16 @@ class StorageRepositoryImp implements StorageRepository {
 
   @override
   Future<List<String>> uploadPostImages(
-      List<File> paths, String userId) async {
-    return uploadImages(paths, userId);
+    List<File> paths,
+    String userId,
+    String username,
+    String name,
+  ) async {
+    return uploadImages(
+      paths,
+      userId,
+      username,
+      name,
+    );
   }
 }
