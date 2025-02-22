@@ -1,8 +1,6 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram/features/stories/domain/entities/story_entity.dart';
-
 import '../../domain/repos/story_repo.dart';
 
 class StoryRepositoryImp implements StoryRepository {
@@ -28,7 +26,16 @@ class StoryRepositoryImp implements StoryRepository {
   @override
   Future<List<StoryEntity>> getAllStories() async {
     try {
-      final storySnapshot = await storyCollection.get();
+      final storySnapshot = await storyCollection
+          .where(
+            'datePublished',
+            isGreaterThan: DateTime.now().subtract(
+              const Duration(
+                hours: 24,
+              ),
+            ),
+          )
+          .get();
       var allStories = storySnapshot.docs.map((doc) {
         return StoryEntity.fromMap(doc.data() as Map<String, dynamic>);
       }).toList();

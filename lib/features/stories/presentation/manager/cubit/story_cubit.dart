@@ -24,6 +24,7 @@ class StoryCubit extends Cubit<StoryState> {
     required String id,
     required String userId,
     required String userName,
+    required String name,
     required String profileImageUrl,
     required DateTime datePublished,
     required List<String> imageUrls,
@@ -43,6 +44,7 @@ class StoryCubit extends Cubit<StoryState> {
         id: id,
         userId: userId,
         userName: userName,
+        name: name,
         storyImageUrl: images,
         datePublished: datePublished,
         profileImage: profileImageUrl,
@@ -60,6 +62,18 @@ class StoryCubit extends Cubit<StoryState> {
       emit(StoryLoading());
       final stories = await storyRepo.getAllStories();
       emit(StorySuccess(stories));
+    } catch (e) {
+      emit(StoryError('Error getting stories : $e'));
+    }
+  }
+
+  Future<void> getUserStories({
+    required String userId,
+  }) async {
+    try {
+      emit(StoryLoading());
+      final userStories = await storyRepo.getStoriesByUserId(userId);
+      emit(StorySuccess(userStories));
     } catch (e) {
       emit(StoryError('Error getting stories : $e'));
     }

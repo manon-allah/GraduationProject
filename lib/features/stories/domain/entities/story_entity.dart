@@ -4,6 +4,7 @@ class StoryEntity {
   final String id;
   final String userId;
   final String userName;
+  final String name;
   final String profileImage;
   final List<String>? storyImageUrl;
   final DateTime datePublished;
@@ -12,6 +13,7 @@ class StoryEntity {
     required this.id,
     required this.userId,
     required this.userName,
+    required this.name,
     required this.profileImage,
     this.storyImageUrl,
     required this.datePublished,
@@ -22,7 +24,8 @@ class StoryEntity {
       'id': id,
       'userId': userId,
       'userName': userName,
-      'postImageUrl': storyImageUrl,
+      'name': name,
+      'storyImageUrl': storyImageUrl,
       'datePublished': datePublished,
       'profileImageUrl': profileImage,
     };
@@ -32,6 +35,7 @@ class StoryEntity {
     return StoryEntity(
       id: map['id'],
       userId: map['userId'],
+      name: map['name'],
       userName: map['userName'],
       profileImage: map['profileImage'] ?? '',
       storyImageUrl: List<String>.from(map['storyImageUrl']),

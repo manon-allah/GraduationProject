@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/features/auth/domain/entities/user_entity.dart';
 import 'package:instagram/features/profile/presentation/domain/entities/profile_entity.dart';
-import 'package:instagram/features/stories/presentation/pages/upload_story.dart';
+import 'package:instagram/features/stories/presentation/manager/cubit/story_cubit.dart';
 import '../../../../auth/presentation/manager/cubit/auth_cubit.dart';
+import 'custom_sliver_list.dart';
 
 class StoriesListViewBody extends StatefulWidget {
   final ProfileEntity user;
@@ -17,108 +18,44 @@ class StoriesListViewBody extends StatefulWidget {
 }
 
 class _StoriesListViewBodyState extends State<StoriesListViewBody> {
-  List<String>? imgs = [];
+  late final storyCubit = context.read<StoryCubit>();
 
   UserEntity? currentUser;
 
   @override
   void initState() {
     super.initState();
+    getAllStories();
     getCurrentUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 15,
+    return BlocBuilder<StoryCubit, StoryState>(
+      builder: (context, state) {
+        if (state is StoryLoading) {
+          return const SliverToBoxAdapter(
+            child: Center(
+              child: CircularProgressIndicator(),
             ),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  Column(
-                    children: [
-                      Stack(
-                        alignment: Alignment.bottomRight,
-                        children: [
-                          CircleAvatar(
-                            radius: 40,
-                            backgroundImage: NetworkImage(
-                              widget.user.imageProfileUrl.isNotEmpty
-                                  ? widget.user.imageProfileUrl
-                                  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s',
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 13,
-                            backgroundColor: Colors.blue,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => UploadStory(
-                                      user: widget.user,
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(widget.user.userName.isNotEmpty
-                          ? widget.user.userName
-                          : 'UserName'),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  ...List.generate(
-                    10,
-                    (index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                          right: 10,
-                        ),
-                        child: Column(
-                          children: [
-                            const CircleAvatar(
-                              radius: 42,
-                              backgroundColor: Colors.red,
-                              child: CircleAvatar(
-                                radius: 40,
-                                backgroundImage: AssetImage('assets/4.jpeg'),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text('Story $index'),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+          );
+        } else if (state is StorySuccess) {
+          final stories = state.stories;
+          return CustomSliverList(
+            stories: stories,
+            user: widget.user,
+          );
+        } else {
+          return const SliverToBoxAdapter(
+            child: SizedBox(),
+          );
+        }
+      },
     );
+  }
+
+  void getAllStories() {
+    storyCubit.getAllStories();
   }
 
   getCurrentUser() {
@@ -126,6 +63,7 @@ class _StoriesListViewBodyState extends State<StoriesListViewBody> {
     currentUser = authCubit.currentUser;
   }
 }
+
 
 
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/features/auth/domain/entities/user_entity.dart';
 import 'package:instagram/features/profile/presentation/presentation/manager/cubit/profile_cubit.dart';
+import 'package:instagram/features/stories/presentation/manager/cubit/story_cubit.dart';
 import '../../../auth/presentation/manager/cubit/auth_cubit.dart';
 import '../../../post/presentation/manager/cubit/post_cubit.dart';
 import 'widgets/custom_app_bar.dart';
@@ -20,6 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late final postCubit = context.read<PostCubit>();
   late final profileCubit = context.read<ProfileCubit>();
+  late final storyCubit = context.read<StoryCubit>();
 
   UserEntity? currentUser;
 
@@ -27,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getCurrentUser();
+    getAllStories();
     getAllPosts();
     profileCubit.getCurrentProfile(
       currentUser!.uid,
@@ -112,6 +115,10 @@ class _HomePageState extends State<HomePage> {
 
   void getAllPosts() {
     postCubit.getAllPosts();
+  }
+
+  void getAllStories() {
+    storyCubit.getAllStories();
   }
 
   void deletePost(String postId) {

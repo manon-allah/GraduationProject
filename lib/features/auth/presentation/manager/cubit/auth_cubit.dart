@@ -32,7 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(AuthLoading());
       final user = await authRepo.logInWithEmailAndPassword(email, password);
-      if (user != null) {
+      if (user != null && profileRepo !=null) {
         _currentUser = user;
         await profileRepo!.getCurrentProfile(_currentUser!.uid);
         emit(Authenticated(user));

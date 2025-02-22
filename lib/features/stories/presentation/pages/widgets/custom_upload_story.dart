@@ -168,6 +168,7 @@ class _CustomUploadStoryState extends State<CustomUploadStory> {
       userId: currentUser!.uid,
       userName: widget.user.userName,
       datePublished: DateTime.now(),
+      name: widget.user.name,
       imageUrls: imgPath!,
       profileImageUrl: widget.user.imageProfileUrl,
     );
