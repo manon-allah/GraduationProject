@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/firebase_options.dart';
 import 'core/services/caching.dart';
+import 'core/services/firebase_api.dart';
 import 'features/main_app/custom_main_screen.dart';
 
 void main() async {
@@ -9,6 +10,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseApi().initNotifications();
   await CacheHelper.cachIntialization();
   runApp(const Instagram());
 }
