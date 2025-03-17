@@ -20,7 +20,11 @@ class _AddPostPageState extends State<AddPostPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PostCubit, PostState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is PostsSuccess) {
+          Navigator.pop(context);
+        }
+      },
       builder: (context, state) {
         if (state is PostsLoading || state is PostsUploading) {
           return const Scaffold(
