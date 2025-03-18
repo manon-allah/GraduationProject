@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../lang/locale_keys.g.dart';
 import '../cubit/search_cubit.dart';
 import 'widgets/custom_search_body.dart';
+import 'widgets/custom_text_field_search.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -16,11 +17,6 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController searchController = TextEditingController();
   late final searchCubit = context.read<SearchCubit>();
 
-  void onSearchChanged() {
-    final query = searchController.text;
-    searchCubit.searchUser(query);
-  }
-
   @override
   void initState() {
     super.initState();
@@ -28,29 +24,11 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    searchController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextField(
-          controller: searchController,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Theme.of(context).colorScheme.secondary,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24),
-              borderSide: BorderSide.none,
-            ),
-            hintText: LocaleKeys.searchTitle.tr(),
-            hintStyle: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          ),
+        title: CustomTextFieldSearch(
+          searchController: searchController,
         ),
       ),
       body: BlocBuilder<SearchCubit, SearchState>(
@@ -79,5 +57,16 @@ class _SearchPageState extends State<SearchPage> {
         },
       ),
     );
+  }
+
+  void onSearchChanged() {
+    final query = searchController.text;
+    searchCubit.searchUser(query);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    searchController.dispose();
   }
 }

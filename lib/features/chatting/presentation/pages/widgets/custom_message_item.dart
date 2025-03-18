@@ -22,6 +22,7 @@ class CustomMessageItem extends StatelessWidget {
         isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
     var mainAxisAlignment =
         isCurrentUser ? MainAxisAlignment.end : MainAxisAlignment.start;
+
     return Container(
       alignment: alignment,
       child: Padding(

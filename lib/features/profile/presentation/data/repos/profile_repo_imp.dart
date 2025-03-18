@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/entities/profile_entity.dart';
 import '../../domain/repos/profile_repo.dart';
@@ -93,6 +94,8 @@ class ProfileRepositotryImp implements ProfileRepositotry {
           }
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

@@ -1,6 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +9,9 @@ import '../../../../auth/domain/entities/user_entity.dart';
 import '../../../../auth/presentation/manager/cubit/auth_cubit.dart';
 import '../../../../profile/presentation/domain/entities/profile_entity.dart';
 import '../../manager/cubit/post_cubit.dart';
+import 'custom_grid_view_photos.dart';
+import 'custom_profile_cashed_network.dart';
+import 'custom_text_field_caption.dart';
 
 class CustomAddPostBody extends StatefulWidget {
   final ProfileEntity user;
@@ -53,8 +54,8 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
                     Icons.arrow_back,
                   ),
                 ),
-                 Text(
-                  LocaleKeys.addPostTitle.tr(), 
+                Text(
+                  LocaleKeys.addPostTitle.tr(),
                   style: const TextStyle(
                     fontSize: 20,
                   ),
@@ -94,44 +95,18 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Profile picture
-                          CachedNetworkImage(
-                            imageUrl: widget.user.imageProfileUrl,
-                            placeholder: (context, url) =>
-                                const CircularProgressIndicator(),
-                            errorWidget: (context, url, error) => Icon(
-                              Icons.person,
-                              size: 40,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                            imageBuilder: (context, imageProvider) => Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
+                          CustomProfileCashedNetwork(
+                            user: widget.user,
                           ),
                           // write a caption
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            child: TextField(
-                              controller: captionController,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: LocaleKeys.writeCaptionTitle.tr(),
-                              ),
-                              maxLines: 3,
-                            ),
+                          CustomTextFieldCaption(
+                            captionController: captionController,
                           ),
                         ],
                       ),
                       TextButton(
                         onPressed: () => chooseImage(context),
-                        child:  Text(
+                        child: Text(
                           LocaleKeys.choosePhotoTile.tr(),
                           style: const TextStyle(
                             color: Colors.blue,
@@ -141,24 +116,9 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
                       ),
                       // post photos
                       imgs!.isNotEmpty
-                          ? SizedBox(
-                              height: 700,
-                              child: GridView.builder(
-                                itemCount: imgs!.length,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  mainAxisSpacing: 1,
-                                  crossAxisSpacing: 1,
-                                ),
-                                itemBuilder: (context, index) {
-                                  return Image.file(
-                                    File(imgs![index]),
-                                    fit: BoxFit.fill,
-                                  );
-                                },
-                              )
-                              )
+                          ? CustomGridViewPhotos(
+                              imgs: imgs,
+                            )
                           : const SizedBox(),
                     ],
                   ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../auth/domain/entities/user_entity.dart';
 import '../../../../post/presentation/manager/cubit/post_cubit.dart';
 import '../../../../profile/presentation/domain/entities/profile_entity.dart';

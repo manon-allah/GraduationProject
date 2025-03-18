@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram/features/post/domain/entities/post_entity.dart';
-
 import '../../domain/repos/favorites_repo.dart';
 
 class FavoritesRepositoryImpl implements FavoritesRepository {
@@ -19,7 +18,6 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   }
 
   @override
-
   Future<void> removeFromFavorites(PostEntity post) async {
     final querySnapshot = await firestore
         .collection('favorites')

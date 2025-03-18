@@ -1,11 +1,9 @@
 import 'dart:io';
-
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/features/stories/domain/entities/story_entity.dart';
 import 'package:instagram/features/stories/domain/repos/story_repo.dart';
-import 'package:meta/meta.dart';
-
 import '../../../../storage/domain/repos/storage_repo.dart';
 
 part 'story_state.dart';

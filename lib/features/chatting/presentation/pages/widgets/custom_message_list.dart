@@ -21,6 +21,7 @@ class CustomMessageList extends StatelessWidget {
     late final authCubit = context.read<AuthCubit>();
     late UserEntity? currentUser = authCubit.currentUser;
     String senderId = currentUser!.uid;
+
     return StreamBuilder(
       stream: chatRepo.getMessages(receiverId, senderId),
       builder: (context, snapShot) {

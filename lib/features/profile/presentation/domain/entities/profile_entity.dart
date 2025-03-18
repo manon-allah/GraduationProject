@@ -1,4 +1,3 @@
-
 import '../../../../auth/domain/entities/user_entity.dart';
 
 class ProfileEntity extends UserEntity {
@@ -53,7 +52,8 @@ class ProfileEntity extends UserEntity {
       following: newFollowing ?? following,
     );
   }
-
+  
+  @override
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/features/profile/presentation/domain/entities/profile_entity.dart';
 import 'package:instagram/features/stories/presentation/manager/cubit/story_cubit.dart';
-
 import 'widgets/custom_upload_story.dart';
 
 class UploadStory extends StatelessWidget {

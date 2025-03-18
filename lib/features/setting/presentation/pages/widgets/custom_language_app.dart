@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../lang/locale_keys.g.dart';
 
 class CustomLanguageApp extends StatefulWidget {
@@ -28,7 +27,7 @@ class _CustomLanguageAppState extends State<CustomLanguageApp> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-           Text(
+          Text(
             LocaleKeys.arabicLanguageTitle.tr(),
             style: const TextStyle(
               fontSize: 20,
