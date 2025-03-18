@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../lang/locale_keys.g.dart';
 import '../../domain/entities/profile_entity.dart';
 import '../manager/cubit/profile_cubit.dart';
 import 'widgets/edit_profile/custom_edit_profile_body.dart';
@@ -21,16 +23,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return BlocConsumer<ProfileCubit, ProfileState>(
       builder: (context, state) {
         if (state is ProfileLoading) {
-          return const Scaffold(
+          return Scaffold(
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(),
-                  SizedBox(
+                  const CircularProgressIndicator(),
+                  const SizedBox(
                     height: 30,
                   ),
-                  Text('Uploading...'),
+                  Text(LocaleKeys.uploadingTitle.tr()),
                 ],
               ),
             ),

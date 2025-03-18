@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../../core/functions/show_snake_bar.dart';
+import '../../../../../../../lang/locale_keys.g.dart';
 import '../../../../domain/entities/profile_entity.dart';
 import '../../../manager/cubit/profile_cubit.dart';
 import 'app_bar/custom_app_bar_edit_profile.dart';
@@ -29,6 +31,75 @@ class _CustomEditProfileBodyState extends State<CustomEditProfileBody> {
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final genderController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomAppBarEditProfile(
+              onPressed: updateProfile,
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            //  photo text change photo
+            CustomTextChangePhoto(
+              pickImage: pickImage,
+              imagePicked: imagePickedFile,
+              user: widget.user,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            //  some info
+            CustomSomeInfo(
+              user: widget.user,
+              nameController: nameController,
+              userNameController: userNameController,
+              websiteController: websiteController,
+              bioController: bioController,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Divider(
+              endIndent: 10,
+              indent: 10,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            // switch
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 15,
+              ),
+              child: Text(
+                LocaleKeys.switchToProfessionalAccountTitle.tr(),
+                style: const TextStyle(
+                  color: Colors.blue,
+                  fontSize: 17,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            //  private info
+            CustomPrivateInfo(
+              user: widget.user,
+              emailController: emailController,
+              phoneController: phoneController,
+              genderController: genderController,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   Future<void> pickImage() async {
     final res = await FilePicker.platform.pickFiles(
@@ -77,74 +148,5 @@ class _CustomEditProfileBodyState extends State<CustomEditProfileBody> {
     emailController.dispose();
     phoneController.dispose();
     genderController.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomAppBarEditProfile(
-              onPressed: updateProfile,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            //  photo text change photo
-            CustomTextChangePhoto(
-              pickImage: pickImage,
-              imagePicked: imagePickedFile,
-              user: widget.user,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            //  some info
-            CustomSomeInfo(
-              user: widget.user,
-              nameController: nameController,
-              userNameController: userNameController,
-              websiteController: websiteController,
-              bioController: bioController,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const Divider(
-              endIndent: 10,
-              indent: 10,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            // switch
-            const Padding(
-              padding: EdgeInsets.only(
-                left: 15,
-              ),
-              child: Text(
-                'Switch to Professional Account',
-                style: TextStyle(
-                  color: Colors.blue,
-                  fontSize: 17,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            //  private info
-            CustomPrivateInfo(
-              user: widget.user,
-              emailController: emailController,
-              phoneController: phoneController,
-              genderController: genderController,
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../../../../../../../lang/locale_keys.g.dart';
 import '../../../../../domain/entities/profile_entity.dart';
 import 'custom_text_field_edit_profile.dart';
 
@@ -23,22 +25,22 @@ class CustomSomeInfo extends StatelessWidget {
     return Column(
       children: [
         CustomTextFieldEditProfile(
-          text: 'Name',
+          text: LocaleKeys.nameTitle.tr(),
           controller: nameController,
           hint: user.name,
         ),
         CustomTextFieldEditProfile(
-          text: 'UserName',
+          text: LocaleKeys.userNameTitle.tr(),
           controller: userNameController,
           hint: user.userName,
         ),
         CustomTextFieldEditProfile(
-          text: 'Website',
+          text: LocaleKeys.WebsiteTitle.tr(),
           controller: websiteController,
           hint: user.website,
         ),
         CustomTextFieldEditProfile(
-          text: 'Bio',
+          text: LocaleKeys.BioTitle.tr(),
           controller: bioController,
           hint: user.bio,
         ),

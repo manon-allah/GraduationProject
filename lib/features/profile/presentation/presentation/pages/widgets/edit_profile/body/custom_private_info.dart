@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../../../../../../../lang/locale_keys.g.dart';
 import '../../../../../domain/entities/profile_entity.dart';
 import 'custom_text_field_edit_profile.dart';
 
@@ -21,17 +23,17 @@ class CustomPrivateInfo extends StatelessWidget {
     return Column(
       children: [
         CustomTextFieldEditProfile(
-          text: 'Email',
+          text: LocaleKeys.emailTitle.tr(),
           controller: emailController,
           hint: user.email,
         ),
         CustomTextFieldEditProfile(
-          text: 'Phone',
+          text: LocaleKeys.phoneTitle.tr(),
           controller: phoneController,
           hint: user.phone,
         ),
         CustomTextFieldEditProfile(
-          text: 'Gender',
+          text: LocaleKeys.genderTitle.tr(),
           controller: genderController,
           hint: user.gender,
         ),

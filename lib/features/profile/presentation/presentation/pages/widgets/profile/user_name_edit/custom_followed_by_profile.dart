@@ -1,13 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../../../lang/locale_keys.g.dart';
 
 class CustomFollowedByProfile extends StatelessWidget {
   const CustomFollowedByProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
-        SizedBox(
+        const SizedBox(
           width: 100,
           child: Stack(
             children: [
@@ -40,16 +43,23 @@ class CustomFollowedByProfile extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text('Followed by '),
+                Text(LocaleKeys.followedByTitle.tr()),
                 Text(
-                  'username,username',
-                  style: TextStyle(
+                  LocaleKeys.usernameTitle.tr(),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const Text(' , '),
+                Text(
+                  LocaleKeys.usernameTitle.tr(),
+                  style: const TextStyle(
                     fontWeight: FontWeight.w900,
                   ),
                 ),
               ],
             ),
-            Text('and 100 others'),
+            Text(LocaleKeys.andOthersTitle.tr()),
           ],
         ),
       ],

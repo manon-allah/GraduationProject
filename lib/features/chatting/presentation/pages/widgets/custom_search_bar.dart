@@ -1,4 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../lang/locale_keys.g.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({super.key});
@@ -13,13 +16,11 @@ class CustomSearchBar extends StatelessWidget {
       ),
       child: TextField(
         decoration: InputDecoration(
-          // filled: true,
-          // fillColor: const Color(0xFFD9D9D9),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide.none,
           ),
-          hintText: 'Search for users',
+          hintText: LocaleKeys.searchTitle.tr(),
           prefixIcon: const Icon(
             Icons.search,
             size: 18,

@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../../../lang/locale_keys.g.dart';
 import '../../../../../../../post/presentation/manager/cubit/post_cubit.dart';
 import '../../../../../domain/entities/profile_entity.dart';
 import 'custom_column_text_num.dart';
@@ -53,23 +55,23 @@ class CustomPhotoPostsFollowers extends StatelessWidget {
                         .toList();
                     return CustomColumnTextNum(
                       num: posts.length,
-                      text: 'Posts',
+                      text: LocaleKeys.postsTitle.tr(),
                     );
                   } else {
-                    return const CustomColumnTextNum(
-                      num: 5,
-                      text: 'Posts',
+                    return CustomColumnTextNum(
+                      num: 0,
+                      text: LocaleKeys.postsTitle.tr(),
                     );
                   }
                 },
               ),
               CustomColumnTextNum(
                 num: followersCount,
-                text: 'Follower',
+                text: LocaleKeys.followerTitle.tr(),
               ),
               CustomColumnTextNum(
                 num: followingCount,
-                text: 'Following',
+                text: LocaleKeys.followingTitle.tr(),
               ),
             ],
           ),

@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../../../../../lang/locale_keys.g.dart';
 import '../../../../../post/domain/entities/post_entity.dart';
 
 class CustomNumberOfLikes extends StatelessWidget {
@@ -27,9 +29,9 @@ class CustomNumberOfLikes extends StatelessWidget {
               ),
             ),
           ),
-          const Text(
-            'Likes',
-            style: TextStyle(
+          Text(
+            LocaleKeys.likesTitle.tr(),
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),

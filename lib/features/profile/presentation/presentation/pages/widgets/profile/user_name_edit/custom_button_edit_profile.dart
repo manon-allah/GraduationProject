@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/features/auth/domain/entities/user_entity.dart';
+import '../../../../../../../../lang/locale_keys.g.dart';
 import '../../../../../domain/entities/profile_entity.dart';
 import '../../../edit_profile_page.dart';
 import 'custom_button.dart';
@@ -29,7 +31,7 @@ class CustomButtonEditProfile extends StatelessWidget {
                   CustomButton(
                     width: MediaQuery.of(context).size.width - 70,
                     fontSize: 18,
-                    text: 'Edit profile',
+                    text: LocaleKeys.editProfileTitle.tr(),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -58,7 +60,7 @@ class CustomButtonEditProfile extends StatelessWidget {
                 ? CustomButton(
                     width: MediaQuery.of(context).size.width - 33,
                     fontSize: 18,
-                    text: 'UnFollow',
+                    text: LocaleKeys.unFollowTitle.tr(),
                     onTap: onTap,
                     colorText: Theme.of(context).colorScheme.inversePrimary,
                     colorContainer: Theme.of(context).colorScheme.primary,
@@ -68,7 +70,7 @@ class CustomButtonEditProfile extends StatelessWidget {
                       CustomButton(
                         width: MediaQuery.of(context).size.width - 33,
                         fontSize: 20,
-                        text: 'Follow',
+                        text: LocaleKeys.followTitle.tr(),
                         onTap: onTap,
                         colorText: Colors.white,
                         colorContainer: Colors.blue,
@@ -83,9 +85,9 @@ class CustomButtonEditProfile extends StatelessWidget {
                               vertical: 5,
                               horizontal: 22,
                             ),
-                            child: const Text(
-                              'Message',
-                              style: TextStyle(
+                            child: Text(
+                              LocaleKeys.messageTitleProfile.tr(),
+                              style: const TextStyle(
                                 fontSize: 18,
                               ),
                             ),
@@ -98,9 +100,9 @@ class CustomButtonEditProfile extends StatelessWidget {
                               vertical: 5,
                               horizontal: 22,
                             ),
-                            child: const Text(
-                              'SubScribe',
-                              style: TextStyle(
+                            child: Text(
+                              LocaleKeys.subScribeTitle.tr(),
+                              style: const TextStyle(
                                 fontSize: 18,
                               ),
                             ),
@@ -113,9 +115,9 @@ class CustomButtonEditProfile extends StatelessWidget {
                               vertical: 5,
                               horizontal: 22,
                             ),
-                            child: const Text(
-                              'Contact',
-                              style: TextStyle(
+                            child: Text(
+                              LocaleKeys.contactTitle.tr(),
+                              style: const TextStyle(
                                 fontSize: 18,
                               ),
                             ),

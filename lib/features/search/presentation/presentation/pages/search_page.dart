@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../lang/locale_keys.g.dart';
 import '../cubit/search_cubit.dart';
 import 'widgets/custom_search_body.dart';
 
@@ -44,7 +46,7 @@ class _SearchPageState extends State<SearchPage> {
               borderRadius: BorderRadius.circular(24),
               borderSide: BorderSide.none,
             ),
-            hintText: 'Search for a user',
+            hintText: LocaleKeys.searchTitle.tr(),
             hintStyle: TextStyle(
               color: Theme.of(context).colorScheme.primary,
             ),
@@ -55,8 +57,8 @@ class _SearchPageState extends State<SearchPage> {
         builder: (context, state) {
           if (state is SearchSuccess) {
             if (state.users.isEmpty) {
-              return const Center(
-                child: Text('No users found'),
+              return Center(
+                child: Text(LocaleKeys.noUsersFoundTitle.tr()),
               );
             }
             return CustomSearchBody(
@@ -71,8 +73,8 @@ class _SearchPageState extends State<SearchPage> {
               child: Text(state.message),
             );
           }
-          return const Center(
-            child: Text('Search for a user'),
+          return Center(
+            child: Text(LocaleKeys.searchTitle.tr()),
           );
         },
       ),

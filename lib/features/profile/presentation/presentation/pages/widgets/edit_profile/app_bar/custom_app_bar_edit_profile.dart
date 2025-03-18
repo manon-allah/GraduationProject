@@ -1,4 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../../../lang/locale_keys.g.dart';
 
 class CustomAppBarEditProfile extends StatelessWidget {
   final void Function()? onPressed;
@@ -16,37 +19,25 @@ class CustomAppBarEditProfile extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text(
-            'Cancel',
-            style: TextStyle(
+          child: Text(
+            LocaleKeys.cancelTitle.tr(),
+            style: const TextStyle(
               fontSize: 17,
               color: Color(0xFF606060),
             ),
           ),
         ),
-        const Text(
-          'Edit Profile',
-          style: TextStyle(
+        Text(
+          LocaleKeys.editProfileTitleEdit.tr(),
+          style: const TextStyle(
             fontSize: 25,
           ),
         ),
         TextButton(
           onPressed: onPressed,
-          // () {
-          //   // addDataCubit.addUserData(
-          //   //   name: nameController.text,
-          //   //   userName: userNameController.text,
-          //   //   website: websiteController.text,
-          //   //   bio: bioController.text,
-          //   //   email: emailController.text,
-          //   //   phone: phoneController.text,
-          //   //   gender: genderController.text,
-          //   //   photoUrl: _image!,
-          //   // );
-          // },
-          child: const Text(
-            'Done',
-            style: TextStyle(
+          child: Text(
+            LocaleKeys.doneTitle.tr(),
+            style: const TextStyle(
               fontSize: 17,
               color: Colors.blue,
             ),

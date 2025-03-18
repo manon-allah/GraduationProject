@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/features/auth/domain/entities/user_entity.dart';
 import 'package:instagram/features/profile/presentation/presentation/manager/cubit/profile_cubit.dart';
 import 'package:instagram/features/stories/presentation/manager/cubit/story_cubit.dart';
+import '../../../../lang/locale_keys.g.dart';
 import '../../../auth/presentation/manager/cubit/auth_cubit.dart';
 import '../../../post/presentation/manager/cubit/post_cubit.dart';
 import 'widgets/custom_app_bar.dart';
@@ -78,9 +80,9 @@ class _HomePageState extends State<HomePage> {
               } else if (state is PostsSuccess) {
                 final allPosts = state.posts;
                 if (allPosts.isEmpty) {
-                  return const SliverToBoxAdapter(
+                  return SliverToBoxAdapter(
                     child: Center(
-                      child: Text('No Posts available'),
+                      child: Text(LocaleKeys.noPostsAvailableTitle.tr()),
                     ),
                   );
                 }

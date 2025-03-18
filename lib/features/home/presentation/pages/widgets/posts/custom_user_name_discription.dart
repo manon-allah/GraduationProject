@@ -18,7 +18,7 @@ class CustomUserNameDescription extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            post.userName.isNotEmpty ? post.userName : 'user name',
+            post.userName.isNotEmpty ? post.userName : 'username',
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w800,

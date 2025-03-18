@@ -1,9 +1,12 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/functions/select_image.dart';
 import '../../../../../core/functions/show_snake_bar.dart';
+import '../../../../../lang/locale_keys.g.dart';
 import '../../../../auth/domain/entities/user_entity.dart';
 import '../../../../auth/presentation/manager/cubit/auth_cubit.dart';
 import '../../../../profile/presentation/domain/entities/profile_entity.dart';
@@ -50,9 +53,9 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
                     Icons.arrow_back,
                   ),
                 ),
-                const Text(
-                  'Add Post',
-                  style: TextStyle(
+                 Text(
+                  LocaleKeys.addPostTitle.tr(), 
+                  style: const TextStyle(
                     fontSize: 20,
                   ),
                 ),
@@ -63,9 +66,9 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
                   ),
                   child: TextButton(
                     onPressed: uploadPost,
-                    child: const Text(
-                      'Post',
-                      style: TextStyle(
+                    child: Text(
+                      LocaleKeys.postTitle.tr(),
+                      style: const TextStyle(
                         fontSize: 23,
                         color: Colors.blue,
                       ),
@@ -117,9 +120,9 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
                             width: MediaQuery.of(context).size.width * 0.7,
                             child: TextField(
                               controller: captionController,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: 'Write a caption...',
+                                hintText: LocaleKeys.writeCaptionTitle.tr(),
                               ),
                               maxLines: 3,
                             ),
@@ -128,9 +131,9 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
                       ),
                       TextButton(
                         onPressed: () => chooseImage(context),
-                        child: const Text(
-                          'choose photo',
-                          style: TextStyle(
+                        child:  Text(
+                          LocaleKeys.choosePhotoTile.tr(),
+                          style: const TextStyle(
                             color: Colors.blue,
                             fontSize: 20,
                           ),
@@ -189,7 +192,7 @@ class _CustomAddPostBodyState extends State<CustomAddPostBody> {
                   setState(() {
                     imgs = images;
                   });
-                  print('images is =================== $imgs');
+                  log('images is =================== $imgs');
                 },
               ),
               SimpleDialogOption(

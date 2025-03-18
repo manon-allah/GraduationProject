@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/functions/show_snake_bar.dart';
+import '../../../../../../lang/locale_keys.g.dart';
 import '../../../../../post/domain/entities/post_entity.dart';
 import '../../../../../profile/presentation/domain/entities/profile_entity.dart';
 import '../../../../../profile/presentation/presentation/pages/profile_page.dart';
@@ -73,7 +75,7 @@ class CustomListTileUserHome extends StatelessWidget {
                               horizontal: 15,
                             ),
                             shrinkWrap: true,
-                            children: ['Delete']
+                            children: [LocaleKeys.menuTitle.tr()]
                                 .map((e) => InkWell(
                                       onTap: () {
                                         deletePost!(post.id);

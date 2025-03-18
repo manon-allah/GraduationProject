@@ -1,10 +1,19 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class CustomLanguageApp extends StatelessWidget {
+import '../../../../../lang/locale_keys.g.dart';
+
+class CustomLanguageApp extends StatefulWidget {
   const CustomLanguageApp({
     super.key,
   });
 
+  @override
+  State<CustomLanguageApp> createState() => _CustomLanguageAppState();
+}
+
+class _CustomLanguageAppState extends State<CustomLanguageApp> {
+  bool lang = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,9 +28,9 @@ class CustomLanguageApp extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Arabic Language : ',
-            style: TextStyle(
+           Text(
+            LocaleKeys.arabicLanguageTitle.tr(),
+            style: const TextStyle(
               fontSize: 20,
             ),
           ),
@@ -29,7 +38,19 @@ class CustomLanguageApp extends StatelessWidget {
             width: 40,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () async {
+              if (lang == false) {
+                setState(() {
+                  lang = true;
+                });
+                await context.setLocale(const Locale('ar'));
+              } else {
+                setState(() {
+                  lang = false;
+                });
+                await context.setLocale(const Locale('en'));
+              }
+            },
             child: const Icon(
               Icons.language_rounded,
             ),

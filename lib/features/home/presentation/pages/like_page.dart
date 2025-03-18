@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../lang/locale_keys.g.dart';
 import '../../../auth/domain/entities/user_entity.dart';
 import '../../../auth/presentation/manager/cubit/auth_cubit.dart';
 import '../manager/cubit/home_cubit.dart';
@@ -40,12 +42,12 @@ class _LikePageState extends State<LikePage> {
             dividerColor: Colors.transparent,
             labelColor: Theme.of(context).colorScheme.inversePrimary,
             unselectedLabelColor: Theme.of(context).colorScheme.primary,
-            tabs: const [
+            tabs: [
               Tab(
-                text: 'Following',
+                text: LocaleKeys.followingTitleLike.tr(),
               ),
               Tab(
-                text: 'You',
+                text: LocaleKeys.youTitle.tr(),
               ),
             ],
           ),
@@ -59,17 +61,17 @@ class _LikePageState extends State<LikePage> {
               return TabBarView(
                 children: [
                   CustomFollowingBody(
-                    text: 'is following you',
+                    text: LocaleKeys.isFollowingYouTitle.tr(),
                     context: context,
-                    emptyMessage: 'No following',
+                    emptyMessage: LocaleKeys.nofollowingTitle.tr(),
                     uIds: user.following,
                     posts: posts,
                   ),
                   CustomLikeBody(
                     posts: posts,
-                    text: 'liked post',
+                    text: LocaleKeys.likedPostTitle.tr(),
                     context: context,
-                    emptyMessage: 'No Likes',
+                    emptyMessage: LocaleKeys.noLikesTitle.tr(),
                     uIds: like,
                   ),
                 ],

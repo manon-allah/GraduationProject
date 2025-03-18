@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../lang/locale_keys.g.dart';
 import '../../../../auth/presentation/pages/widgets/custom_text_form_field.dart';
 
 class CustomUserInput extends StatelessWidget {
@@ -23,7 +25,7 @@ class CustomUserInput extends StatelessWidget {
         children: [
           Expanded(
             child: CustomTextFormField(
-              hint: 'Type a message',
+              hint: LocaleKeys.typeMessageTitle.tr(),
               controller: mesageController,
             ),
           ),

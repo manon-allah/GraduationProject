@@ -1,5 +1,7 @@
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../lang/locale_keys.g.dart';
 
 class CustomAllComments extends StatelessWidget {
   const CustomAllComments({
@@ -14,9 +16,9 @@ class CustomAllComments extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {},
-        child: const Text(
-          'View all 16 comments',
-          style: TextStyle(
+        child: Text(
+          LocaleKeys.commentsTitle.tr(),
+          style: const TextStyle(
             color: Colors.grey,
             fontSize: 17,
           ),

@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../../../lang/locale_keys.g.dart';
 import '../../../../../domain/entities/profile_entity.dart';
 
 class CustomTextChangePhoto extends StatelessWidget {
@@ -55,12 +57,9 @@ class CustomTextChangePhoto extends StatelessWidget {
         ),
         TextButton(
           onPressed: pickImage,
-          //  () {
-          //   // chooseImage();
-          // },
-          child: const Text(
-            'Change Profile Photo',
-            style: TextStyle(
+          child: Text(
+            LocaleKeys.changeProfilePhotoTitle.tr(),
+            style: const TextStyle(
               color: Colors.blue,
             ),
           ),
