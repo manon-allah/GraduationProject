@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/features/profile/presentation/domain/entities/profile_entity.dart';
+import '../../../../auth/presentation/manager/cubit/auth_cubit.dart';
 import '../../../../post/presentation/pages/add_post_page.dart';
 import '../like_page.dart';
 
@@ -38,6 +40,16 @@ class CustomAppBar extends StatelessWidget {
         const Spacer(),
         Row(
           children: [
+            IconButton(
+              onPressed: () {
+                context.read<AuthCubit>().logOut();
+              },
+              icon: Icon(
+                Icons.logout,
+                size: 25,
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ),
             IconButton(
               onPressed: () {
                 Navigator.push(

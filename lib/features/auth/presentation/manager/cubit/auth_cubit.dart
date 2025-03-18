@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../profile/presentation/domain/repos/profile_repo.dart';
+// import '../../../../profile/presentation/domain/repos/profile_repo.dart';
 import '../../../domain/entities/user_entity.dart';
 import '../../../domain/repos/auth_repo.dart';
 
@@ -8,7 +8,6 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository authRepo;
-  ProfileRepositotry? profileRepo;
   UserEntity? _currentUser;
 
   AuthCubit({required this.authRepo}) : super(AuthInitial());
@@ -32,9 +31,8 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(AuthLoading());
       final user = await authRepo.logInWithEmailAndPassword(email, password);
-      if (user != null && profileRepo !=null) {
+      if (user != null) {
         _currentUser = user;
-        await profileRepo!.getCurrentProfile(_currentUser!.uid);
         emit(Authenticated(user));
       } else {
         emit(UnAuthenticated());
@@ -64,7 +62,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   // log out
   Future<void> logOut() async {
-    authRepo.logOut();
+    await authRepo.logOut();
     emit(UnAuthenticated());
   }
 }
